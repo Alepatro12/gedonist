@@ -1,0 +1,53 @@
+.background {
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "header header" "sidebar main" "footer footer";
+  -ms-grid-rows: 100px 1fr 60px;
+      grid-template-rows: 100px 1fr 60px;
+  -ms-grid-columns: 15% 1fr;
+      grid-template-columns: 15% 1fr;
+  grid-gap: 10px;
+  height: 100vh;
+  background-image: url(./img/home.jpg);
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.background--about {
+  background-image: url(./img/about.jpg);
+}
+
+.background--auth {
+  background-image: url(./img/registration.jpg);
+}
+
+.head, .sidebar, .main, .footer {
+  padding: 20px;
+}
+
+.head {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: header;
+}
+
+.sidebar {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: sidebar;
+}
+
+.main {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: main;
+}
+
+.footer {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: footer;
+}

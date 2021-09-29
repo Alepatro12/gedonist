@@ -1,0 +1,23 @@
+.head {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 50px;
+	padding: 10px 0 0 20px;
+	color: #fff;
+
+	&__logo {
+		color: #fff;
+		line-height: 1em;
+		font-size: 64px;
+		font-family: 'Times New Roman', sans-serif;
+	}
+
+	&__registration {
+		margin-right: 3%;
+		margin-top: 1%;
+		font-size: 18px;
+		color: #d38484;
+		cursor: pointer;
+	}
+}

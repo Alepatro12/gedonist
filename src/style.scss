@@ -1,0 +1,43 @@
+.background {
+	display: grid;
+	grid-template-areas: 
+		"header header"
+		"sidebar main"
+		"footer footer";
+	grid-template-rows: 100px 1fr 60px;
+	grid-template-columns: 15% 1fr;
+	grid-gap: 10px;
+	height: 100vh;
+	background-image: url(./img/home.jpg);
+	background-position: center center;
+	background-attachment: fixed;
+	background-size: cover;
+
+	&--about {
+		background-image: url(./img/about.jpg);
+	}
+
+	&--auth {
+		background-image: url(./img/registration.jpg);
+	}
+}
+
+.head, .sidebar, .main, .footer {
+	padding: 20px;
+}
+
+.head {
+	grid-area: header;
+}
+
+.sidebar {
+	grid-area: sidebar;
+}
+
+.main {
+	grid-area: main;
+}
+
+.footer {
+	grid-area: footer;
+}

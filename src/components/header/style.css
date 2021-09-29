@@ -1,0 +1,27 @@
+.head {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 50px;
+  padding: 10px 0 0 20px;
+  color: #fff;
+}
+
+.head__logo {
+  color: #fff;
+  line-height: 1em;
+  font-size: 64px;
+  font-family: 'Times New Roman', sans-serif;
+}
+
+.head__registration {
+  margin-right: 3%;
+  margin-top: 1%;
+  font-size: 18px;
+  color: #d38484;
+  cursor: pointer;
+}

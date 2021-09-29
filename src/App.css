@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	background-color: #fff;
+	color: #333;
+	font-family: "Segoe UI", Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.2em;
+	float: left;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	width: auto\9;
+}
+
+a {
+	color: #d38484;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #f59888;
+}
+
+a, a:hover {
+	-webkit-transition: all.6s ease;
+	-moz-transition: all.6s ease;
+	-o-transition: all.6s ease;
+	-ms-transition: all.6s ease;
+	transition: all.6s ease;
+}
