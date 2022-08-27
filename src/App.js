@@ -32,12 +32,12 @@ class App extends React.Component {
 						<HeaderContainer/>
 						<Sidebar sidebar={this.props.state.sidebar} />
 						<div className="main">
-							<Route exact path="/" component={Home} />
+							<Route path="/" component={Home} />
 							<Suspense fallback={<Loader isFetching={true}/>}>
 								<Switch>
-									<Route path="/about" component={About}/>
-									<Route path="/auth/login" component={LoginContainer}/>
-									<Route path="/auth/authenticate" component={AuthenticateContainer}/>
+									<Route path={this.props.match.path + "/about"} component={About}/>
+									<Route path={this.props.match.path + "/auth/login"} component={LoginContainer}/>
+									<Route path={this.props.match.path + "/auth/authenticate"} component={AuthenticateContainer}/>
 									<Redirect from="/auth" to="/auth/login"/>
 								</Switch>
 							</Suspense>

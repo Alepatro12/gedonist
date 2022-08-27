@@ -1,5 +1,5 @@
 import './style.css';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from "react-router-dom";
 
 const Header = React.memo(({ isAuthenticate, isDisabled, name, getLogout }) => {
@@ -25,19 +25,27 @@ const Header = React.memo(({ isAuthenticate, isDisabled, name, getLogout }) => {
 
 export const Logout = React.memo(({ name, isDisabled, getLogout }) => {
 	let [editMode, setEditMode] = useState(false);
+	const ref = useRef(null);
 
-	const showUnlogin = () => {
-		setEditMode(true);
-	}
+	const handleClickOutside = (event) => {
+		if (ref.current && !ref.current.contains(event.target)) {
+            setEditMode(false);
+        }
+	};
 
-	const attemptLogout = () => {
-		getLogout(name);
-	}
+	const showUnlogin = () => setEditMode(true);
+
+	useEffect(() => {
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => document.removeEventListener('mousedown', handleClickOutside);
+	})
+
+	const attemptLogout = () => getLogout(name);
 
 	return <>
 		<span onClick={ showUnlogin }>{name}</span>
 		{editMode &&
-			<div onClick={ attemptLogout } className="modal__error modal__error--unlogin" disabled={isDisabled}>Выйти</div>
+			<div ref={ref} onClick={ attemptLogout } className="head__unlogin" disabled={isDisabled}>Выйти</div>
 		}
 	</>
 });

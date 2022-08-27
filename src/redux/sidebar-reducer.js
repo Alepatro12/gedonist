@@ -1,6 +1,6 @@
 let initialState = [
-	{name: 'Кино', link: '/movie'},
-	{name: 'Обратная связь', link: '/feedback'},
+	// {name: 'Кино', link: '/movie'},
+	// {name: 'Обратная связь', link: '/feedback'},
 	{name: 'О нас', link: '/about'}
 ];
 

@@ -42,7 +42,7 @@ const checkAuthenticationReducer = (state = initialState, action) => {
 		default:
 			return state;
 	}
-}
+};
 
 export const checkUser = (name) => {
 	isAuthenticate = name ? true : false;
@@ -51,21 +51,21 @@ export const checkUser = (name) => {
 		isAuthenticate,
 		name
 	}
-}
+};
 
 const setIsFetching = (isFetching) => {
 	return {
 		type: TOGGLE_IS_FETCHING,
 		isFetching,
 	}
-}
+};
 
 const setIsDisabled = (isDisabled) => {
 	return {
 		type: TOGGLE_IS_DISABLED,
 		isDisabled,
 	}
-}
+};
 
 const attemptLogin = (name, isAuthenticate) => {
 	return {
@@ -73,14 +73,14 @@ const attemptLogin = (name, isAuthenticate) => {
 		isAuthenticate,
 		name
 	}
-}
+};
 
 const setToggle = (isToggle) => {
 	return (dispatch) => {
 		dispatch(setIsFetching(isToggle));
 		dispatch(setIsDisabled(isToggle));
 	}
-}
+};
 
 export const getUser = (getParameter = '') => {
 	return async (dispatch) => {
@@ -96,7 +96,7 @@ export const getUser = (getParameter = '') => {
 
 		dispatch(setIsFetching(false));
 	}
-}
+};
 
 export const getLogout = (name) => {
 	return async (dispatch) => {
@@ -109,7 +109,7 @@ export const getLogout = (name) => {
 
 		dispatch(setToggle(false));
 	}
-}
+};
 
 export const getLogin = (password, name, remember) => {
 	return async (dispatch) => {
@@ -117,8 +117,7 @@ export const getLogin = (password, name, remember) => {
 
 		const response = await getLoginAPI(password, name, remember);
 		if (response.resultCode === 0) {
-			const isAuthenticate = response.username ? true : false;
-			dispatch(attemptLogin(response.username, isAuthenticate));
+			dispatch(attemptLogin(response.username, Boolean(response.username)));
 		} else {
 			// const action = stopSubmit('login', {_error: 'Что-то пошло не так, попробуйте позже'});
 			// dispatch(action);
@@ -126,16 +125,15 @@ export const getLogin = (password, name, remember) => {
 
 		dispatch(setToggle(false));
 	}
-}
+};
 
 export const getRegistration = (name, email, password, passwordValid) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
 		const response = await getRegistrationAPI(name, email, password, passwordValid);
-		if (response.resultCode === 0) {console.log(response);
-			// const isAuthenticate = response.username ? true : false;
-			// dispatch(attemptLogin(response.username, isAuthenticate));
+		if (response.resultCode === 0) {
+			dispatch(attemptLogin(response.username, Boolean(response.username)));
 		} else {
 			// const action = stopSubmit('registration', {_error: 'Что-то пошло не так, попробуйте позже'});
 			// dispatch(action);
@@ -143,6 +141,6 @@ export const getRegistration = (name, email, password, passwordValid) => {
 
 		dispatch(setToggle(false));
 	}
-}
+};
 
 export default checkAuthenticationReducer;

@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 
 const instance = axios.create({
-	baseURL: 'http://localhost/',
+	baseURL: '/eoeo/',
 	withCredentials: true
 });
 
@@ -29,9 +29,6 @@ export const getLoginAPI = (password, name, remember) => {
 export const getRegistrationAPI = (name, email, password, passwordValid) => {
 	return instance
 		.get(`auth/registration.php?name=${name}&email=${email}&password=${password}&passwordValid=${passwordValid}`)
-		.then(response => {
-			console.log(response);
-			return response.data;
-		})
+		.then(response => response.data)
 	;
 }
