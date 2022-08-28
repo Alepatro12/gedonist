@@ -16,7 +16,9 @@ const Header = React.memo(({ isAuthenticate, isDisabled, name, getLogout }) => {
 						name={name}
 					/>
 				:
-					<NavLink to="/auth/login">Войти</NavLink>
+					<div className="head__login">
+						<NavLink to="/auth/login">Войти</NavLink>
+					</div>
 				}
 			</div>
 		</header>
@@ -43,7 +45,9 @@ export const Logout = React.memo(({ name, isDisabled, getLogout }) => {
 	const attemptLogout = () => getLogout(name);
 
 	return <>
-		<span onClick={ showUnlogin }>{name}</span>
+		<div className="head__login">
+			<span onClick={ showUnlogin }>{name}</span>
+		</div>
 		{editMode &&
 			<div ref={ref} onClick={ attemptLogout } className="head__unlogin" disabled={isDisabled}>Выйти</div>
 		}

@@ -6,6 +6,12 @@
 	padding: 10px 0 0 20px;
 	color: #fff;
 
+	&__login {
+		padding: 5px;
+		background-color: rgba(255, 255, 255, 0.9);
+		border-radius: 10px;
+	}
+
 	&__logo {
 		color: #fff;
 		line-height: 1em;
@@ -30,7 +36,7 @@
 		text-align: center;
 		color: #eee;
 		background-color: #d38484;
-		border-radius: 3px;
+		border-radius: 5px;
 		text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.2);
 
 		&::before {
@@ -41,7 +47,7 @@
 			height: 0;
 			left: auto;
 			margin-top: -20px;
-			margin-left: 20px;
+			margin-left: 25px;
 			border-style: solid;
 			border-width: 9px;
 			border-color: transparent;
