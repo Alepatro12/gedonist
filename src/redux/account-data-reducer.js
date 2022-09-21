@@ -1,27 +1,40 @@
 import { checkUserAPI, getLogoutAPI, getLoginAPI, getRegistrationAPI } from './../api/api'
 
 const CHECK_AUTHENTICATION = 'checkAuthentication/CHECK_AUTHENTICATION';
+const ATTEMPT_REGISTRATION = 'checkAuthentication/ATTEMPT_REGISTRATION';
 const TOGGLE_IS_FETCHING = 'checkAuthentication/TOGGLE_IS_FETCHING';
 const TOGGLE_IS_DISABLED = 'checkAuthentication/TOGGLE_IS_DISABLED';
 const ATTEMPT_LOGIN = 'checkAuthentication/ATTEMPT_LOGIN';
 
 
 let initialState = {
-	isAuthenticate: false,
+	userId: 0,
+	userName: '',
+	emailStatus: 0,
 	isFetching: false,
 	isDisabled: false,
-	name: ''
+	isAuthenticate: false,
+	errors: {
+		loginError: {
+			errorCode: 0,
+			errorText: '',
+		},
+		registrationError: {
+			errorCode: 0,
+			errorText: '',
+		},
+	},
 };
-
-let isAuthenticate;
 
 const checkAuthenticationReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case CHECK_AUTHENTICATION:
 			return {
 				...state,
+				userId: action.userId,
+				userName: action.userName,
+				emailStatus: action.emailStatus,
 				isAuthenticate: action.isAuthenticate,
-				name: action.name || ''
 			};
 		case TOGGLE_IS_FETCHING:
 			return {
@@ -36,20 +49,49 @@ const checkAuthenticationReducer = (state = initialState, action) => {
 		case ATTEMPT_LOGIN:
 			return {
 				...state,
+				userId: action.userId,
+				userName: action.userName,
+				emailStatus: action.emailStatus,
 				isAuthenticate: action.isAuthenticate,
-				name: action.name,
+				errors: {
+					registrationError: { ...state.errors.registrationError },
+					loginError: {
+						...state.errors.loginError,
+						errorCode: action.errorCode,
+						errorText: action.errorText,
+					},
+				},
+			};
+		case ATTEMPT_REGISTRATION:
+			return {
+				...state,
+				userId: action.userId,
+				userName: action.userName,
+				emailStatus: action.emailStatus,
+				isAuthenticate: action.isAuthenticate,
+				errors: {
+					loginError: { ...state.errors.loginError },
+					registrationError: {
+						...state.errors.registrationError,
+						errorCode: action.errorCode,
+						errorText: action.errorText,
+					},
+				},
 			};
 		default:
 			return state;
 	}
 };
 
-export const checkUser = (name) => {
-	isAuthenticate = name ? true : false;
+export const checkUser = ({ userName = '', userId = 0, emailStatus = 0, errorCode = 0, errorText = '' }) => {
 	return {
+		userId,
+		userName,
+		errorCode,
+		errorText,
+		emailStatus,
 		type: CHECK_AUTHENTICATION,
-		isAuthenticate,
-		name
+		isAuthenticate: userId && userName && !errorCode ? true : false,
 	}
 };
 
@@ -67,11 +109,27 @@ const setIsDisabled = (isDisabled) => {
 	}
 };
 
-const attemptLogin = (name, isAuthenticate) => {
+const attemptLogin = ({ userName = '', userId = 0, emailStatus = 0, errorCode = 0, errorText = '' }) => {
 	return {
+		userId,
+		userName,
+		errorCode,
+		errorText,
+		emailStatus,
 		type: ATTEMPT_LOGIN,
-		isAuthenticate,
-		name
+		isAuthenticate: userId && userName && !errorCode ? true : false,
+	}
+};
+
+const attemptRegistration = ({ userName = '', userId = 0, emailStatus = 0, errorCode = 0, errorText = '' }) => {
+	return {
+		userId,
+		userName,
+		errorCode,
+		errorText,
+		emailStatus,
+		type: ATTEMPT_REGISTRATION,
+		isAuthenticate: userId && userName && !errorCode ? true : false,
 	}
 };
 
@@ -88,57 +146,40 @@ export const getUser = (getParameter = '') => {
 
 		const response = await checkUserAPI(getParameter);
 
-		if (response.resultCode === 0) {
-			dispatch(checkUser(response.username));
-		} else {
-			dispatch(checkUser());
-		}
-
+		dispatch(checkUser({ ...response }));
 		dispatch(setIsFetching(false));
 	}
 };
 
-export const getLogout = (name) => {
+export const getLogout = (userName) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await getLogoutAPI(name);
-		if (response.resultCode === 0) {
-			dispatch(checkUser());
-		}
+		const response = await getLogoutAPI(userName);
 
+		dispatch(checkUser({ ...response }));
 		dispatch(setToggle(false));
 	}
 };
 
-export const getLogin = (password, name, remember) => {
+export const getLogin = (password, userName, remember) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await getLoginAPI(password, name, remember);
-		if (response.resultCode === 0) {
-			dispatch(attemptLogin(response.username, Boolean(response.username)));
-		} else {
-			// const action = stopSubmit('login', {_error: 'Что-то пошло не так, попробуйте позже'});
-			// dispatch(action);
-		}
+		const response = await getLoginAPI(password, userName, remember);
 
+		dispatch(attemptLogin({ ...response }));
 		dispatch(setToggle(false));
 	}
 };
 
-export const getRegistration = (name, email, password, passwordValid) => {
+export const getRegistration = (userName, email, password, passwordValid) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await getRegistrationAPI(name, email, password, passwordValid);
-		if (response.resultCode === 0) {
-			dispatch(attemptLogin(response.username, Boolean(response.username)));
-		} else {
-			// const action = stopSubmit('registration', {_error: 'Что-то пошло не так, попробуйте позже'});
-			// dispatch(action);
-		}
+		const response = await getRegistrationAPI(userName, email, password, passwordValid);
 
+		dispatch(attemptRegistration({ ...response }));
 		dispatch(setToggle(false));
 	}
 };

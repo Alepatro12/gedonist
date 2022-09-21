@@ -3,7 +3,7 @@ import Header from './index';
 import { connect } from 'react-redux';
 import Loader from './../common/loader/index';
 import { getLogout } from './../../redux/account-data-reducer';
-import { getIsAuthenticate, getIsFetching, getIsDisabled, getName } from './../../redux/selectors';
+import { getIsAuthenticate, getIsFetching, getIsDisabled, getUserName } from './../../redux/selectors';
 
 const HeaderClassContainer = React.memo(props => {
 	return <>
@@ -12,7 +12,7 @@ const HeaderClassContainer = React.memo(props => {
 			isAuthenticate={props.isAuthenticate}
 			isDisabled={props.isDisabled}
 			getLogout={props.getLogout}
-			name={props.name}
+			userName={props.userName}
 		/>
 	</>
 });
@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
 		isAuthenticate: getIsAuthenticate(state),
 		isFetching: getIsFetching(state),
 		isDisabled: getIsDisabled(state),
-		name: getName(state)
+		userName: getUserName(state)
 	}
 }
 
