@@ -146,7 +146,7 @@ export const getUser = (getParameter = '') => {
 
 		const response = await checkUserAPI(getParameter);
 
-		dispatch(checkUser({ ...response }));
+		dispatch(checkUser(response));
 		dispatch(setIsFetching(false));
 	}
 };
@@ -157,7 +157,7 @@ export const getLogout = (userName) => {
 
 		const response = await getLogoutAPI(userName);
 
-		dispatch(checkUser({ ...response }));
+		dispatch(checkUser(response));
 		dispatch(setToggle(false));
 	}
 };
@@ -168,7 +168,7 @@ export const getLogin = (password, userName, remember) => {
 
 		const response = await getLoginAPI(password, userName, remember);
 
-		dispatch(attemptLogin({ ...response }));
+		dispatch(attemptLogin(response));
 		dispatch(setToggle(false));
 	}
 };
@@ -179,7 +179,7 @@ export const getRegistration = (userName, email, password, passwordValid) => {
 
 		const response = await getRegistrationAPI(userName, email, password, passwordValid);
 
-		dispatch(attemptRegistration({ ...response }));
+		dispatch(attemptRegistration(response));
 		dispatch(setToggle(false));
 	}
 };
