@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { loginOrEmail, password } from './../../../utils/index';
 
-const Login = React.memo(({ getLogin }) => {
+const Login = React.memo(({ getLogin, errorText, isDisabled }) => {
 	const onSubmit = (formData) => {
 		getLogin(formData.password, formData.name, formData.remember);
 	}
@@ -12,7 +12,11 @@ const Login = React.memo(({ getLogin }) => {
 	return (
 		<div className="modal">
 			<div className="modal__title">Вход в аккаунт</div><br/>
-			<LoginForm onSubmit={ onSubmit }/>
+			<LoginForm
+				onSubmit={onSubmit}
+				errorText={errorText}
+				isDisabled={isDisabled}
+			/>
 		</div> 
 	);
 });
@@ -32,12 +36,12 @@ const validateForm = (formData) => {
 	return errors;
 };
 
-const LoginForm = React.memo((props) => {
+const LoginForm = React.memo(({ onSubmit, errorText, isDisabled}) => {
 	return (
 		<Formik
 			initialValues = {{ name: '', password: '', remember: true }}
 			validate = {(formData) => validateForm(formData)}
-			onSubmit = {(formData) => props.onSubmit(formData)}
+			onSubmit = {(formData) => onSubmit(formData)}
 		>
 			{() => (
 				<Form>
@@ -54,7 +58,11 @@ const LoginForm = React.memo((props) => {
 							<span className="modal__text-label modal__text-label--right">Забыли пароль?</span>
 						</label>
 					</div>
-					<button type="submit" className="modal__button modal__button--primary" id="login">Вход</button><br/>
+					<button type="submit" className="modal__button modal__button--primary" id="login" disabled={isDisabled}>Вход</button>
+					{ errorText && 
+						<div className="modal__error">{errorText}</div>
+					}
+					<br/>
 					<div className="modal__button modal__button--default">
 						<NavLink to="/auth/authenticate" className="modal__link">Регистрация</NavLink>
 					</div>

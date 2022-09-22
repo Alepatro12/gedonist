@@ -12,23 +12,23 @@ export const checkUserAPI = (getParameter = '') => {
 	;
 }
 
-export const getLogoutAPI = (name) => {
+export const getLogoutAPI = (userName) => {
 	return instance
-		.get(`auth/logout.php?name=${name}`)
+		.get(`auth/logout.php?name=${userName}`)
 		.then(response => response.data)
 	;
 }
 
-export const getLoginAPI = (password, name, remember) => {
+export const getLoginAPI = (password, userName, remember) => {
 	return instance
-		.get(`auth/login.php?password=${password}&name=${name}&remember=${remember}`)
+		.get(`auth/login.php?password=${password}&name=${userName}&remember=${remember}`)
 		.then(response => response.data)
 	;
 }
 
-export const getRegistrationAPI = (name, email, password, passwordValid) => {
+export const getRegistrationAPI = (userName, email, password, passwordValid) => {
 	return instance
-		.get(`auth/registration.php?name=${name}&email=${email}&password=${password}&passwordValid=${passwordValid}`)
+		.get(`auth/registration.php?name=${userName}&email=${email}&password=${password}&passwordValid=${passwordValid}`)
 		.then(response => response.data)
 	;
 }

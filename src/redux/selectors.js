@@ -20,6 +20,18 @@ export const getIsDisabled = (state) => {
 	return state.authenticationData.isDisabled;
 }
 
-export const getName = (state) => {
-	return state.authenticationData.name;
+export const getUserName = (state) => {
+	return state.authenticationData.userName;
+}
+
+export const getLoginError = (state) => {
+	return state.authenticationData.errors.loginError.errorText;
+}
+
+export const getRegistrationError = (state) => {
+	return state.authenticationData.errors.registrationError.errorText;
+}
+
+export const getEmailStatus = (state) => {
+	return state.authenticationData.emailStatus;
 }

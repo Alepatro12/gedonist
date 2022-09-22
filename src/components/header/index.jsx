@@ -2,7 +2,7 @@ import './style.css';
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from "react-router-dom";
 
-const Header = React.memo(({ isAuthenticate, isDisabled, name, getLogout }) => {
+const Header = React.memo(({ isAuthenticate, isDisabled, userName, getLogout }) => {
 	return (
 		<header className="head">
 			<div className="head__logo">
@@ -13,7 +13,7 @@ const Header = React.memo(({ isAuthenticate, isDisabled, name, getLogout }) => {
 					<Logout
 						isDisabled={isDisabled}
 						getLogout={getLogout}
-						name={name}
+						userName={userName}
 					/>
 				:
 					<div className="head__login">
@@ -25,7 +25,7 @@ const Header = React.memo(({ isAuthenticate, isDisabled, name, getLogout }) => {
 	)
 });
 
-export const Logout = React.memo(({ name, isDisabled, getLogout }) => {
+export const Logout = React.memo(({ userName, isDisabled, getLogout }) => {
 	let [editMode, setEditMode] = useState(false);
 	const ref = useRef(null);
 
@@ -42,11 +42,11 @@ export const Logout = React.memo(({ name, isDisabled, getLogout }) => {
 		return () => document.removeEventListener('mousedown', handleClickOutside);
 	})
 
-	const attemptLogout = () => getLogout(name);
+	const attemptLogout = () => getLogout(userName);
 
 	return <>
 		<div className="head__login">
-			<span onClick={ showUnlogin }>{name}</span>
+			<span onClick={ showUnlogin }>{userName}</span>
 		</div>
 		{editMode &&
 			<div ref={ref} onClick={ attemptLogout } className="head__unlogin" disabled={isDisabled}>Выйти</div>

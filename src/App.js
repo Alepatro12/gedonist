@@ -1,4 +1,3 @@
-//import logo from './logo.svg';
 import './App.css';
 import './style.css';
 import React, { Suspense } from 'react';
@@ -14,6 +13,7 @@ import { compose } from 'redux';
 import { getInitialized } from './redux/selectors';
 import store from './redux/redux-store';
 import { Provider } from 'react-redux';
+import EmailWarningContainer from './components/email-warning/container';
 
 const About = React.lazy(() => import('./components/about/index'));
 const LoginContainer = React.lazy(() => import('./components/auth/login/container'));
@@ -28,6 +28,7 @@ class App extends React.Component {
 		if (this.props.initialized) {
 			return (
 				<div className="App">
+					<EmailWarningContainer/>
 					<div className={`background background--${this.props.match.params.pageName}`}>
 						<HeaderContainer/>
 						<Sidebar sidebar={this.props.state.sidebar} />
