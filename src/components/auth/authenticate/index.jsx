@@ -25,16 +25,18 @@ const validateForm = (formData) => {
 	const errorName = login(formData.name);
 	const errorEmail = email(formData.email);
 	const errorPassword = password(formData.password);
-	const errorPasswordValid = password(formData.passwordValid);
+	const isPasswordsMatch = formData.passwordValid !== formData.password ? 'Пароли не совпадают' : '';
+	const errorPasswordText = password(formData.passwordValid);
+	const errorPasswordValid = errorPasswordText || isPasswordsMatch;
 	let errors = {};
 
-	if (errorName || errorPassword) {
+	if (errorName || errorEmail || errorPassword || errorPasswordValid) {
 		errors = {
 			name: errorName,
 			email: errorEmail,
 			password: errorPassword,
 			passwordValid: errorPasswordValid
-		}
+		};
 	}
 
 	return errors;
@@ -49,7 +51,7 @@ const RegistrationForm = React.memo(({ onSubmit, errorText, isDisabled}) => {
 		>
 			{() => (
 				<Form>
-					<Field type="text" className="modal__input" name="name" placeholder="Имя"/>
+					<Field type="text" className="modal__input" name="name" placeholder="Логин"/>
 					<ErrorMessage name="name" component="div" className="modal__error"/><br/>
 					<Field type="text" className="modal__input" name="email" placeholder="E-mail"/>
 					<ErrorMessage name="email" component="div" className="modal__error"/><br/>

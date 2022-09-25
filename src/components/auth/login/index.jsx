@@ -30,7 +30,7 @@ const validateForm = (formData) => {
 		errors = {
 			name: errorName,
 			password: errorPassword
-		}
+		};
 	}
 
 	return errors;
@@ -45,7 +45,7 @@ const LoginForm = React.memo(({ onSubmit, errorText, isDisabled}) => {
 		>
 			{() => (
 				<Form>
-					<Field type="text" className="modal__input" name="name" placeholder="Имя или e-mail"/>
+					<Field type="text" className="modal__input" name="name" placeholder="Логин или e-mail"/>
 					<ErrorMessage name="name" component="div" className="modal__error"/><br/>
 					<Field type="password" className="modal__input" name="password" placeholder="Пароль"/>
 					<ErrorMessage name="password" component="div" className="modal__error"/><br/>

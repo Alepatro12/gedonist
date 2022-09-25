@@ -1,4 +1,7 @@
-const regEmail = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
+const REGULAR_LOGIN = /^([A-Za-z0-9_])+$/;
+const REGULAR_PASSWORD = /^([A-Za-z0-9])+$/;
+const REGULAR_FIRST_SYMBOL_LETTER = /^[A-Za-z]/;
+const REGULAR_EMAIL = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
 
 const required = (value) => !value && 'Обязательное поле';
 
@@ -6,7 +9,7 @@ const maxLength = (max) => (value) => value.length > max && `Максималь�
 
 const minLength = (min) => (value) => value.length < min && `Минимальная длина — ${min} символов`;
 
-const emailValid = (value) => value.match(/@/) && !regEmail.test(value) && 'E-mail введен некорректно';
+const emailValid = (value) => value.match(/@/) && !REGULAR_EMAIL.test(value) && 'E-mail введен некорректно';
 
 const isEmail = (value) => !value.match(/@/) && 'E-mail введен некорректно';
 
@@ -18,6 +21,12 @@ const thereIsUpperSymbol = (value) => !value.match(/[A-Z]/) && 'Должно б�
 
 const thereIsSpaceSymbol = (value) => value.match(/\s/) && 'Не должно содержать пробельные символы';
 
+const thereIsValidLoginSymbol = (value) => !REGULAR_LOGIN.test(value) && 'Может содержать только латинские буквы, цифры и знак нижнего подчёркивания';
+
+const thereIsFirstSymbolLetter = (value) => !REGULAR_FIRST_SYMBOL_LETTER.test(value) && 'Первым символом может быть только буква';
+
+const thereIsValidPasswordSymbol = (value) => !REGULAR_PASSWORD.test(value) && 'Может содержать только латинские буквы и цифры';
+
 const email = (value) => {
 	let errors = {};
 
@@ -26,16 +35,14 @@ const email = (value) => {
 		errors = {
 			...errors,
 			thereIsSpaceSymbol: thereIsSpaceSymbol(value),
-			maxLength: maxLength(30)(value),
+			maxLength: maxLength(40)(value),
 			minLength: minLength(4)(value),
 			email: emailValid(value),
 			isEmail: isEmail(value)
 		}
 	}
 
-	const errorMessage = errors.required || errors.minLength || errors.maxLength || errors.thereIsSpaceSymbol || errors.isEmail || errors.email;
-
-	return errorMessage;
+	return errors.required || errors.thereIsSpaceSymbol || errors.minLength || errors.maxLength || errors.isEmail || errors.email;
 };
 
 const login = (value) => {
@@ -45,15 +52,15 @@ const login = (value) => {
 	if (!errors.required) {
 		errors = {
 			...errors,
+			thereIsFirstSymbolLetter: thereIsFirstSymbolLetter(value),
 			thereIsSpaceSymbol: thereIsSpaceSymbol(value),
-			maxLength: maxLength(30)(value),
+			validSymbol: thereIsValidLoginSymbol(value),
+			maxLength: maxLength(20)(value),
 			minLength: minLength(4)(value),
 		}
 	}
 
-	const errorMessage = errors.required || errors.minLength || errors.maxLength || errors.thereIsSpaceSymbol;
-
-	return errorMessage;
+	return errors.required || errors.thereIsFirstSymbolLetter || errors.thereIsSpaceSymbol || errors.validSymbol || errors.minLength || errors.maxLength;
 };
 
 
@@ -65,15 +72,13 @@ const loginOrEmail = (value) => {
 		errors = {
 			...errors,
 			thereIsSpaceSymbol: thereIsSpaceSymbol(value),
-			maxLength: maxLength(30)(value),
+			maxLength: maxLength(40)(value),
 			minLength: minLength(4)(value),
 			email: emailValid(value)
 		}
 	}
 
-	const errorMessage = errors.required || errors.minLength || errors.maxLength || errors.thereIsSpaceSymbol || errors.email;
-
-	return errorMessage;
+	return errors.required || errors.thereIsSpaceSymbol || errors.minLength || errors.maxLength || errors.email;
 };
 
 const password = (value) => {
@@ -83,18 +88,17 @@ const password = (value) => {
 	if (!errors.required) {
 		errors = {
 			...errors,
-			maxLength: maxLength(30)(value),
+			maxLength: maxLength(40)(value),
 			minLength: minLength(8)(value),
 			thereIsNumber: thereIsNumber(value),
 			thereIsLowerSymbol: thereIsLowerSymbol(value),
 			thereIsUpperSymbol: thereIsUpperSymbol(value),
-			thereIsSpaceSymbol: thereIsSpaceSymbol(value)
+			thereIsSpaceSymbol: thereIsSpaceSymbol(value),
+			validSymbol: thereIsValidPasswordSymbol(value),
 		}
 	}
 
-	const errorMessage = errors.required || errors.minLength || errors.maxLength || errors.thereIsSpaceSymbol || errors.thereIsNumber || errors.thereIsLowerSymbol || errors.thereIsUpperSymbol;
-
-	return errorMessage;
+	return errors.required || errors.thereIsLowerSymbol || errors.validSymbol || errors.minLength || errors.maxLength || errors.thereIsSpaceSymbol || errors.thereIsNumber || errors.thereIsUpperSymbol;
 };
 
 export {
