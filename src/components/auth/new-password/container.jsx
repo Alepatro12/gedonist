@@ -1,5 +1,5 @@
 import React from 'react';
-import Registration from './index';
+import NewPassword from './index';
 import { connect } from 'react-redux';
 import Loader from './../../common/loader/index';
 import { getNewPassword } from './../../../redux/account-data-reducer';
@@ -10,7 +10,7 @@ import { compose } from 'redux';
 const NewPasswordContainer = React.memo(props => {
 	return <>
 		<Loader isFetching={props.isFetching} />
-		<Registration
+		<NewPassword
 			errorText={props.errorText}
 			isDisabled={props.isDisabled}
 			getNewPassword={props.getNewPassword}
