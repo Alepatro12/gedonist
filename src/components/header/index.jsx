@@ -2,7 +2,7 @@ import './style.css';
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from "react-router-dom";
 
-const Header = React.memo(({ isAuthenticate, isDisabled, userName, getLogout }) => {
+const Header = React.memo(({ isAuthenticate, isDisabled, userName, getLogout, attemptIsChangePassword }) => {
 	return (
 		<header className="head">
 			<div className="head__logo">
@@ -16,9 +16,7 @@ const Header = React.memo(({ isAuthenticate, isDisabled, userName, getLogout }) 
 						userName={userName}
 					/>
 				:
-					<div className="head__login">
-						<NavLink to="/auth/login">Войти</NavLink>
-					</div>
+					<Login attemptIsChangePassword={attemptIsChangePassword} />
 				}
 			</div>
 		</header>
@@ -51,6 +49,16 @@ export const Logout = React.memo(({ userName, isDisabled, getLogout }) => {
 		{editMode &&
 			<div ref={ref} onClick={ attemptLogout } className="head__unlogin" disabled={isDisabled}>Выйти</div>
 		}
+	</>
+});
+
+const Login = React.memo(({ attemptIsChangePassword }) => {
+	const deleteIsChangePassword = () => attemptIsChangePassword(false);
+
+	return <>
+		<div className="head__login">
+			<NavLink to="/auth/login" onClick={ deleteIsChangePassword }>Войти</NavLink>
+		</div>
 	</>
 });
 

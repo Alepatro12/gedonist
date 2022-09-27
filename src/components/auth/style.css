@@ -34,7 +34,7 @@
 }
 
 .modal__title--subtext {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 27px;
 }
 
@@ -95,6 +95,7 @@
 .modal__text-label--right {
   right: 7%;
   margin-top: 6px;
+  color: #eee;
 }
 
 .modal__checkbox {

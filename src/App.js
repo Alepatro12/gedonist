@@ -17,7 +17,9 @@ import EmailWarningContainer from './components/email-warning/container';
 
 const About = React.lazy(() => import('./components/about/index'));
 const LoginContainer = React.lazy(() => import('./components/auth/login/container'));
+const NewPasswordContainer = React.lazy(() => import('./components/auth/new-password/container'));
 const AuthenticateContainer = React.lazy(() => import('./components/auth/authenticate/container'));
+const ChangePasswordContainer = React.lazy(() => import('./components/auth/change-password/container'));
 
 class App extends React.Component {
 	componentDidMount() {
@@ -38,7 +40,9 @@ class App extends React.Component {
 								<Switch>
 									<Route path={this.props.match.path + "/about"} component={About}/>
 									<Route path={this.props.match.path + "/auth/login"} component={LoginContainer}/>
+									<Route path={this.props.match.path + "/auth/new-password"} component={NewPasswordContainer}/>
 									<Route path={this.props.match.path + "/auth/authenticate"} component={AuthenticateContainer}/>
+									<Route path={this.props.match.path + "/auth/change-password"} component={ChangePasswordContainer}/>
 									<Redirect from="/auth" to="/auth/login"/>
 								</Switch>
 							</Suspense>

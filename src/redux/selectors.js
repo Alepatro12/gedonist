@@ -25,13 +25,25 @@ export const getUserName = (state) => {
 }
 
 export const getLoginError = (state) => {
-	return state.authenticationData.errors.loginError.errorText;
+	return state.authenticationData.loginError.errorText;
 }
 
 export const getRegistrationError = (state) => {
-	return state.authenticationData.errors.registrationError.errorText;
+	return state.authenticationData.registrationError.errorText;
 }
 
 export const getEmailStatus = (state) => {
 	return state.authenticationData.emailStatus;
+}
+
+export const getChangePasswordError = (state) => {
+	return state.authenticationData.changePasswordError.errorText;
+}
+
+export const getIsChangePassword = (state) => {
+	return state.authenticationData.isChangePassword;
+}
+
+export const getNewPasswordError = (state) => {
+	return state.authenticationData.newPasswordError.errorText;
 }

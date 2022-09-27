@@ -32,3 +32,17 @@ export const getRegistrationAPI = (userName, email, password, passwordValid) => 
 		.then(response => response.data)
 	;
 }
+
+export const getChangePasswordAPI = (email) => {
+	return instance
+		.get(`auth/change-password.php?email=${email}`)
+		.then(response => response.data)
+	;
+}
+
+export const getNewPasswordAPI = (password, passwordValid, token, email) => {
+	return instance
+		.get(`auth/change-password.php?password=${password}&passwordValid=${passwordValid}&token=${token}&email=${email}`)
+		.then(response => response.data)
+	;
+}
