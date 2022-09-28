@@ -98,7 +98,7 @@ const password = (value) => {
 		}
 	}
 
-	return errors.required || errors.thereIsLowerSymbol || errors.validSymbol || errors.minLength || errors.maxLength || errors.thereIsSpaceSymbol || errors.thereIsNumber || errors.thereIsUpperSymbol;
+	return errors.required || errors.thereIsSpaceSymbol || errors.validSymbol || errors.minLength || errors.maxLength || errors.thereIsLowerSymbol || errors.thereIsUpperSymbol || errors.thereIsNumber;
 };
 
 export {
