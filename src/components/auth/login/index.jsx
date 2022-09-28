@@ -36,7 +36,7 @@ const validateForm = (formData) => {
 	return errors;
 };
 
-const LoginForm = React.memo(({ onSubmit, errorText, isDisabled}) => {
+const LoginForm = React.memo(({ onSubmit, errorText, isDisabled }) => {
 	return (
 		<Formik
 			initialValues = {{ name: '', password: '', remember: true }}
@@ -55,7 +55,7 @@ const LoginForm = React.memo(({ onSubmit, errorText, isDisabled}) => {
 							<span className="modal__text-label">Запомнить меня</span>
 						</label>
 						<label className="modal__label">
-							<span className="modal__text-label modal__text-label--right">Забыли пароль?</span>
+							<NavLink to="/auth/change-password" className="modal__text-label modal__text-label--right">Забыли пароль?</NavLink>
 						</label>
 					</div>
 					<button type="submit" className="modal__button modal__button--primary" id="login" disabled={isDisabled}>Вход</button>
