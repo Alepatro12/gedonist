@@ -4,8 +4,8 @@ let initialState = [
 	{name: 'О нас', link: '/about'}
 ];
 
-const sidebarReducer = (state = initialState, action) => {
+const menuReducer = (state = initialState, action) => {
 	return state;
 }
 
-export default sidebarReducer;
+export default menuReducer;

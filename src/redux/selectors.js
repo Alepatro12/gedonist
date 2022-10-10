@@ -47,3 +47,7 @@ export const getIsChangePassword = (state) => {
 export const getNewPasswordError = (state) => {
 	return state.authenticationData.newPasswordError.errorText;
 }
+
+export const getMenu = (state) => {
+	return state.menu;
+}

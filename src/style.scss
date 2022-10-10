@@ -1,3 +1,5 @@
+@import './style/mixins.scss';
+
 .background {
 	display: grid;
 	grid-template-areas: 
@@ -13,7 +15,16 @@
 	background-attachment: fixed;
 	background-size: cover;
 
-	&--about {
+	@include mq('tablet') {
+		grid-template-areas: 
+		"header header"
+		"sidebar main"
+		"footer footer";
+		grid-template-columns: 0 1fr;
+	}
+
+	&--about,
+	&--menu {
 		background-image: url(./img/about.jpg);
 	}
 
@@ -36,8 +47,13 @@
 
 .main {
 	grid-area: main;
+
+	@include mq('tablet') {
+		padding-left: 5px;
+	}
 }
 
 .footer {
 	grid-area: footer;
+	height: 50px;
 }

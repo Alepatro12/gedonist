@@ -1,12 +1,17 @@
 import './style.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useHistory } from "react-router-dom";
 
 const Header = React.memo(({ isAuthenticate, isDisabled, userName, getLogout, attemptIsChangePassword }) => {
 	return (
 		<header className="head">
-			<div className="head__logo">
-				<NavLink to="/" title="Перейти на Главную">Gedonist</NavLink>
+			<div className="head__main">
+				<div>
+					<MenuButton/>
+				</div>
+				<div className="head__logo">
+					<NavLink to="/" title="Перейти на Главную">Gedonist</NavLink>
+				</div>
 			</div>
 			<div className="head__registration">
 				{isAuthenticate ?
@@ -29,8 +34,8 @@ export const Logout = React.memo(({ userName, isDisabled, getLogout }) => {
 
 	const handleClickOutside = (event) => {
 		if (ref.current && !ref.current.contains(event.target)) {
-            setEditMode(false);
-        }
+			setEditMode(false);
+		}
 	};
 
 	const showUnlogin = () => setEditMode(true);
@@ -59,6 +64,46 @@ const Login = React.memo(({ attemptIsChangePassword }) => {
 		<div className="head__login">
 			<NavLink to="/auth/login" onClick={ deleteIsChangePassword }>Войти</NavLink>
 		</div>
+	</>
+});
+
+const MenuButton = React.memo(() => {
+	const pathname = useLocation().pathname;
+	const history = useHistory();
+
+	const initMenu = () => {
+		return pathname === '/menu';
+	};
+
+	let [isOpenMenu, setOpenMenu ] = useState(initMenu());
+
+	const toggleMenu = () => {
+		if (isOpenMenu) {
+			history.goBack();
+		}
+
+		setOpenMenu(!isOpenMenu);
+	};
+
+	const handleClickOutside = (event) => {
+		if (
+			(event.target.nodeName === 'A'
+			|| event.target.dataset.link)
+			&& !event.target.classList.contains('js-menu')
+		) {
+			setOpenMenu(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('click', handleClickOutside);
+		return () => document.removeEventListener('click', handleClickOutside);
+	})
+
+	return <>
+		<NavLink to="/menu" title="Открыть меню" className="head__menu js-menu" onClick={ toggleMenu }>
+			<span className={`head__menu-icon ${ isOpenMenu ? 'head__menu-icon--active' : '' }`}></span>
+		</NavLink>
 	</>
 });
 
