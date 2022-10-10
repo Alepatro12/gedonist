@@ -16,14 +16,10 @@
 		text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
 	}
 
-	$midGrey: #2e2e2e;
-	$darkGrey: #252525;
 	$green: #4e4e4e;
 	$lightGrey:#d38484;
 
 	$curve: cubic-bezier(0.23, 1, 0.32, 1);
-	
-	$font: 'Share Tech Mono', monospace;
 
 	@mixin keyframes($animationName)
 	{
@@ -156,7 +152,6 @@
 	.glitch-btn .mask span {
 		position: absolute;
 		left: 50%;
-		-webkit-transform: translateX(-50%);
 		transform: translateX(-50%);
 		width: 100%;
 		top: -100%;

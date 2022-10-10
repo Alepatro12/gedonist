@@ -75,7 +75,7 @@ const MenuButton = React.memo(() => {
 		return pathname === '/menu';
 	};
 
-	let [isOpenMenu, setOpenMenu ] = useState(initMenu());
+	let [isOpenMenu, setOpenMenu] = useState(initMenu());
 
 	const toggleMenu = () => {
 		if (isOpenMenu) {

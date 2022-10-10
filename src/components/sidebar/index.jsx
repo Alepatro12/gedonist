@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Sidebar = (props) => {
 
-	let blockPageLink =
+	const blockPageLink =
 		props.menu.map(pageLink => {
 			return (
 				<NavLink className="glitch-btn" to={pageLink.link} key={pageLink.link}>

@@ -232,7 +232,7 @@ nav .glitch-btn .mask span {
   position: absolute;
   left: 50%;
   -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
+          transform: translateX(-50%);
   width: 100%;
   top: -100%;
 }
