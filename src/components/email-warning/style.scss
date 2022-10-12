@@ -7,8 +7,7 @@
 	text-align: center;
 
 	@include mq('phone') {
-		height: 100px;
-		padding: 15px;
+		padding: 10px;
 		line-height: 1.5em;
 	}
 }
