@@ -15,6 +15,7 @@ import store from './redux/redux-store';
 import { Provider } from 'react-redux';
 import EmailWarningContainer from './components/email-warning/container';
 
+const Menu = React.lazy(() => import('./components/menu/container'));
 const About = React.lazy(() => import('./components/about/index'));
 const LoginContainer = React.lazy(() => import('./components/auth/login/container'));
 const NewPasswordContainer = React.lazy(() => import('./components/auth/new-password/container'));
@@ -33,11 +34,12 @@ class App extends React.Component {
 					<EmailWarningContainer/>
 					<div className={`background background--${this.props.match.params.pageName}`}>
 						<HeaderContainer/>
-						<Sidebar sidebar={this.props.state.sidebar} />
+						<Sidebar menu={this.props.state.menu} />
 						<div className="main">
 							<Route path="/" component={Home} />
 							<Suspense fallback={<Loader isFetching={true}/>}>
 								<Switch>
+									<Route path={this.props.match.path + "/menu"} component={Menu}/>
 									<Route path={this.props.match.path + "/about"} component={About}/>
 									<Route path={this.props.match.path + "/auth/login"} component={LoginContainer}/>
 									<Route path={this.props.match.path + "/auth/new-password"} component={NewPasswordContainer}/>

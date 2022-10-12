@@ -16,7 +16,7 @@ body {
 	width: 100%;
 	background-color: #fff;
 	color: #333;
-	font-family: "Segoe UI", Arial, sans-serif;
+	font-family: 'Roboto', system-ui, '-apple-system', 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 	font-size: 14px;
 	line-height: 1.2em;
 	float: left;

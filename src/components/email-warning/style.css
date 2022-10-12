@@ -1,6 +1,15 @@
 .email-warning {
+  padding: 0 15px;
   background: linear-gradient(119.23deg, rgba(255, 200, 223, 0.7) 0%, rgba(255, 197, 165, 0.7) 99%);
   line-height: 38px;
   text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .email-warning {
+    height: 100px;
+    padding: 15px;
+    line-height: 1.5em;
+  }
 }
 /*# sourceMappingURL=style.css.map */

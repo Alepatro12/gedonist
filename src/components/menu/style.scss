@@ -1,15 +1,14 @@
 @import './../../style/mixins.scss';
 
-nav {
-	display: flex;
+.menu {
+	display: none;
 	flex-direction: column;
-	max-width: 300px;
-	padding-left: 20px;
+	align-items: center;
 
 	@include mq('tablet') {
-		display: none;
+		display: flex;
 	}
-	
+
 	.glitch-btn {
 		font-size: 30px;
 		color: #eee;
@@ -50,8 +49,8 @@ nav {
 	.glitch-btn:before {
 		content: "";
 		position: absolute;
-		left: -10%;
-		top: -10%;
+		left: -15%;
+		top: -25%;
 		background: $lightGrey;
 		width: 4px;
 		height: 160%;
