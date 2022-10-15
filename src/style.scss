@@ -49,6 +49,7 @@
 	grid-area: main;
 
 	@include mq('tablet') {
+		padding-top: 0;
 		padding-left: 5px;
 	}
 }
