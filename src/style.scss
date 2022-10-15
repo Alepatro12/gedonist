@@ -9,8 +9,8 @@
 	grid-template-rows: 100px 1fr 60px;
 	grid-template-columns: 15% 1fr;
 	grid-gap: 10px;
-	height: 100vh;
-	background-image: url(./img/home.jpg);
+	min-height: 100vh;
+	background-image: url(./img/home-o.jpg);
 	background-position: center center;
 	background-attachment: fixed;
 	background-size: cover;
@@ -25,11 +25,11 @@
 
 	&--about,
 	&--menu {
-		background-image: url(./img/about.jpg);
+		background-image: url(./img/about-o.jpg);
 	}
 
 	&--auth {
-		background-image: url(./img/registration.jpg);
+		background-image: url(./img/registration-o.jpg);
 	}
 }
 
@@ -49,6 +49,7 @@
 	grid-area: main;
 
 	@include mq('tablet') {
+		padding-top: 0;
 		padding-left: 5px;
 	}
 }
@@ -56,4 +57,16 @@
 .footer {
 	grid-area: footer;
 	height: 50px;
+}
+
+.center {
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	transform: translate(-10%, 0);
+
+	@include mq('tablet') {
+		transform: unset;
+	}
 }
