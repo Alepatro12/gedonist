@@ -7,8 +7,8 @@
   -ms-grid-columns: 15% 1fr;
       grid-template-columns: 15% 1fr;
   grid-gap: 10px;
-  height: 100vh;
-  background-image: url(./img/home.jpg);
+  min-height: 100vh;
+  background-image: url(./img/home-o.jpg);
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
@@ -23,11 +23,11 @@
 }
 
 .background--about, .background--menu {
-  background-image: url(./img/about.jpg);
+  background-image: url(./img/about-o.jpg);
 }
 
 .background--auth {
-  background-image: url(./img/registration.jpg);
+  background-image: url(./img/registration-o.jpg);
 }
 
 .head, .sidebar, .main, .footer {
@@ -65,5 +65,27 @@
   -ms-grid-column-span: 2;
   grid-area: footer;
   height: 50px;
+}
+
+.center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transform: translate(-10%, 0);
+          transform: translate(-10%, 0);
+}
+
+@media only screen and (max-width: 991px) {
+  .center {
+    -webkit-transform: unset;
+            transform: unset;
+  }
 }
 /*# sourceMappingURL=style.css.map */
