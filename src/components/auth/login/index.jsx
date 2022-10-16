@@ -56,7 +56,7 @@ const LoginForm = React.memo(({ onSubmit, errorText, isDisabled }) => {
 							<Field type="checkbox" name="remember" className="authentication__checkbox"/>
 							<span className="authentication__text-label">Запомнить меня</span>
 						</label>
-						<NavLink to="/auth/change-password" className="authentication__text-label authentication__text-label--right">Забыли пароль?</NavLink>
+						<NavLink to="/auth/change-password" className="authentication__text-label authentication__text-label--color">Забыли пароль?</NavLink>
 					</div>
 					<button type="submit" className="authentication__button authentication__button--primary" id="login" disabled={isDisabled}>Вход</button>
 					{ errorText && 

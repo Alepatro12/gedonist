@@ -46,7 +46,6 @@
 
 		&--remember {
 			display: flex;
-			position: relative;
 			justify-content: space-between;
 			padding: 0 6px;
 		}
@@ -65,7 +64,7 @@
 		margin-left: 5px;
 		margin-top: 5px;
 
-		&--right {
+		&--color {
 			color: #eee;
 		}
 	}
