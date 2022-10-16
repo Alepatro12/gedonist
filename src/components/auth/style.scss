@@ -1,34 +1,25 @@
- /* Стили для модальных окон */
-.modal {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+@import './../../style/mixins.scss';
+
+.authentication {
 	width: 330px;
+	min-width: 250px;
+	max-width: 330px;
 	text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.6);
 
-	&__hidden {
-		opacity: 0;
-		visibility: hidden;
-	}
-
-	&__active {
-		opacity: 1;
-		visibility: visible;
-		cursor: default;
+	@include mq('tablet') {
+		width: 100%;
 	}
 
 	&__title {
+		margin: 0 0 5px;
 		font-size: 28px;
 		text-align: center;
 		line-height: 36px;
 		color: #eee;
 		font-family: Roboto, sans-serif;
-		font-style: normal;
-		font-weight: 500;
-		margin: 0 0 5px;
 
 		&--subtext {
+			margin-bottom: 10px;
 			font-size: 18px;
 			line-height: 27px;
 		}
@@ -56,16 +47,12 @@
 		&--remember {
 			display: flex;
 			justify-content: space-between;
-			padding-left: 6px;
-		}
-
-		&--textarea {
-			height: 100px;
-			padding: 10px;
+			padding: 0 6px;
 		}
 	}
 
 	&__label {
+		display: flex;
 		color: #eee;
 		font-family: Roboto, sans-serif;
 		font-size: 16px;
@@ -74,13 +61,10 @@
 	}
 
 	&__text-label {
-		position: absolute;
 		margin-left: 5px;
 		margin-top: 5px;
 
-		&--right {
-			right: 7%;
-			margin-top: 6px;
+		&--color {
 			color: #eee;
 		}
 	}
@@ -162,27 +146,5 @@
 			border-color: transparent;
 			border-bottom-color: #dc3545;
 		}
-
-		&--success {
-			margin-bottom: -5px;
-			padding: 6px;
-			background-color: #27b13c;
-
-			&::before {
-				margin-top: -22px;
-				border-bottom-color: #27b13c;
-			}
-		}
-	}
-
-	 /* Стили для кнопки закрытия */
-	&__cross {
-		position: absolute;
-		top: 20px;
-		right: 20px;
-		fill: #999;
-		margin-top: -50px;
-		margin-right: -50px;
-		cursor: pointer;
 	}
 }

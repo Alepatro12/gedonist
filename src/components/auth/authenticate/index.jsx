@@ -10,14 +10,16 @@ const Registration = React.memo(({ errorText, isDisabled, getRegistration }) => 
 	}
 
 	return (
-		<div className="modal">
-			<div className="modal__title">Регистрация</div><br/>
-			<RegistrationForm
-				onSubmit={onSubmit}
-				errorText={errorText}
-				isDisabled={isDisabled}
-			/>
-		</div> 
+		<div className="center">
+			<div className="authentication">
+				<div className="authentication__title">Регистрация</div><br/>
+				<RegistrationForm
+					onSubmit={onSubmit}
+					errorText={errorText}
+					isDisabled={isDisabled}
+				/>
+			</div>
+		</div>
 	);
 });
 
@@ -51,21 +53,21 @@ const RegistrationForm = React.memo(({ onSubmit, errorText, isDisabled}) => {
 		>
 			{() => (
 				<Form>
-					<Field type="text" className="modal__input" name="name" placeholder="Логин"/>
-					<ErrorMessage name="name" component="div" className="modal__error"/><br/>
-					<Field type="text" className="modal__input" name="email" placeholder="E-mail"/>
-					<ErrorMessage name="email" component="div" className="modal__error"/><br/>
-					<Field type="password" className="modal__input" name="password" placeholder="Пароль"/>
-					<ErrorMessage name="password" component="div" className="modal__error"/><br/>
-					<Field type="password" className="modal__input" name="passwordValid" placeholder="Подтверждение пароля"/>
-					<ErrorMessage name="passwordValid" component="div" className="modal__error"/><br/>
-					<button type="submit" className="modal__button modal__button--primary" id="registration" disabled={isDisabled}>Регистрация</button>
+					<Field type="text" className="authentication__input" name="name" placeholder="Логин"/>
+					<ErrorMessage name="name" component="div" className="authentication__error"/><br/>
+					<Field type="text" className="authentication__input" name="email" placeholder="E-mail"/>
+					<ErrorMessage name="email" component="div" className="authentication__error"/><br/>
+					<Field type="password" className="authentication__input" name="password" placeholder="Пароль"/>
+					<ErrorMessage name="password" component="div" className="authentication__error"/><br/>
+					<Field type="password" className="authentication__input" name="passwordValid" placeholder="Подтверждение пароля"/>
+					<ErrorMessage name="passwordValid" component="div" className="authentication__error"/><br/>
+					<button type="submit" className="authentication__button authentication__button--primary" id="registration" disabled={isDisabled}>Регистрация</button>
 					{ errorText && 
-						<div className="modal__error">{errorText}</div>
+						<div className="authentication__error">{errorText}</div>
 					}
 					<br/>
-					<div className="modal__button modal__button--default">
-						<NavLink to="/auth/login" className="modal__link">Назад</NavLink>
+					<div className="authentication__button authentication__button--default">
+						<NavLink to="/auth/login" className="authentication__link">Назад</NavLink>
 					</div>
 				</Form>
 			)}

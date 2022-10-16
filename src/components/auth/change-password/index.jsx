@@ -10,15 +10,17 @@ const ChangePassword = React.memo(({ errorText, isDisabled, getChangePassword })
 	}
 
 	return (
-		<div className="modal">
-			<div className="modal__title">Забыли пароль?</div><br/>
-			<div className="modal__title modal__title--subtext">Введите ваш E-mail для получения нового пароля</div> 
-			<ChangePasswordForm
-				onSubmit={onSubmit}
-				errorText={errorText}
-				isDisabled={isDisabled}
-			/>
-		</div> 
+		<div className="center">
+			<div className="authentication">
+				<div className="authentication__title">Забыли пароль?</div><br/>
+				<div className="authentication__title authentication__title--subtext">Введите ваш E-mail для получения нового пароля</div> 
+				<ChangePasswordForm
+					onSubmit={onSubmit}
+					errorText={errorText}
+					isDisabled={isDisabled}
+				/>
+			</div>
+		</div>
 	);
 });
 
@@ -44,15 +46,15 @@ const ChangePasswordForm = React.memo(({ onSubmit, errorText, isDisabled }) => {
 		>
 			{() => (
 				<Form>
-					<Field type="text" className="modal__input" name="email" placeholder="E-mail"/>
-					<ErrorMessage name="email" component="div" className="modal__error"/><br/>
-					<button type="submit" className="modal__button modal__button--primary" id="change-password" disabled={isDisabled}>Подтвердить</button>
+					<Field type="text" className="authentication__input" name="email" placeholder="E-mail"/>
+					<ErrorMessage name="email" component="div" className="authentication__error"/><br/>
+					<button type="submit" className="authentication__button authentication__button--primary" id="change-password" disabled={isDisabled}>Подтвердить</button>
 					{ errorText && 
-						<div className="modal__error">{errorText}</div>
+						<div className="authentication__error">{errorText}</div>
 					}
 					<br/>
-					<div className="modal__button modal__button--default">
-						<NavLink to="/auth/login" className="modal__link">Назад</NavLink>
+					<div className="authentication__button authentication__button--default">
+						<NavLink to="/auth/login" className="authentication__link">Назад</NavLink>
 					</div>
 				</Form>
 			)}
