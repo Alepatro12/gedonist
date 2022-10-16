@@ -10,15 +10,17 @@ const NewPassword = React.memo(({ errorText, isDisabled, getNewPassword }) => {
 	}
 
 	return (
-		<div className="modal">
-			<div className="modal__title">Восстановление пароля</div><br/>
-			<div className="modal__title modal__title--subtext">Введите новый пароль</div> 
-			<NewPasswordForm
-				onSubmit={onSubmit}
-				errorText={errorText}
-				isDisabled={isDisabled}
-			/>
-		</div> 
+		<div className="center">
+			<div className="authentication">
+				<div className="authentication__title">Восстановление пароля</div><br/>
+				<div className="authentication__title authentication__title--subtext">Введите новый пароль</div> 
+				<NewPasswordForm
+					onSubmit={onSubmit}
+					errorText={errorText}
+					isDisabled={isDisabled}
+				/>
+			</div>
+		</div>
 	);
 });
 
@@ -50,13 +52,13 @@ const NewPasswordForm = React.memo(({ onSubmit, errorText, isDisabled }) => {
 		>
 			{() => (
 				<Form>
-					<Field type="password" className="modal__input" name="password" placeholder="Пароль"/>
-					<ErrorMessage name="password" component="div" className="modal__error"/><br/>
-					<Field type="password" className="modal__input" name="passwordValid" placeholder="Подтверждение пароля"/>
-					<ErrorMessage name="passwordValid" component="div" className="modal__error"/><br/>
-					<button type="submit" className="modal__button modal__button--primary" id="new-password" disabled={isDisabled}>Подтвердить</button>
+					<Field type="password" className="authentication__input" name="password" placeholder="Пароль"/>
+					<ErrorMessage name="password" component="div" className="authentication__error"/><br/>
+					<Field type="password" className="authentication__input" name="passwordValid" placeholder="Подтверждение пароля"/>
+					<ErrorMessage name="passwordValid" component="div" className="authentication__error"/><br/>
+					<button type="submit" className="authentication__button authentication__button--primary" id="new-password" disabled={isDisabled}>Подтвердить</button>
 					{ errorText && 
-						<div className="modal__error">{errorText}</div>
+						<div className="authentication__error">{errorText}</div>
 					}
 				</Form>
 			)}
