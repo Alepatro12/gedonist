@@ -7,6 +7,7 @@
   -ms-grid-columns: 15% 1fr;
       grid-template-columns: 15% 1fr;
   grid-gap: 10px;
+  height: 100%;
   min-height: 100vh;
   background-image: url(./img/home-o.jpg);
   background-position: center center;
