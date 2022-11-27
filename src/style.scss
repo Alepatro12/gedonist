@@ -13,7 +13,7 @@
 	min-height: 100vh;
 	background-image: url(./img/home-o.jpg);
 	background-position: center center;
-	background-attachment: fixed;
+	background-attachment: scroll;
 	background-size: cover;
 
 	@include mq('tablet') {
@@ -32,9 +32,14 @@
 	&--auth {
 		background-image: url(./img/registration-o.jpg);
 	}
+
+	&--music {
+		background-image: url(./img/music-o.jpg);
+	}
 }
 
 .head, .sidebar, .main, .footer {
+	position: relative;
 	padding: 20px;
 }
 
@@ -70,4 +75,8 @@
 	@include mq('tablet') {
 		transform: unset;
 	}
+}
+
+.hidden {
+	display: none !important;
 }

@@ -24,6 +24,10 @@ export const getUserName = (state) => {
 	return state.authenticationData.userName;
 }
 
+export const getUserId = (state) => {
+	return state.authenticationData.userId;
+}
+
 export const getLoginError = (state) => {
 	return state.authenticationData.loginError.errorText;
 }
@@ -50,4 +54,24 @@ export const getNewPasswordError = (state) => {
 
 export const getMenu = (state) => {
 	return state.menu;
+}
+
+export const getPerformers = (state) => {
+	return state.music.performers;
+}
+
+export const getMusicFocus = (state) => {
+	return state.music.isFocus;
+}
+
+export const getPerformer = (state) => {
+	return state.music.performer;
+}
+
+export const getIsAddPerformer = (state) => {
+	return state.music.isAddPerformer;
+}
+
+export const getCollection = (state) => {
+	return state.music.collection;
 }

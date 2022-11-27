@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 
 const instance = axios.create({
-	baseURL: '/eoeo/',
+	baseURL: 'http://eoeo/',
 	withCredentials: true
 });
 
@@ -43,6 +43,34 @@ export const getChangePasswordAPI = (email) => {
 export const getNewPasswordAPI = (password, passwordValid, token, email) => {
 	return instance
 		.get(`auth/change-password.php?password=${password}&passwordValid=${passwordValid}&token=${token}&email=${email}`)
+		.then(response => response.data)
+	;
+}
+
+export const getPerformersAPI = (searchLine) => {
+	return instance
+		.get(`music/search.php?searchLine=${searchLine}`)
+		.then(response => response.data)
+	;
+}
+
+export const getPerformerAPI = (userId, performerId) => {
+	return instance
+		.get(`music/search-performer.php?userId=${userId}&performerId=${performerId}`)
+		.then(response => response.data)
+	;
+}
+
+export const addPerformerAPI = (userId, performerId, isDelete) => {
+	return instance
+		.get(`music/add-performer.php?userId=${userId}&performerId=${performerId}&isDelete=${isDelete}`)
+		.then(response => response.data)
+	;
+}
+
+export const getCollectionAPI = (userId) => {
+	return instance
+		.get(`music/collection.php?userId=${userId}`)
 		.then(response => response.data)
 	;
 }

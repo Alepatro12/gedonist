@@ -4,13 +4,11 @@
   max-width: 330px;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.6);
 }
-
 @media only screen and (max-width: 991px) {
   .authentication {
     width: 100%;
   }
 }
-
 .authentication__title {
   margin: 0 0 5px;
   font-size: 28px;
@@ -19,18 +17,14 @@
   color: #eee;
   font-family: Roboto, sans-serif;
 }
-
 .authentication__title--subtext {
   margin-bottom: 10px;
   font-size: 18px;
   line-height: 27px;
 }
-
 .authentication__input {
   width: 95%;
   height: 45px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin: 5px 0;
   margin-left: 2.5%;
@@ -38,32 +32,20 @@
   padding-right: 30px;
   font-family: Roboto, sans-serif;
   font-size: 16px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   border-radius: 5px;
   border: none;
-  -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-
 .authentication__input:focus {
-  -webkit-box-shadow: 0 5px 5px #ddd;
-          box-shadow: 0 5px 5px #ddd;
+  box-shadow: 0 5px 5px #ddd;
 }
-
 .authentication__input--remember {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   padding: 0 6px;
 }
-
 .authentication__label {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   color: #eee;
   font-family: Roboto, sans-serif;
@@ -71,33 +53,27 @@
   text-shadow: 3px 5px 4px rgba(0, 0, 0, 0.9);
   cursor: pointer;
 }
-
 .authentication__text-label {
   margin-left: 5px;
   margin-top: 5px;
 }
-
 .authentication__text-label--color {
   color: #eee;
 }
-
 .authentication__checkbox {
   height: 25px;
   width: 25px;
   border-radius: 5px;
   cursor: pointer;
 }
-
 .authentication__link {
   width: 100%;
   padding-top: 13px;
   color: #27b13c;
 }
-
 .authentication__link:hover {
   color: #27b13c;
 }
-
 .authentication__button {
   width: 95%;
   height: 45px;
@@ -108,34 +84,26 @@
   border: none;
   border-radius: 24px;
   cursor: pointer;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
-
 .authentication__button--primary {
   margin-top: 10px;
   background-color: #27b13c;
   color: #eee;
 }
-
 .authentication__button--primary:hover {
   background-color: #209732;
 }
-
 .authentication__button--default {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   text-align: center;
   margin-bottom: 10px;
   background-color: #eee;
   text-shadow: none;
 }
-
 .authentication__button--default:hover {
   background-color: #d4e6d5;
 }
-
 .authentication__error {
   width: 95%;
   margin-left: 2%;
@@ -148,7 +116,6 @@
   border-radius: 3px;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.2);
 }
-
 .authentication__error::before {
   display: block;
   content: "";
@@ -161,5 +128,4 @@
   border-width: 9px;
   border-color: transparent;
   border-bottom-color: #dc3545;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
