@@ -37,68 +37,6 @@
   z-index: -1;
   transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
-@-webkit-keyframes glitchin {
-  100% {
-    transform: translate(0px, 0px);
-  }
-  95% {
-    transform: translate(0.5px, 0.05px);
-  }
-  90% {
-    transform: translate(0.6px, -0.3px);
-  }
-  85% {
-    transform: translate(1.2px, 0px);
-  }
-  80% {
-    transform: translate(1.2px, 0.2px);
-  }
-  75% {
-    transform: translate(0.5px, 1px);
-  }
-  70% {
-    transform: translate(0.3px, 1.2px);
-  }
-  65% {
-    transform: translate(-2.1px, 0.7px);
-  }
-  60% {
-    transform: translate(3.6px, 0.4px);
-  }
-  55% {
-    transform: translate(0.45px, 1.8px);
-  }
-  50% {
-    transform: translate(-3px, -1px);
-  }
-  45% {
-    transform: translate(-4.4px, 1.1px);
-  }
-  40% {
-    transform: translate(-4.2px, 2.4px);
-  }
-  35% {
-    transform: translate(2.6px, 1.3px);
-  }
-  30% {
-    transform: translate(-1.4px, 2.8px);
-  }
-  25% {
-    transform: translate(6px, 0.75px);
-  }
-  20% {
-    transform: translate(0px, -1.6px);
-  }
-  15% {
-    transform: translate(-5.95px, -0.85px);
-  }
-  10% {
-    transform: translate(3.6px, 3.6px);
-  }
-  5% {
-    transform: translate(-0.95px, -0.95px);
-  }
-}
 @keyframes glitchin {
   100% {
     transform: translate(0px, 0px);
@@ -179,23 +117,13 @@
   top: 20%;
 }
 .menu .glitch-btn:hover .mask {
-  -webkit-animation: glitchin 0.2s both;
-          animation: glitchin 0.2s both;
+  animation: glitchin 0.2s both;
 }
 .menu .glitch-btn:hover .text {
-  -webkit-animation: fade-in 0.8s forwards;
-          animation: fade-in 0.8s forwards;
+  animation: fade-in 0.8s forwards;
 }
 .menu .glitch-btn:hover .mask {
   display: block;
-}
-@-webkit-keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 @keyframes fade-in {
   from {

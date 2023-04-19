@@ -3,7 +3,6 @@ import './style.css';
 import React, { Suspense } from 'react';
 import { Route, withRouter, BrowserRouter, Switch, Redirect } from "react-router-dom";
 import HeaderContainer from './components/header/container';
-import Sidebar from './components/sidebar/index';
 import Footer from './components/footer/index';
 import { connect } from 'react-redux';
 import { initializedApp } from './redux/app-reducer';
@@ -14,6 +13,7 @@ import { getInitialized } from './redux/selectors';
 import store from './redux/redux-store';
 import { Provider } from 'react-redux';
 import EmailWarningContainer from './components/email-warning/container';
+import Sidebar from './components/sidebar/container';
 
 const Menu = React.lazy(() => import('./components/menu/container'));
 const About = React.lazy(() => import('./components/about/index'));
@@ -35,15 +35,14 @@ class App extends React.Component {
 					<EmailWarningContainer/>
 					<div className={`background background--${this.props.match.params.pageName}`}>
 						<HeaderContainer/>
-						<Sidebar menu={this.props.state.menu} />
+						<Sidebar/>
 						<div className="main">
 							<Route path="/" component={Home} />
 							<Suspense fallback={<Loader isFetching={true}/>}>
 								<Switch>
 									<Route path={this.props.match.path + "/menu"} component={Menu}/>
 									<Route path={this.props.match.path + "/about"} component={About}/>
-									<Route path={this.props.match.path + "/music"} component={Music} exact/>
-									<Route path={this.props.match.path + "/music/:id"} component={Music}/>
+									<Route path={this.props.match.path + "/music"} component={Music}/>
 									<Route path={this.props.match.path + "/auth/login"} component={LoginContainer}/>
 									<Route path={this.props.match.path + "/auth/new-password"} component={NewPasswordContainer}/>
 									<Route path={this.props.match.path + "/auth/authenticate"} component={AuthenticateContainer}/>
