@@ -5,7 +5,7 @@ import {
 	getNewPasswordAPI,
 	getRegistrationAPI,
 	getChangePasswordAPI
-} from './../api/api'
+} from './../api/api';
 
 const SET_IS_CHANGE_PASSWORD = 'checkAuthentication/SET_IS_CHANGE_PASSWORD';
 const CHECK_AUTHENTICATION = 'checkAuthentication/CHECK_AUTHENTICATION';

@@ -1,59 +1,48 @@
 .background {
-  display: -ms-grid;
   display: grid;
-      grid-template-areas: "header header" "sidebar main" "footer footer";
-  -ms-grid-rows: 100px 1fr 60px;
-      grid-template-rows: 100px 1fr 60px;
-  -ms-grid-columns: 15% 1fr;
-      grid-template-columns: 15% 1fr;
+  grid-template-areas: "header header" "sidebar main" "footer footer";
+  grid-template-rows: 100px 1fr 60px;
+  grid-template-columns: 15% 1fr;
   grid-gap: 10px;
   height: 100%;
   min-height: 100vh;
   background-image: url(./img/home-o.jpg);
   background-position: center center;
-  background-attachment: fixed;
+  background-attachment: scroll;
   background-size: cover;
 }
-
 @media only screen and (max-width: 991px) {
   .background {
-        grid-template-areas: "header header" "sidebar main" "footer footer";
-    -ms-grid-columns: 0 1fr;
-        grid-template-columns: 0 1fr;
+    grid-template-areas: "header header" "sidebar main" "footer footer";
+    grid-template-columns: 0 1fr;
   }
 }
-
 .background--about, .background--menu {
   background-image: url(./img/about-o.jpg);
 }
-
 .background--auth {
   background-image: url(./img/registration-o.jpg);
 }
+.background--music {
+  background-image: url(./img/music-o.jpg);
+}
 
 .head, .sidebar, .main, .footer {
+  position: relative;
   padding: 20px;
 }
 
 .head {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 2;
   grid-area: header;
 }
 
 .sidebar {
-  -ms-grid-row: 2;
-  -ms-grid-column: 1;
   grid-area: sidebar;
 }
 
 .main {
-  -ms-grid-row: 2;
-  -ms-grid-column: 2;
   grid-area: main;
 }
-
 @media only screen and (max-width: 991px) {
   .main {
     padding-top: 0;
@@ -62,32 +51,23 @@
 }
 
 .footer {
-  -ms-grid-row: 3;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 2;
   grid-area: footer;
   height: 50px;
 }
 
 .center {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-transform: translate(-10%, 0);
-          transform: translate(-10%, 0);
+  justify-content: center;
+  align-items: center;
+  transform: translate(-10%, 0);
 }
-
 @media only screen and (max-width: 991px) {
   .center {
-    -webkit-transform: unset;
-            transform: unset;
+    transform: unset;
   }
 }
-/*# sourceMappingURL=style.css.map */
+
+.hidden {
+  display: none !important;
+}/*# sourceMappingURL=style.css.map */

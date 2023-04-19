@@ -16,19 +16,19 @@ const appReducer = (state = initialState, action) => {
 		default:
 			return state;
 	}
-}
+};
 
 export const setInitialized = () => {
 	return {
 		type: SET_INITIALIZED,
 	}
-}
+};
 
 export const initializedApp = (getParameter = '') => {
 	return async (dispatch) => {
 		await dispatch(getUser(getParameter));
 		dispatch(setInitialized());
 	}
-}
+};
 
 export default appReducer;

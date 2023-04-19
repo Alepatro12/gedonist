@@ -4,12 +4,14 @@ import { reducer as formReducer } from 'redux-form';
 import menuReducer from './menu-reducer';
 import thunkMiddleware from 'redux-thunk';
 import appReducer from './app-reducer';
+import musicReducer from './music-reducer';
 
 const reducers = combineReducers({
 	authenticationData: checkAuthenticationReducer,
 	menu: menuReducer,
 	appData: appReducer,
 	form: formReducer,
+	music: musicReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
