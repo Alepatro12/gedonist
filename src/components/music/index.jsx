@@ -254,7 +254,7 @@ const Performer = React.memo(({
 				<div className="block-information__page block-information__page--1">
 					<div className="poster">
 						<div className="block-information__button block-information__button--close-two">
-							<NavLink to="/music" className="block-information__button-link">Закрыть</NavLink>
+							<NavLink to="/music" onClick={ backToMain } className="block-information__button-link">Закрыть</NavLink>
 						</div>
 
 						<div className="poster__shadow">
@@ -532,6 +532,10 @@ const ListSectionBlock = React.memo(({
 	isOrganization = false,
 	searchPerformer
 }) => {
+	if (!artists.length) {
+		return <></>;
+	}
+
 	return <div className="block-information__row">
 		<div className="block-information__parametr">{title}:</div>
 		<div>
