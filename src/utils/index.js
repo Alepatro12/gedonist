@@ -101,7 +101,23 @@ const password = (value) => {
 	return errors.required || errors.thereIsSpaceSymbol || errors.validSymbol || errors.minLength || errors.maxLength || errors.thereIsLowerSymbol || errors.thereIsUpperSymbol || errors.thereIsNumber;
 };
 
+const nameCollection = (value) => {
+	let errors = {};
+
+	errors.required = required(value);
+	if (!errors.required) {
+		errors = {
+			...errors,
+			maxLength: maxLength(30)(value),
+			minLength: minLength(1)(value),
+		}
+	}
+
+	return errors.required || errors.minLength || errors.maxLength;
+};
+
 export {
+	nameCollection,
 	loginOrEmail,
 	password,
 	login,

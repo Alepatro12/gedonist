@@ -1,6 +1,18 @@
 @import './../../style/mixins.scss';
 @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,400,600|Tulpen+One&display=swap');
 
+%button-cross {
+	&::before, &::after {
+		content: '';
+		position: absolute;
+		top: 10px;
+		display: block;
+		width: 20px;
+		height: 2px;
+		background: #000;
+	}
+}
+
 .block-information {
 	display: flex;
 	justify-content: center;
@@ -107,6 +119,10 @@
 		width: 100%;
 	}
 
+	&__margin {
+		margin-left: 10px;
+	}
+
 	&__page {
 		width: 50%;
 		background-color: #F5F5F5;
@@ -161,6 +177,60 @@
 	}
 }
 
+.check {
+	display: block;
+	margin-bottom: 10px;
+	font-size: 15px;
+
+	&__input {
+		float: left;
+		width: 1.25em;
+		height: 1.25em;
+		margin-right: 10px;
+		border-radius: 5px;
+		cursor: pointer;
+
+		&:hover {
+			background-color: #aaa;
+		}
+	}
+
+	&__label {
+		cursor: pointer;
+	}
+}
+
+.collection-header {
+	display: flex;
+    justify-content: space-between;
+	margin-bottom: 25px;
+	padding: 0 14px;
+    font-size: 28px;
+	color: #fff;
+
+	&__change {
+		font-size: 24px;
+		text-decoration: underline;
+	}
+
+	&__delete {
+		cursor: pointer;
+
+		&:hover {
+			color: #aaa;
+		}
+	}
+
+	&__link {
+		padding-right: 14px;
+		color: #fff;
+
+		&:hover {
+			color: #aaa;
+		}
+	}
+}
+
 .item {
 	height: 225px;
 	width: 175px;
@@ -199,6 +269,10 @@
 		height: 225px;
 		width: 175px;
 		overflow: hidden;
+
+		&--empty {
+			background-color: #666;
+		}
 
 		@include mq('tablet') {
 			height: 200px;
@@ -254,6 +328,150 @@
 	display: flex;
 	position: relative;
 	flex-wrap: wrap;
+}
+
+.modal {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	text-align: center;
+	z-index: 7;
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	&::after {
+		content: '';
+		display: inline-block;
+		height: 100%;
+		vertical-align: middle;
+	}
+
+	@include mq('phone') {
+		&::after {
+			display: none;
+		}
+	}
+
+	&__window {
+		position: relative;
+		display: inline-block;
+		border-radius: 6px;
+		background-color: #dfdfdf;
+		text-align: left;
+		vertical-align: middle;
+		z-index: 8;
+		transform: translateZ(0);
+
+		@include mq('phone') {
+			display: block;
+			top: 0;
+			left: 0;
+			width: 100% !important;
+			max-width: 100% !important;
+			min-height: 100vh !important;
+			border-radius: 0;
+		}
+	}
+
+	&__mask {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #444;
+		opacity: .6;
+		overflow: hidden;
+		z-index: 7;
+		user-select: none;
+	}
+}
+
+.modal-collections {
+	width: 250px;
+	background-color: #F5F5F5;
+
+	&__header {
+		padding: 20px 50px 20px 20px;
+		border-radius: 6px 6px 0 0;
+		background-color: #f2f2f2;
+	}
+
+	&__footer {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		padding: 20px;
+		border-radius: 0 0 6px 6px;
+		cursor: pointer;
+	}
+
+	&__content {
+		padding: 15px 20px;
+	}
+
+	&__title {
+		margin: 0;
+		font-size: 16px;
+		line-height: 1.2;
+	}
+
+	&__close {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		width: 24px;
+		height: 24px;
+		border: 0;
+		outline: 0;
+		opacity: 0.4;
+		cursor: pointer;
+
+		&:hover {
+			opacity: .8;
+		}
+	
+		@extend %button-cross;
+
+		&::before {
+			transform: rotate(45deg);
+		}
+
+		&::after {
+			transform: rotate(-45deg);
+		}
+	}
+
+	&__new-collection-cross {
+		position: relative;
+		width: 20px;
+		margin-right: 10px;
+	}
+
+	&__new-collection {
+		border: 0;
+		outline: 0;
+		opacity: 0.4;
+		cursor: pointer;
+		transition: opacity ease 0.5s;
+	
+		@extend %button-cross;
+
+		&::before {
+			transform: rotate(90deg);
+		}
+	}
+
+	&__new-collection-link {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		z-index: 1;
+	}
 }
 
 .popup {

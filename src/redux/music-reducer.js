@@ -1,9 +1,14 @@
 import {
-	getCollectionAPI,
+	getCollectionsAPI,
 	getPerformersAPI,
 	getPerformerAPI,
 	addPerformerAPI,
-	getIsAddPerformerAPI
+	deleteCollectionAPI,
+	getIsAddPerformerAPI,
+	getUserCollectionsAPI,
+	getCreateCollectionAPI,
+	getChangeCollectionAPI,
+	getCollectionElementsAPI
 } from './../api/music';
 
 /**
@@ -26,9 +31,9 @@ const GET_RERFORMERS = 'music/GET_RERFORMERS';
 
 /**
  * @const
- * @type {string} Action type - get collection
+ * @type {string} Action type - get collections
  */
-const GET_COLLECTION = 'music/GET_COLLECTION';
+const GET_COLLECTIONS = 'music/GET_COLLECTIONS';
 
 /**
  * @const
@@ -72,6 +77,42 @@ const TOGGLE_IS_FETCHING = 'music/TOGGLE_IS_FETCHING';
  */
 const TOGGLE_IS_DISABLED = 'music/TOGGLE_IS_DISABLED';
 
+/**
+ * @const
+ * @type {string} Action type - get whether to show the user's collections modal window
+ */
+const IS_SHOW_MODAL_USER_COLLECTIONS = 'music/IS_SHOW_MODAL_USER_COLLECTIONS';
+
+/**
+ * @const
+ * @type {string} Action type - get user's collection
+ */
+const GET_USER_COLLECTIONS = 'music/GET_USER_COLLECTIONS';
+
+/**
+ * @const
+ * @type {string} Action type - create collection
+ */
+const CREATE_COLLECTION = 'music/CREATE_COLLECTION';
+
+/**
+ * @const
+ * @type {string} Action type - get collection
+ */
+const GET_COLLECTION = 'music/GET_COLLECTION';
+
+/**
+ * @const
+ * @type {string} Action type - get change collection
+ */
+const CHANGE_COLLECTION = 'music/CHANGE_COLLECTION';
+
+/**
+ * @const
+ * @type {string} Action type - get delete collection
+ */
+const DELETE_COLLECTION = 'music/DELETE_COLLECTION';
+
 
 let initialState = {
 	isAddPerformer: false,
@@ -79,13 +120,25 @@ let initialState = {
 	isFetching: false,
 	isDisabled: false,
 	isFocus: false,
+	collectionId: 0,
+	countCollections: 0,
+	userCollections: [],
 	collection: {},
+	collections: {},
 	performers: [],
 	performer: {},
 	performersStorage: [],
 	isAddPerformerStorage: {},
 	searchPerformersStorage: {},
 	errorCode: 0,
+	collectionName: '',
+	collectionUserId: 0,
+	isCreatedCollection: false,
+	isShowModalUserCollections: false,
+	collectionError: {
+		errorCode: 0,
+		errorText: '',
+	},
 };
 
 /**
@@ -118,10 +171,43 @@ const musicReducer = (state = initialState, action = {}) => {
 				performers: [ ...state.searchPerformersStorage[action.searchStr] ],
 			};
 		}
-		case GET_COLLECTION: {
+		case GET_COLLECTIONS: {
+			let changeState = {};
+
+			if (action.countCollections === 1) {
+				changeState = {
+					collection: {
+						...state.collection,
+						[action.userName]: {
+							...state.collection[action.userName],
+							[action.collectionId]: action.collection,
+						}
+					},
+				}
+			} else {
+				changeState = {
+					collections: {
+						...state.collections,
+						[action.userName]: [
+							...action.collections,
+						]
+					},
+				};
+			}
+
 			return {
 				...state,
-				collection: { ...state.collection, [action.userId]: action.collection },
+				collectionId: action.countCollections === 1 ? action.collectionId : 0,
+				collectionName: action.countCollections === 1 ? action.collectionName : 0,
+				countCollections: action.countCollections,
+				isCreatedCollection: false,
+				...changeState,
+			};
+		}
+		case GET_USER_COLLECTIONS: {
+			return {
+				...state,
+				userCollections: [ ...action.userCollections ],
 			};
 		}
 		case TOGGLE_IS_FOCUS: {
@@ -134,6 +220,8 @@ const musicReducer = (state = initialState, action = {}) => {
 			return {
 				...state,
 				isMainPage: true,
+				collectionId: 0,
+				isCreatedCollection: false,
 			};
 		}
 		case GET_RERFORMER: {
@@ -195,24 +283,76 @@ const musicReducer = (state = initialState, action = {}) => {
 		}
 		case GET_ADD_RERFORMER: {
 			let newCollection = [];
-			let isChangeCollection = action.performerId && state.collection[action.userId].length;
+			let isChangeCollection = action.musicianId
+				&& state.collection[action.userName]
+				&& state.collection[action.userName][action.collectionId]
+				&& state.collection[action.userName][action.collectionId].length;
 
 			const changeState = {
 				...state,
 				errorCode: action.errorCode,
 				isAddPerformer: action.isAddPerformer,
+				collections: {}
 			};
 
 			if (isChangeCollection) {
 				newCollection =
-					action.isAddPerformer ?
-						[ ...state.collection[action.userId], action.addedPerformer ]
+					action.isAddPerformerCollection ?
+						[ ...state.collection[action.userName][action.collectionId], action.addedPerformer ]
 					:
-						state.collection[action.userId].filter((performer) => performer.id !== Number(action.performerId))
+						state.collection[action.userName][action.collectionId].filter((performer) => Number(performer.id) !== Number(action.musicianId))
 					;
 
-				changeState.collection = { ...state.collection, [action.userId]: newCollection };
+				changeState.collection = {
+					...state.collection,
+					[action.userName]: {
+						...state.collection[action.userName],
+						[action.collectionId]: newCollection,
+					}
+				};
 			}
+
+			if (!state.isAddPerformerStorage[action.userId]?.length) {
+				changeState.isAddPerformerStorage = { ...state.isAddPerformerStorage, [action.userId]: [[action.musicianId, action.isAddPerformer]] };
+			} else {
+				const isAddPerformerStorage = state.isAddPerformerStorage[action.userId].filter((performer) => Number(performer[0]) !== Number(action.musicianId));
+
+				changeState.isAddPerformerStorage = { ...state.isAddPerformerStorage, [action.userId]: [ ...isAddPerformerStorage, [action.musicianId, action.isAddPerformer]] };
+			}
+
+			if (state.userCollections.length) {
+				const userCollections = state.userCollections.map((collection) => {
+					if (Number(collection['id']) === Number(action.collectionId)) {
+						collection.isAddedMusician = action.isAddPerformerCollection;
+					}
+
+					return collection;
+				});
+
+				changeState.userCollections = [ ...userCollections ];
+			}
+
+			return changeState;
+		}
+		case IS_SHOW_MODAL_USER_COLLECTIONS : {
+			return {
+				...state,
+				isShowModalUserCollections: action.isShow,
+			};
+		}
+		case CREATE_COLLECTION: {
+			const changeState = {
+				...state,
+				collections: {},
+				isAddPerformer: action.isAddPerformer,
+				countCollections: action.countCollections,
+				isCreatedCollection: action.isCreatedCollection,
+				collectionError: {
+					...state.collectionError,
+					errorCode: action.errorCode,
+					errorText: action.errorText,
+				},
+			};
 
 			if (!state.isAddPerformerStorage[action.userId]?.length) {
 				changeState.isAddPerformerStorage = { ...state.isAddPerformerStorage, [action.userId]: [[action.performerId, action.isAddPerformer]] };
@@ -224,6 +364,48 @@ const musicReducer = (state = initialState, action = {}) => {
 
 			return changeState;
 		}
+		case CHANGE_COLLECTION: {
+			return {
+				...state,
+				collections: {},
+				collectionId: 0,
+				isCreatedCollection: action.isCreatedCollection,
+				collectionError: {
+					...state.collectionError,
+					errorCode: action.errorCode,
+					errorText: action.errorText,
+				},
+			};
+		}
+		case DELETE_COLLECTION: {
+			return {
+				...state,
+				collections: {},
+				collectionId: 0,
+				isCreatedCollection: action.isCreatedCollection,
+				collectionError: {
+					...state.collectionError,
+					errorCode: action.errorCode,
+					errorText: action.errorText,
+				},
+			};
+		}
+		case GET_COLLECTION: {
+			return {
+				...state,
+				collectionId: action.collectionId,
+				collectionName: action.collectionName,
+				collectionUserId: action.collectionUserId,
+				isCreatedCollection: false,
+				collection: {
+					...state.collection,
+					[action.userName]: {
+						...state.collection[action.userName],
+						[action.collectionId]: action.collection,
+					}
+				},
+			};
+		}
 		case TOGGLE_IS_FETCHING: {
 			return {
 				...state,
@@ -234,6 +416,7 @@ const musicReducer = (state = initialState, action = {}) => {
 			return {
 				...state,
 				isDisabled: action.isDisabled,
+				isCreatedCollection: false,
 			};
 		}
 		default:
@@ -267,17 +450,33 @@ const setPerformers = ({ performers = [], errorCode = 0 }, searchStr = '') => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {Array} collection
+ * @param {Array} collections
  * @param {number} userId
  * @param {number} errorCode
+ * @param {number} collectionId
+ * @param {number} countCollections
+ * @param {String} userName
  * @returns {Object}
  */
-const setCollection = ({ collection = [], errorCode = 0 }, userId = 0) => {
+const setCollections = ({
+	collections = [],
+	collection = [],
+	errorCode = 0,
+	collectionId = 0,
+	collectionName = '',
+	countCollections = 0,
+	},
+	userName = ''
+) => {
 	return {
-		userId,
+		userName,
 		errorCode,
 		collection,
-		type: GET_COLLECTION,
+		collections,
+		collectionId,
+		collectionName,
+		countCollections,
+		type: GET_COLLECTIONS,
 	}
 };
 
@@ -294,7 +493,14 @@ const setCollection = ({ collection = [], errorCode = 0 }, userId = 0) => {
  * @param {number} errorCode
  * @returns {Object}
  */
-const setPerformer = ({ performer = {}, errorCode = 0, isAddPerformer = false }, userId = 0, performerId = 0) => {
+const setPerformer = ({
+	performer = {},
+	errorCode = 0,
+	isAddPerformer = false
+	},
+	userId = 0,
+	performerId = 0
+) => {
 	return {
 		userId,
 		errorCode,
@@ -316,8 +522,9 @@ const setPerformer = ({ performer = {}, errorCode = 0, isAddPerformer = false },
  * @param {number} errorCode
  * @returns {Object}
  */
-const setAvailablePerformer = ({ errorCode = 0, isAddPerformer = false }, performerId = 0) => {
+const setAvailablePerformer = ({ errorCode = 0, isAddPerformer = false }, performerId = 0, userId = 0) => {
 	return {
+		userId,
 		errorCode,
 		performerId,
 		isAddPerformer,
@@ -333,19 +540,182 @@ const setAvailablePerformer = ({ errorCode = 0, isAddPerformer = false }, perfor
  *
  * @param {Array} addedPerformer
  * @param {boolean} isAddPerformer
+ * @param {number} collectionId
  * @param {number} userId
- * @param {number} performerId
+ * @param {number} musicianId
+ * @param {number} errorCode
+ * @param {String} userName
+ * @returns {Object}
+ */
+const setAddPerformer = ({
+	errorCode = 0,
+	isAddPerformer = false,
+	addedPerformer = [],
+	collectionId = 0,
+	isAddPerformerCollection = false,
+	},
+	userId = 0,
+	musicianId = 0,
+	userName = '',
+) => {
+	return {
+		userId,
+		userName,
+		errorCode,
+		musicianId,
+		collectionId,
+		addedPerformer,
+		isAddPerformer,
+		isAddPerformerCollection,
+		type: GET_ADD_RERFORMER,
+	}
+};
+
+/**
+ * Set user's collection
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Array} userCollections
+ * @param {number} userId
  * @param {number} errorCode
  * @returns {Object}
  */
-const setAddPerformer = ({ errorCode = 0, isAddPerformer = false, addedPerformer = [] }, userId = 0, performerId = 0) => {
+const setUserCollections = ({
+	userCollections = [],
+	errorCode = 0,
+	},
+	userId = 0
+) => {
 	return {
 		userId,
 		errorCode,
-		performerId,
-		addedPerformer,
+		userCollections,
+		type: GET_USER_COLLECTIONS,
+	}
+};
+
+/**
+ * Set user's collection
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Array} userCollections
+ * @param {number} userId
+ * @param {number} errorCode
+ * @returns {Object}
+ */
+const setNewCollection = ({
+	isCreatedCollection = false,
+	isAddPerformer = false,
+	countCollections = 0,
+	collectionId = 0,
+	errorCode = 0,
+	errorText = '',
+	},
+	userId = 0,
+	collectionName = ''
+) => {
+	return {
+		userId,
+		errorCode,
+		errorText,
+		collectionId,
+		collectionName,
 		isAddPerformer,
-		type: GET_ADD_RERFORMER,
+		countCollections,
+		isCreatedCollection,
+		type: CREATE_COLLECTION,
+	}
+};
+
+/**
+ * Set change user's collection
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Array} userCollections
+ * @param {number} userId
+ * @param {number} errorCode
+ * @returns {Object}
+ */
+const setChangeCollection = ({
+	isCreatedCollection = false,
+	collectionId = 0,
+	errorCode = 0,
+	errorText = '',
+	},
+	userId = 0,
+	collectionName = ''
+) => {
+	return {
+		userId,
+		errorCode,
+		errorText,
+		collectionId,
+		collectionName,
+		isCreatedCollection,
+		type: CHANGE_COLLECTION,
+	}
+};
+
+/**
+ * Set delete user's collection
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Array} userCollections
+ * @param {number} userId
+ * @param {number} errorCode
+ * @returns {Object}
+ */
+const setDeleteCollection = ({
+	errorCode = 0,
+	errorText = '',
+	isCreatedCollection = false
+	},
+) => {
+	return {
+		errorCode,
+		errorText,
+		isCreatedCollection,
+		type: DELETE_COLLECTION,
+	}
+};
+
+/**
+ * Set collection elements
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Array} collection
+ * @param {number} userId
+ * @param {number} errorCode
+ * @param {number} collectionId
+ * @returns {Object}
+ */
+const setCollectionElements = ({
+	collectionUserId = 0,
+	collectionName = '',
+	collectionId = 0,
+	collection = [],
+	errorCode = 0,
+	},
+	userName = ''
+) => {
+	return {
+		userName,
+		errorCode,
+		collection,
+		collectionId,
+		collectionName,
+		collectionUserId,
+		type: GET_COLLECTION,
 	}
 };
 
@@ -495,17 +865,25 @@ export const findPerformerFromStorage = (userId = 0, performerId = 0, isAddPerfo
  * @version 1.0.0
  *
  * @param {number} userId
- * @param {number} performerId
+ * @param {number} musicianId
  * @param {boolean} isDelete
+ * @param {String} userName
+ * @param {number} collectionId
  * @returns {Function}
  */
-export const addPerformer = (userId = 0, performerId = 0, isDelete = false) => {
+export const addPerformer = ({
+	userId = 0,
+	musicianId = 0,
+	isDelete = false,
+	userName = '',
+	collectionId = 0
+}) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await addPerformerAPI(userId, performerId, isDelete);
+		const response = await addPerformerAPI(userId, musicianId, isDelete, collectionId);
 
-		dispatch(setAddPerformer(response, userId, performerId));
+		dispatch(setAddPerformer(response, userId, musicianId, userName));
 		dispatch(setToggle(false));
 	}
 };
@@ -516,16 +894,16 @@ export const addPerformer = (userId = 0, performerId = 0, isDelete = false) => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {number} userId
+ * @param {String} userName
  * @returns {Function}
  */
-export const findCollection = (userId = 0) => {
+export const findCollections = (userName = '') => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await getCollectionAPI(userId);
+		const response = await getCollectionsAPI(userName);
 
-		dispatch(setCollection(response, userId));
+		dispatch(setCollections(response, userName));
 		dispatch(setToggle(false));
 	}
 };
@@ -562,7 +940,129 @@ export const findIsAddPerformer = (userId = 0, performerId = 0) => {
 
 		const response = await getIsAddPerformerAPI(userId, performerId);
 
-		dispatch(setAvailablePerformer(response, userId, performerId));
+		dispatch(setAvailablePerformer(response, performerId, userId));
+		dispatch(setToggle(false));
+	}
+};
+
+/**
+ * Set whether to show the user's collections modal window
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {boolean} isShow
+ * @returns {Function}
+ */
+export const setIsShowModalUserCollections = (isShow = false) => {
+	return {
+		isShow,
+		type: IS_SHOW_MODAL_USER_COLLECTIONS
+	}
+};
+
+/**
+ * Find user's collection
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {number} userId
+ * @param {number} musicianId
+ * @returns {Function}
+ */
+export const findUserCollections = (userId = 0, musicianId = 0) => {
+	return async (dispatch) => {
+		dispatch(setToggle(true));
+
+		const response = await getUserCollectionsAPI(userId, musicianId);
+
+		dispatch(setUserCollections(response, userId));
+		dispatch(setToggle(false));
+	}
+};
+
+/**
+ * Create collection
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {number} userId
+ * @param {number} musicianId
+ * @param {String} collectionName
+ * @returns {Function}
+ */
+export const createCollection = (collectionName = '', userId = 0, musicianId = 0) => {
+	return async (dispatch) => {
+		dispatch(setToggle(true));
+
+		const response = await getCreateCollectionAPI(collectionName, userId, musicianId);
+
+		dispatch(setNewCollection(response, userId, collectionName));
+		dispatch(setToggle(false));
+	}
+};
+
+/**
+ * Find collection
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {number} collectionId Collection ID
+ * @returns {Function}
+ */
+export const findCollectionElements = (collectionId = 0, userName = '') => {
+	return async (dispatch) => {
+		dispatch(setToggle(true));
+
+		const response = await getCollectionElementsAPI(collectionId);
+
+		dispatch(setCollectionElements(response, userName));
+		dispatch(setToggle(false));
+	}
+};
+
+/**
+ * Change collection
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {number} userId
+ * @param {number} collectionId
+ * @param {String} collectionName
+ * @returns {Function}
+ */
+export const changeCollection = (collectionName = '', userId = 0, collectionId = 0) => {
+	return async (dispatch) => {
+		dispatch(setToggle(true));
+
+		const response = await getChangeCollectionAPI(collectionName, userId, collectionId);
+
+		dispatch(setChangeCollection(response, userId, collectionName));
+		dispatch(setToggle(false));
+	}
+};
+
+/**
+ * Delete collection
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {number} userId
+ * @param {number} collectionId
+ * @returns {Function}
+ */
+export const deleteCollection = (userId = 0, collectionId = 0) => {
+	return async (dispatch) => {
+		dispatch(setToggle(true));
+
+		const response = await deleteCollectionAPI(userId, collectionId);
+
+		dispatch(setDeleteCollection(response, userId));
 		dispatch(setToggle(false));
 	}
 };

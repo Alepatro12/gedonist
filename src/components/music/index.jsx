@@ -1,6 +1,8 @@
 import './style.css';
 import React, { useRef, useEffect, useLayoutEffect } from 'react';
 import { NavLink } from "react-router-dom";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 /**
  * Render the Music page
@@ -16,18 +18,23 @@ const Music = React.memo(({
 	performer,
 	isMainPage,
 	setIsFocus,
+	backToMain,
 	findPerformer,
 	findPerformers,
 	isAuthenticate,
 	performersStorage,
 	findIsAddPerformer,
 	isAddPerformerStorage,
+	findCollectionElements,
 	searchPerformersStorage,
 	getPerformersFromStorage,
 	findPerformerFromStorage,
+	isShowModalUserCollections,
+	setIsShowModalUserCollections,
 	...props
 }) => {
 	const refSearch = useRef(null);
+	const userName = props.location.pathname.replace(/\/music\//, '');
 
 	const search = () => {
 		const searchStr = refSearch.current.value;
@@ -48,20 +55,24 @@ const Music = React.memo(({
 	};
 
 	useLayoutEffect(() => {
-		const searchStr = props.location.search;
-		const nameParametr = '?performer=';
-		const performerIdPosition = searchStr.indexOf('?performer=');
+		const params = new URLSearchParams(props.location.search);
+		const newPerformerId = Number(params.get('performer'));
+		const newCollectionId = Number(params.get('collection'));
 
-		if (performerIdPosition !== -1 && !performer?.id) {
-			const newPerformerId = Number(searchStr.slice(nameParametr.length));
-
-			findPerformer(userId, newPerformerId);
+		if (newPerformerId) {
+			searchPerformer(newPerformerId);
+		} else if (newCollectionId) {
+			findCollectionElements(newCollectionId, userName);
+			backToMain();
+		} else {
+			backToMain();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isAuthenticate]);
 
-	const searchPerformer = (event) => {
-		const performerId = Number(event.target.id);
+		setIsShowModalUserCollections(false);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [props.location.search]);
+
+	const searchPerformer = (performerId = 0) => {
 		const performerData = performersStorage.length ?
 			performersStorage.filter((performer) => Number(performer.id) === performerId)
 			: [];
@@ -95,13 +106,13 @@ const Music = React.memo(({
 					onChange={ search }
 					onFocus={ onFocus }
 				/>
-				<PopUp setIsFocus={setIsFocus} searchPerformer={searchPerformer} {...props}/>
+				<PopUp setIsFocus={setIsFocus} userName={props.location.pathname.replace(/\/music\//, '')} {...props}/>
 			</div>
 			<input type="button" className="search__button" id="search" value="Найти" onClick={ onFocus }/>
 		</div>
-		{((!isMainPage && performer?.id) || '') && <Performer userId={userId} performer={performer} setIsFocus={setIsFocus} isAuthenticate={isAuthenticate} searchPerformer={searchPerformer} {...props}/>}
-		{((isMainPage && userId) || '') && <Collection userId={userId} searchPerformer={searchPerformer} {...props}/>}
-		
+		{((!isMainPage && performer?.id) || '') && <Performer userId={userId} performer={performer} setIsFocus={setIsFocus} isAuthenticate={isAuthenticate} backToMain={backToMain} userName={props.location.pathname.replace(/\/music\//, '')} setIsShowModalUserCollections={setIsShowModalUserCollections} {...props}/>}
+		{((isMainPage && userName) || '') && <Collections userId={userId} userName={props.location.pathname.replace(/\/music\//, '')} findCollectionElements={findCollectionElements} {...props}/>}
+		{((isShowModalUserCollections && userName) || '') && <ModalUserCollections musicianId={performer.id} setIsShowModalUserCollections={setIsShowModalUserCollections} userName={userName} userId={userId} {...props}/>}
 	</>;
 });
 
@@ -116,9 +127,9 @@ const Music = React.memo(({
  */
 const PopUp = React.memo(({
 	isFocus,
+	userName,
 	performers,
-	setIsFocus,
-	searchPerformer
+	setIsFocus
 }) => {
 	const handleClickOutside = (event) => {
 		if (
@@ -139,13 +150,21 @@ const PopUp = React.memo(({
 			const mainName = performer.alias || performer.name || performer.originalName;
 			const altName = performer.alias ? performer.name || performer.originalName : performer.originalName;
 			const origName = (performer.alias && performer.name) ? performer.originalName : '';
-			const typePerformer = performer.typePerformer ? 'music-groups' : 'people';
+			const typePerformer = performer.typePerformer === "1" ? 'music-groups' : 'people';
 
 			return (
 				<div className="popup__block" key={performer.id}>
-					<NavLink to={`/music?performer=${performer.id}`} className="popup__link" id={performer.id} onClick={ searchPerformer }></NavLink>
+					<NavLink to={`/music/${userName}?performer=${performer.id}`} className="popup__link" id={performer.id}></NavLink>
 					<div className="popup__block-img">
-						<img src={`./../../img/${typePerformer}/${performer.imageId}.jpg`} className="popup__img" alt={mainName} title={mainName}/>
+						<LazyLoadImage
+							src={`./../../img/${typePerformer}/${performer.imageId}.jpg`}
+							className="popup__img"
+							alt={mainName}
+							title={mainName}
+							effect="blur"
+							width="100%"
+							height="100%"
+						/>
 					</div>
 					<div>
 						<h4 className="popup__title">{mainName}</h4>
@@ -164,6 +183,47 @@ const PopUp = React.memo(({
 });
 
 /**
+ * Get user collections
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} props
+ * @returns {HTMLElement}
+ */
+const Collections = React.memo(({
+	userId,
+	userName,
+	collection,
+	collections,
+	collectionName,
+	collectionId,
+	findCollections,
+	collectionUserId,
+	deleteCollection
+}) => {
+	const userCollection = collectionId && collection[userName] ? collection[userName][collectionId] : collections[userName];
+	const colectionParam = collectionId && collection[userName] ? `?collection=${collectionId}` : '';
+	const newParam = collectionId && collection[userName] ? '&performer=' : '?collection=';
+	const isChangeCollection = collectionUserId === userId && userId;
+
+	useLayoutEffect(() => {
+		if (
+			!userCollection
+			|| !Object.keys(userCollection)?.length) {
+			findCollections(userName);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [collectionId]);
+
+	const deleteUserCollection = () => {
+		deleteCollection(userId, collectionId);
+	};
+
+	return <Collection deleteUserCollection={deleteUserCollection} isChangeCollection={isChangeCollection} collection={userCollection} userName={userName} colectionParam={colectionParam} newParam={newParam} collectionId={collectionId} collectionName={collectionName}/>;
+});
+
+/**
  * Get user collection
  *
  * @author Alessandro Vilanni
@@ -173,47 +233,65 @@ const PopUp = React.memo(({
  * @returns {HTMLElement}
  */
 const Collection = React.memo(({
-	userId,
+	newParam,
 	collection,
-	findCollection,
-	searchPerformer
+	userName,
+	collectionId,
+	collectionName,
+	colectionParam,
+	deleteUserCollection,
+	isChangeCollection
 }) => {
-	useLayoutEffect(() => {
-		if (!collection || !collection[userId]?.length) {
-			findCollection(userId);
-		}
-	});
+	let blockCollection = '';
 
-	if (!collection || !collection[userId]?.length) {
-		return <></>;
-	}
+	if (collection && collection.length) {
+		blockCollection =
+			collection.map(item => {
+				const mainName = item.alias || item.name || item.originalName;
+				const emptyClass = !item.imageId ? ' item__image-block--empty' : '';
+				const typePerformer = item.typePerformer ? 'music-groups' : 'people';
 
-	const blockCollection =
-		collection[userId].map(performer => {
-			const mainName = performer.alias || performer.name || performer.originalName;
-			const typePerformer = performer.typePerformer ? 'music-groups' : 'people';
-
-			return (
-				<div className="item" key={performer.id}>
-					<div className="item__block">
-						<NavLink to={`/music?performer=${performer.id}`} className="item__link" key={performer.id} id={performer.id} onClick={ searchPerformer }></NavLink>
-						<div className="item__shadow">
-							<div className="item__image-block">
-								<img src={`./../../img/${typePerformer}/${performer.imageId}.jpg`} className="item__image" alt={mainName} title={mainName}/>
+				return <>
+					<div className="item" key={item.id}>
+						<div className="item__block">
+							<NavLink to={`/music/${userName}${colectionParam}${newParam}${item.id}`} className="item__link"></NavLink>
+							<div className="item__shadow">
+								<div className={`item__image-block${emptyClass}`}>
+									<LazyLoadImage
+										className="item__image"
+										effect="blur"
+										src={`./../../img/${typePerformer}/${item.imageId}.jpg`}
+										alt={mainName}
+										title={mainName}
+										width="100%"
+										height="100%"
+									/>
+								</div>
+								<div className="item__title"><span>{mainName}</span></div>
 							</div>
-							<div className="item__title"><span>{mainName}</span></div>
 						</div>
 					</div>
-				</div>
-			);
-		})
-	;
+				</>;
+			})
+		;
+	}
 
-	return <>
+	return <div>
+		{ collectionId ?
+			<div className="collection-header">
+				<span>{collectionName}</span>
+				{ isChangeCollection ?
+					<div className="collection-header__change">
+						<NavLink to="/music/change-collection" className="collection-header__link">Изменить</NavLink>
+						<span className="collection-header__delete" onClick={deleteUserCollection}>Удалить</span>
+					</div>
+				: <></> }
+			</div>
+		: <></> }
 		<div className="item-list">
 			{blockCollection}
 		</div>
-	</>;
+	</div>;
 });
 
 /**
@@ -227,17 +305,21 @@ const Collection = React.memo(({
  */
 const Performer = React.memo(({
 	userId,
+	userName,
 	performer,
 	backToMain,
 	setIsFocus,
+	collectionId,
 	addPerformer,
 	isAuthenticate,
 	isAddPerformer,
-	searchPerformer
+	countCollection,
+	findUserCollections,
+	setIsShowModalUserCollections
 }) => {
 	const mainName = performer.alias || performer.name || performer.originalName;
-	const typePerformer = performer.typePerformer ? 'music-groups' : 'people';
-	const buttonName = isAddPerformer ? 'Убрать из коллекции' : 'Добавить';
+	const typePerformer = performer.typePerformer === "1" ? 'music-groups' : 'people';
+	const colectionParam = collectionId ? `?collection=${collectionId}` : '';
 
 	useEffect(() => {
 		setIsFocus(false);
@@ -245,7 +327,18 @@ const Performer = React.memo(({
 	}, [performer.id]);
 
 	const appendPerformer = (event) => {
-		addPerformer(userId, Number(event.currentTarget.dataset.id), isAddPerformer);
+		addPerformer({
+			userId,
+			userName,
+			isDelete: isAddPerformer,
+			musicianId: Number(event.currentTarget.dataset.id),
+			collectionId: Number(event.currentTarget.dataset.collectionId),
+		});
+	};
+
+	const getModalUserCollections = () => {
+		findUserCollections(userId, performer.id);
+		setIsShowModalUserCollections(true);
 	};
 
 	return <>
@@ -254,19 +347,34 @@ const Performer = React.memo(({
 				<div className="block-information__page block-information__page--1">
 					<div className="poster">
 						<div className="block-information__button block-information__button--close-two">
-							<NavLink to="/music" onClick={ backToMain } className="block-information__button-link">Закрыть</NavLink>
+							<NavLink to={`/music/${userName}${colectionParam}`} onClick={ backToMain } className="block-information__button-link">Закрыть</NavLink>
 						</div>
 
 						<div className="poster__shadow">
 							<div className="poster__image-block">
-								<img src={`./../../img/${typePerformer}/${performer.imageId}.jpg`} className={`poster__image ${ typePerformer === 'people' ? 'poster__image--height' : ''}`} alt={mainName} title={mainName}/>
+								<LazyLoadImage
+									src={`./../../img/${typePerformer}/${performer.imageId}.jpg`}
+									className={`poster__image ${ typePerformer === 'people' ? 'poster__image--height' : ''}`}
+									alt={mainName}
+									title={mainName}
+									effect="blur"
+									width="100%"
+									height="100%"
+								/>
 							</div>
 							<div className={`poster__original-title ${ typePerformer === 'people' ? 'poster__original-title--margin' : ''}`}>{mainName}</div>
 						</div>
 
 						<div className="block-information__button">
 							{ isAuthenticate ? 
-								<span data-id={performer.id} onClick={appendPerformer}>{buttonName}</span>
+								<ButtonBlock
+									isAddPerformer={isAddPerformer}
+									countCollection={countCollection}
+									collectionId={collectionId}
+									musicianId={performer.id}
+									appendPerformer={appendPerformer}
+									getModalUserCollections={getModalUserCollections}
+								/>
 							:
 								<NavLink to="/auth/login" className="block-information__button-link">Добавить</NavLink>
 							}
@@ -276,7 +384,7 @@ const Performer = React.memo(({
 				<div className="block-information__page">
 					<div className="block-information__content">
 						<div className="block-information__button block-information__button--close-one">
-							<NavLink to="/music" onClick={ backToMain } className="block-information__button-link">Закрыть</NavLink>
+							<NavLink to={`/music/${userName}${colectionParam}`} onClick={ backToMain } className="block-information__button-link">Закрыть</NavLink>
 						</div>
 						<h1 className="block-information__title">Информация</h1>
 						<NameSection name={performer.name} alias={performer.alias} originalName={performer.originalName}/>
@@ -288,15 +396,132 @@ const Performer = React.memo(({
 						<DateDebutSection dateDebut={performer.dateDebut}/>
 						<DateFormationSection age={performer.ageGroup} dateFormation={performer.dateFormation}/>
 						<DateDissolutionSection dateDissolution={performer.dateDissolution}/>
-						<GroupSection groups={performer.groups} searchPerformer={searchPerformer}/>
-						<MemberSection membersArr={performer.members} searchPerformer={searchPerformer}/>
-						<CompanySection companies={performer.companies}/>
+						<GroupSection groups={performer.groups} userName={userName}/>
+						<MemberSection membersArr={performer.members} userName={userName}/>
+						<CompanySection companies={performer.companies} userName={userName}/>
 						<FandomNameSection fandomName={performer.fandomName}/>
 						<LinksSection links={performer.links} artistName={mainName}/>
 					</div>
 				</div>
 			</div>
 		</div>
+	</>;
+});
+
+/**
+ * Get modal window of user collections
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {number} musicianId
+ * @param {Array} userCollections
+ * @param {Function} setIsShowModalUserCollections
+ * @returns {HTMLElement}
+ */
+const ModalUserCollections = React.memo(({
+	userId,
+	userName,
+	addPerformer,
+	musicianId = 0,
+	userCollections = [],
+	setIsShowModalUserCollections
+}) => {
+	if (!userCollections.length) {
+		return <></>;
+	}
+
+	const closeModalUserCollections = () => {
+		setIsShowModalUserCollections(false);
+	};
+
+	const appendPerformer = (event) => {
+		addPerformer({
+			userId,
+			userName,
+			musicianId,
+			isDelete: !event.currentTarget.checked,
+			collectionId: Number(event.currentTarget.id),
+		});
+	};
+
+	const blockCollection =
+		userCollections.map(item => {
+			const checked = item.isAddedMusician ? 'checked' : '';
+
+			return (
+				<div className="check" key={item.id}>
+					<input type="checkbox" id={item.id} checked={checked} className="check__input" onChange={appendPerformer}/>
+					<label htmlFor={item.id} className="check__label">{item.name}</label>
+				</div>
+			);
+		})
+	;
+
+	return <>
+		<div className="modal">
+			<div className="modal__window modal-collections">
+				<div className="modal-collections__header">
+					<span className="modal-collections__title">Выберите коллекцию</span>
+					<button className="modal-collections__close" onClick={closeModalUserCollections}></button>
+				</div>
+				<div className="modal-collections__content">{blockCollection}</div>
+				<div className="modal-collections__footer">
+					<NavLink to="/music/new-collection" className="modal-collections__new-collection-link" onClick={closeModalUserCollections}></NavLink>
+					<div className="modal-collections__new-collection-cross">
+						<button className="modal-collections__new-collection"></button>
+					</div>
+					<span className="modal-collections__title">Новая коллекция</span>
+				</div>
+			</div>
+			<div className="modal__mask"></div>
+		</div>
+	</>;
+});
+
+/**
+ * Get button block
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {bool} isAddPerformer
+ * @param {number} countCollection
+ * @param {number} collectionId
+ * @param {number} musicianId
+ * @param {Function} appendPerformer
+ * @param {Function} getModalUserCollections
+ * @returns {HTMLElement}
+ */
+const ButtonBlock = React.memo(({
+	isAddPerformer = false,
+	countCollection = 0,
+	collectionId = 0,
+	musicianId = 0,
+	appendPerformer,
+	getModalUserCollections
+}) => {
+	const oneCollectionButton = countCollection <= 1 ?
+		<div
+			className="block-information__margin"
+			data-id={musicianId}
+			data-collection-id={collectionId}
+			onClick={appendPerformer}
+		>{isAddPerformer ? 'Убрать из коллекции' : 'Добавить'}</div>
+		: <></>
+	;
+	const changeButton = countCollection > 1 || (countCollection === 1 && isAddPerformer) ?
+		<div
+			data-id={musicianId}
+			data-collection-id={collectionId}
+			onClick={getModalUserCollections}
+		>{isAddPerformer ? 'Изменить' : 'Добавить'}</div>
+		: <></>
+	;
+
+	return <>
+		{changeButton}
+		{oneCollectionButton}
 	</>;
 });
 
@@ -461,7 +686,14 @@ const GeoSectionBlock = React.memo(({
 	return <div className="block-information__row">
 		<div className="block-information__parametr">{title}:</div>{address || countryName}
 		<div className="block-information__img-country">
-			<img src={`./../../img/countries/${countryId}.png`} alt={countryName} title={countryName}/>
+			<LazyLoadImage
+				src={`./../../img/countries/${countryId}.png`}
+				alt={countryName}
+				title={countryName}
+				effect="blur"
+				width="100%"
+				height="100%"
+			/>
 		</div>
 	</div>;
 });
@@ -507,9 +739,9 @@ const LocalitySection = React.memo(({
 const CountrySection = React.memo(({
 	country = '',
 	countryId = 0,
-	typePerformer = 0
+	typePerformer = ''
 }) => {
-	return typePerformer && country ?
+	return typePerformer === "1" && country ?
 		<GeoSectionBlock title="Страна" countryName={country} countryId={countryId}/>
 	: <></>;
 });
@@ -523,14 +755,13 @@ const CountrySection = React.memo(({
  * @param {String} title
  * @param {Array} artists
  * @param {boolean} isOrganization
- * @param {Function} searchPerformer
  * @returns {HTMLElement}
  */
 const ListSectionBlock = React.memo(({
 	title = '',
 	artists = [],
 	isOrganization = false,
-	searchPerformer
+	userName = ''
 }) => {
 	if (!artists.length) {
 		return <></>;
@@ -548,7 +779,7 @@ const ListSectionBlock = React.memo(({
 				separator = index ? ', ' : '';
 
 				if (artist.isActive) {
-					artistBlock = <NavLink to={`/music?performer=${artist.performerId}`} id={artist.performerId} onClick={ searchPerformer }>{artistName}</NavLink>;
+					artistBlock = <NavLink to={`/music/${userName}?performer=${artist.performerId}`} id={artist.performerId}>{artistName}</NavLink>;
 				} else {
 					artistBlock = artistName;
 				}
@@ -572,10 +803,9 @@ const ListSectionBlock = React.memo(({
  * @version 1.0.0
  *
  * @param {Array} membersArr
- * @param {Function} searchPerformer
  * @returns {HTMLElement}
  */
-const MemberSection = React.memo(({membersArr = [], searchPerformer}) => {
+const MemberSection = React.memo(({membersArr = [], userName = ''}) => {
 	if (!membersArr || !membersArr.length) {
 		return <></>;
 	}
@@ -588,8 +818,8 @@ const MemberSection = React.memo(({membersArr = [], searchPerformer}) => {
 	});
 
 	return <>
-		<ListSectionBlock title="Состав группы" artists={members} isOrganization={false} searchPerformer={searchPerformer}/>
-		<ListSectionBlock title="Бывшие участники" artists={formerMembers} isOrganization={false} searchPerformer={searchPerformer}/>
+		<ListSectionBlock title="Состав группы" artists={members} isOrganization={false} userName={userName}/>
+		<ListSectionBlock title="Бывшие участники" artists={formerMembers} isOrganization={false} userName={userName}/>
 	</>;
 });
 
@@ -600,12 +830,11 @@ const MemberSection = React.memo(({membersArr = [], searchPerformer}) => {
  * @version 1.0.0
  *
  * @param {Array} groups
- * @param {Function} searchPerformer
  * @returns {HTMLElement}
  */
-const GroupSection = React.memo(({groups = [], searchPerformer}) => {
+const GroupSection = React.memo(({groups = [], userName = ''}) => {
 	return groups && groups.length ?
-		<ListSectionBlock title="Группа" artists={groups} isOrganization={true} searchPerformer={searchPerformer}/>
+		<ListSectionBlock title="Группа" artists={groups} isOrganization={true} userName={userName}/>
 	: <></>;
 });
 
@@ -618,9 +847,9 @@ const GroupSection = React.memo(({groups = [], searchPerformer}) => {
  * @param {Array} companies
  * @returns {HTMLElement}
  */
-const CompanySection = React.memo(({companies = []}) => {
+const CompanySection = React.memo(({companies = [], userName = ''}) => {
 	return companies && companies.length ?
-		<ListSectionBlock title="Агентство" artists={companies} isOrganization={true}/>
+		<ListSectionBlock title="Агентство" artists={companies} isOrganization={true} userName={userName}/>
 	: <></>;
 });
 
@@ -646,7 +875,14 @@ const LinksSectionBlock = React.memo(({
 			{links.map((link, index) => {
 				return <div className="block-information__block-link" key={index}>
 					<a href={link.url} className="block-information__link" target="_blank" rel="noopener noreferrer">
-						<img src={`./../../img/links/${link.name}.png`} alt={artistName} title={artistName}/>
+						<LazyLoadImage
+							src={`./../../img/links/${link.name}.png`}
+							alt={artistName}
+							title={artistName}
+							effect="blur"
+							width="100%"
+							height="100%"
+						/>
 					</a>
 				</div>;
 			})}

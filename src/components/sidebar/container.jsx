@@ -2,7 +2,7 @@ import React from 'react';
 import Menu from './index';
 import { connect } from 'react-redux';
 import Loader from './../common/loader/index';
-import { getIsFetching, getMenu } from './../../redux/selectors';
+import { getIsFetching, getMenu, getUserName } from './../../redux/selectors';
 import { backToMain } from './../../redux/music-reducer';
 
 const MenuClassContainer = React.memo(props => {
@@ -15,6 +15,7 @@ const MenuClassContainer = React.memo(props => {
 const mapStateToProps = (state) => {
 	return {
 		isFetching: getIsFetching(state),
+		userName: getUserName(state),
 		menu: getMenu(state),
 	}
 }

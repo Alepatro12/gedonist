@@ -1,9 +1,11 @@
 import React from 'react';
 import Music from './index';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import Loader from './../common/loader/index';
 import {
 	getUserId,
+	getUserName,
 	getIsFetching,
 	getIsAuthenticate
 } from './../../redux/selectors';
@@ -13,10 +15,17 @@ import {
 	getPerformers,
 	getMusicFocus,
 	getIsMainPage,
+	getCollections,
+	getCollectionId,
+	getCollectionName,
 	getIsAddPerformer,
+	getUserCollections,
+	getCountCollections,
+	getCollectionUserId,
 	getPerformersStorage,
 	getIsAddPerformerStorage,
-	getSearchPerformersStorage
+	getSearchPerformersStorage,
+	getIsShowModalUserCollections
 } from './../../redux/music-selectors';
 import {
 	setIsFocus,
@@ -24,11 +33,16 @@ import {
 	addPerformer,
 	findPerformer,
 	findPerformers,
-	findCollection,
+	findCollections,
+	deleteCollection,
 	findIsAddPerformer,
+	findUserCollections,
+	findCollectionElements,
 	findPerformerFromStorage,
-	getPerformersFromStorage
+	getPerformersFromStorage,
+	setIsShowModalUserCollections
 } from './../../redux/music-reducer';
+import { withAuthRedirect } from './../../hoc/withAuthRedirectComponent';
 
 /**
  * Get the Music page
@@ -59,8 +73,10 @@ const MusicClassContainer = React.memo(({
  */
 const mapStateToProps = (state) => {
 	return {
+		page: 'music-page',
 		isAddPerformer: getIsAddPerformer(state),
 		isAuthenticate: getIsAuthenticate(state),
+		collectionId: getCollectionId(state),
 		isMainPage: getIsMainPage(state),
 		collection: getCollection(state),
 		isFetching: getIsFetching(state),
@@ -68,9 +84,16 @@ const mapStateToProps = (state) => {
 		performer: getPerformer(state),
 		isFocus: getMusicFocus(state),
 		userId: getUserId(state),
+		userRealName: getUserName(state),
+		collections: getCollections(state),
+		collectionName: getCollectionName(state),
+		userCollections: getUserCollections(state),
+		countCollection: getCountCollections(state),
+		collectionUserId: getCollectionUserId(state),
 		performersStorage: getPerformersStorage(state),
 		isAddPerformerStorage: getIsAddPerformerStorage(state),
-		searchPerformersStorage: getSearchPerformersStorage(state)
+		searchPerformersStorage: getSearchPerformersStorage(state),
+		isShowModalUserCollections: getIsShowModalUserCollections(state)
 	};
 }
 
@@ -80,16 +103,23 @@ const mapStateToProps = (state) => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  */
-const MusicContainer = connect(mapStateToProps, {
-	findCollection,
-	findPerformers,
-	findPerformer,
-	addPerformer,
-	backToMain,
-	setIsFocus,
-	findIsAddPerformer,
-	findPerformerFromStorage,
-	getPerformersFromStorage
-}) (MusicClassContainer);
+const MusicContainer = compose(
+	connect(mapStateToProps, {
+		findCollections,
+		findPerformers,
+		findPerformer,
+		addPerformer,
+		backToMain,
+		setIsFocus,
+		deleteCollection,
+		findIsAddPerformer,
+		findUserCollections,
+		findCollectionElements,
+		findPerformerFromStorage,
+		getPerformersFromStorage,
+		setIsShowModalUserCollections
+	}),
+	withAuthRedirect
+) (MusicClassContainer);
 
 export default MusicContainer;

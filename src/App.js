@@ -14,14 +14,18 @@ import store from './redux/redux-store';
 import { Provider } from 'react-redux';
 import EmailWarningContainer from './components/email-warning/container';
 import Sidebar from './components/sidebar/container';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 const Menu = React.lazy(() => import('./components/menu/container'));
 const About = React.lazy(() => import('./components/about/index'));
 const Music = React.lazy(() => import('./components/music/container'));
+const MusicNewCollection = React.lazy(() => import('./components/music/new-collection/container'));
+const MusicChangeCollection = React.lazy(() => import('./components/music/change-collection/container'));
 const LoginContainer = React.lazy(() => import('./components/auth/login/container'));
 const NewPasswordContainer = React.lazy(() => import('./components/auth/new-password/container'));
 const AuthenticateContainer = React.lazy(() => import('./components/auth/authenticate/container'));
 const ChangePasswordContainer = React.lazy(() => import('./components/auth/change-password/container'));
+const Fortune = React.lazy(() => import('./fortune/index'));
 
 class App extends React.Component {
 	componentDidMount() {
@@ -33,26 +37,31 @@ class App extends React.Component {
 			return (
 				<div className="App">
 					<EmailWarningContainer/>
-					<div className={`background background--${this.props.match.params.pageName}`}>
-						<HeaderContainer/>
-						<Sidebar/>
-						<div className="main">
-							<Route path="/" component={Home} />
-							<Suspense fallback={<Loader isFetching={true}/>}>
-								<Switch>
-									<Route path={this.props.match.path + "/menu"} component={Menu}/>
-									<Route path={this.props.match.path + "/about"} component={About}/>
-									<Route path={this.props.match.path + "/music"} component={Music}/>
-									<Route path={this.props.match.path + "/auth/login"} component={LoginContainer}/>
-									<Route path={this.props.match.path + "/auth/new-password"} component={NewPasswordContainer}/>
-									<Route path={this.props.match.path + "/auth/authenticate"} component={AuthenticateContainer}/>
-									<Route path={this.props.match.path + "/auth/change-password"} component={ChangePasswordContainer}/>
-									<Redirect from="/auth" to="/auth/login"/>
-								</Switch>
-							</Suspense>
-						</div>
-						<Footer/>
+					<LazyLoadComponent>
+						<div className={`background background--${this.props.match.params.pageName}`}>
+							<HeaderContainer/>
+							<Sidebar/>
+							<div className="main">
+								<Route path="/" component={Home} />
+								<Suspense fallback={<Loader isFetching={true}/>}>
+									<Switch>
+										<Route path={this.props.match.path + "/menu"} component={Menu}/>
+										<Route path={this.props.match.path + "/about"} component={About}/>
+										<Route path={this.props.match.path + "/music/new-collection"} component={MusicNewCollection}/>
+										<Route path={this.props.match.path + "/music/change-collection"} component={MusicChangeCollection}/>
+										<Route path={this.props.match.path + "/music"} component={Music}/>
+										<Route path={this.props.match.path + "/auth/login"} component={LoginContainer}/>
+										<Route path={this.props.match.path + "/auth/new-password"} component={NewPasswordContainer}/>
+										<Route path={this.props.match.path + "/auth/authenticate"} component={AuthenticateContainer}/>
+										<Route path={this.props.match.path + "/auth/change-password"} component={ChangePasswordContainer}/>
+										<Route path={this.props.match.path + "/fortune"} component={Fortune}/>
+										<Redirect from="/auth" to="/auth/login"/>
+									</Switch>
+								</Suspense>
+							</div>
+							<Footer/>
 					</div>
+					</LazyLoadComponent>
 				</div>
 			);
 		} else {

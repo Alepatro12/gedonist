@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Sidebar = ({
 	menu,
+	userName,
 	backToMain
 }) => {
 	const isBack = (event) => {
@@ -13,8 +14,10 @@ const Sidebar = ({
 
 	const blockPageLink =
 		menu.map(pageLink => {
+			const link = pageLink.link === 'music' && userName ? `${pageLink.link}/${userName}` : pageLink.link;
+
 			return (
-				<NavLink className={`glitch-btn js-sidebar-${pageLink.link}`} to={`/${pageLink.link}`} key={pageLink.link} onClick={ isBack }>
+				<NavLink className={`glitch-btn js-sidebar-${pageLink.link}`} to={`/${link}`} key={pageLink.link} onClick={ isBack }>
 					<div className="title">{pageLink.name}</div>
 					<div className="mask">
 						<span>{pageLink.name}</span>
