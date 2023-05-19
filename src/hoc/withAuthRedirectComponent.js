@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { getIsAuthenticate, getIsChangePassword } from './../redux/selectors';
 import { getIsCreatedCollection } from './../redux/music-selectors';
 
@@ -18,19 +18,19 @@ export const withAuthRedirect = (Component) => {
 			switch(this.props.page) {
 				case 'music-page': {
 					if (this.props.isCreatedCollection) {
-						return <Redirect to={`/music/${this.props.userRealName}`}></Redirect>;
+						return <Routes><Route path="/music" element={<Navigate to={`/music/${this.props.userRealName}`} replace/>}/></Routes>;
 					}
 					break;
 				}
 				case 'music': {
 					if (!this.props.isAuthenticate || this.props.isCreatedCollection) {
-						return <Redirect to={`/music/${this.props.userName}`}></Redirect>;
+						return <Routes><Route path="/music" element={<Navigate to={`/music/${this.props.userName}`} replace/>}/></Routes>;
 					}
 					break;
 				}
 				default: {
 					if (this.props.isAuthenticate || this.props.isChangePassword) {
-						return <Redirect to="/"></Redirect>;
+						return <Routes><Route path="/" element={<Navigate to="/" replace/>}/></Routes>;
 					}
 					break;
 				}

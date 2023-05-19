@@ -1,14 +1,13 @@
 import './App.css';
 import './style.css';
-import React, { Suspense } from 'react';
-import { Route, withRouter, BrowserRouter, Switch, Redirect } from "react-router-dom";
+import React, { Suspense, useEffect } from 'react';
+import { Route, BrowserRouter, Routes, Navigate, useLocation } from "react-router-dom";
 import HeaderContainer from './components/header/container';
 import Footer from './components/footer/index';
 import { connect } from 'react-redux';
 import { initializedApp } from './redux/app-reducer';
 import Home from './components/home/index';
 import Loader from './components/common/loader';
-import { compose } from 'redux';
 import { getInitialized } from './redux/selectors';
 import store from './redux/redux-store';
 import { Provider } from 'react-redux';
@@ -27,49 +26,45 @@ const AuthenticateContainer = React.lazy(() => import('./components/auth/authent
 const ChangePasswordContainer = React.lazy(() => import('./components/auth/change-password/container'));
 const Fortune = React.lazy(() => import('./fortune/index'));
 
-class App extends React.Component {
-	componentDidMount() {
-		this.props.initializedApp(this.props.location.search);
-	}
+const App = ({initialized, initializedApp}) => {
+	const location = useLocation();
 
-	render() {
-		if (this.props.initialized) {
-			return (
-				<div className="App">
-					<EmailWarningContainer/>
-					<LazyLoadComponent>
-						<div className={`background background--${this.props.match.params.pageName}`}>
-							<HeaderContainer/>
-							<Sidebar/>
-							<div className="main">
-								<Route path="/" component={Home} />
-								<Suspense fallback={<Loader isFetching={true}/>}>
-									<Switch>
-										<Route path={this.props.match.path + "/menu"} component={Menu}/>
-										<Route path={this.props.match.path + "/about"} component={About}/>
-										<Route path={this.props.match.path + "/music/new-collection"} component={MusicNewCollection}/>
-										<Route path={this.props.match.path + "/music/change-collection"} component={MusicChangeCollection}/>
-										<Route path={this.props.match.path + "/music"} component={Music}/>
-										<Route path={this.props.match.path + "/auth/login"} component={LoginContainer}/>
-										<Route path={this.props.match.path + "/auth/new-password"} component={NewPasswordContainer}/>
-										<Route path={this.props.match.path + "/auth/authenticate"} component={AuthenticateContainer}/>
-										<Route path={this.props.match.path + "/auth/change-password"} component={ChangePasswordContainer}/>
-										<Route path={this.props.match.path + "/fortune"} component={Fortune}/>
-										<Redirect from="/auth" to="/auth/login"/>
-									</Switch>
-								</Suspense>
-							</div>
-							<Footer/>
+	useEffect(() => {
+		initializedApp(location.search);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [initialized]);
+
+	return initialized ?
+		<div className="App">
+			<EmailWarningContainer/>
+			<LazyLoadComponent>
+				<div className={`background background--${location.pathname.slice(1).split('/')[0]}`}>
+					<HeaderContainer/>
+					<Sidebar/>
+					<div className="main">
+						<Suspense fallback={<Loader isFetching={true}/>}>
+							<Routes>
+								<Route path="/" element={<Home/>}/>
+								<Route path={"/menu"} element={<Menu/>}/>
+								<Route path={"/about"} element={<About/>}/>
+								<Route path={"/music/new-collection"} element={<MusicNewCollection/>}/>
+								<Route path={"/music/change-collection"} element={<MusicChangeCollection/>}/>
+								<Route path={"/music/*"} element={<Music/>}/>
+								<Route path={"/auth/login/*"} element={<LoginContainer/>}/>
+								<Route path={"/auth/new-password/*"} element={<NewPasswordContainer/>}/>
+								<Route path={"/auth/authenticate/*"} element={<AuthenticateContainer/>}/>
+								<Route path={"/auth/change-password/*"} element={<ChangePasswordContainer/>}/>
+								<Route path={"/fortune"} element={<Fortune/>}/>
+								<Route path="/auth" element={<Navigate to="/auth/login" replace/>}/><Route></Route>
+							</Routes>
+						</Suspense>
 					</div>
-					</LazyLoadComponent>
-				</div>
-			);
-		} else {
-			return <Loader isFetching={!this.props.initialized} />;
-		}
-
-	}
-}
+					<Footer/>
+			</div>
+			</LazyLoadComponent>
+		</div>
+		: <Loader isFetching={!initialized}/>;
+};
 
 const mapStateToProps = (state) => {
 	return {
@@ -77,21 +72,20 @@ const mapStateToProps = (state) => {
 	}
 };
 
-const AppContainer = compose(
-	withRouter,
-	connect(mapStateToProps, { initializedApp })
-) (App);
+const AppContainer = connect(mapStateToProps, { initializedApp }) (App);
 
 const MainApp = (props) => {
 	return (
 		<Provider store={store}>
 			<BrowserRouter>
-				<Route path="/:pageName?" render={props => (
-					<AppContainer
-						{...props}
-						state={store.getState()}
-					/>
-				)}/>
+				<Routes>
+					<Route path="/*" element={
+						<AppContainer
+							{...props}
+							state={store.getState()}
+						/>
+					}/>
+				</Routes>
 			</BrowserRouter>
 		</Provider>
 	)

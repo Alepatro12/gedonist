@@ -1,6 +1,6 @@
 import './style.css';
 import React, { useRef, useEffect, useLayoutEffect } from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
@@ -34,7 +34,8 @@ const Music = React.memo(({
 	...props
 }) => {
 	const refSearch = useRef(null);
-	const userName = props.location.pathname.replace(/\/music\//, '');
+	const location = useLocation();
+	const userName = location.pathname.replace(/\/music\//, '');
 
 	const search = () => {
 		const searchStr = refSearch.current.value;
@@ -55,7 +56,7 @@ const Music = React.memo(({
 	};
 
 	useLayoutEffect(() => {
-		const params = new URLSearchParams(props.location.search);
+		const params = new URLSearchParams(location.search);
 		const newPerformerId = Number(params.get('performer'));
 		const newCollectionId = Number(params.get('collection'));
 
@@ -70,7 +71,7 @@ const Music = React.memo(({
 
 		setIsShowModalUserCollections(false);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [props.location.search]);
+	}, [location.search]);
 
 	const searchPerformer = (performerId = 0) => {
 		const performerData = performersStorage.length ?
@@ -106,12 +107,12 @@ const Music = React.memo(({
 					onChange={ search }
 					onFocus={ onFocus }
 				/>
-				<PopUp setIsFocus={setIsFocus} userName={props.location.pathname.replace(/\/music\//, '')} {...props}/>
+				<PopUp setIsFocus={setIsFocus} userName={location.pathname.replace(/\/music\//, '')} {...props}/>
 			</div>
 			<input type="button" className="search__button" id="search" value="Найти" onClick={ onFocus }/>
 		</div>
-		{((!isMainPage && performer?.id) || '') && <Performer userId={userId} performer={performer} setIsFocus={setIsFocus} isAuthenticate={isAuthenticate} backToMain={backToMain} userName={props.location.pathname.replace(/\/music\//, '')} setIsShowModalUserCollections={setIsShowModalUserCollections} {...props}/>}
-		{((isMainPage && userName) || '') && <Collections userId={userId} userName={props.location.pathname.replace(/\/music\//, '')} findCollectionElements={findCollectionElements} {...props}/>}
+		{((!isMainPage && performer?.id) || '') && <Performer userId={userId} performer={performer} setIsFocus={setIsFocus} isAuthenticate={isAuthenticate} backToMain={backToMain} userName={location.pathname.replace(/\/music\//, '')} setIsShowModalUserCollections={setIsShowModalUserCollections} {...props}/>}
+		{((isMainPage && userName) || '') && <Collections userId={userId} userName={location.pathname.replace(/\/music\//, '')} findCollectionElements={findCollectionElements} {...props}/>}
 		{((isShowModalUserCollections && userName) || '') && <ModalUserCollections musicianId={performer.id} setIsShowModalUserCollections={setIsShowModalUserCollections} userName={userName} userId={userId} {...props}/>}
 	</>;
 });
