@@ -1,6 +1,6 @@
 import './style.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink, useLocation, useHistory } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const Header = React.memo(({ isAuthenticate, isDisabled, userName, getLogout, attemptIsChangePassword }) => {
 	return (
@@ -69,7 +69,7 @@ const Login = React.memo(({ attemptIsChangePassword }) => {
 
 const MenuButton = React.memo(() => {
 	const pathname = useLocation().pathname;
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	const initMenu = () => {
 		return pathname === '/menu';
@@ -79,7 +79,7 @@ const MenuButton = React.memo(() => {
 
 	const toggleMenu = () => {
 		if (isOpenMenu) {
-			history.goBack();
+			navigate(-1);
 		}
 
 		setOpenMenu(!isOpenMenu);
