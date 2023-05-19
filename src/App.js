@@ -28,6 +28,9 @@ const Fortune = React.lazy(() => import('./fortune/index'));
 
 const App = ({initialized, initializedApp}) => {
 	const location = useLocation();
+	const backgroundName = location.pathname
+		.slice(1)
+		.split('/')[0];
 
 	useEffect(() => {
 		initializedApp(location.search);
@@ -38,7 +41,7 @@ const App = ({initialized, initializedApp}) => {
 		<div className="App">
 			<EmailWarningContainer/>
 			<LazyLoadComponent>
-				<div className={`background background--${location.pathname.slice(1).split('/')[0]}`}>
+				<div className={`background background--${backgroundName}`}>
 					<HeaderContainer/>
 					<Sidebar/>
 					<div className="main">

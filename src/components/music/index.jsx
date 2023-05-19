@@ -107,12 +107,12 @@ const Music = React.memo(({
 					onChange={ search }
 					onFocus={ onFocus }
 				/>
-				<PopUp setIsFocus={setIsFocus} userName={location.pathname.replace(/\/music\//, '')} {...props}/>
+				<PopUp setIsFocus={setIsFocus} userName={userName} {...props}/>
 			</div>
 			<input type="button" className="search__button" id="search" value="Найти" onClick={ onFocus }/>
 		</div>
-		{((!isMainPage && performer?.id) || '') && <Performer userId={userId} performer={performer} setIsFocus={setIsFocus} isAuthenticate={isAuthenticate} backToMain={backToMain} userName={location.pathname.replace(/\/music\//, '')} setIsShowModalUserCollections={setIsShowModalUserCollections} {...props}/>}
-		{((isMainPage && userName) || '') && <Collections userId={userId} userName={location.pathname.replace(/\/music\//, '')} findCollectionElements={findCollectionElements} {...props}/>}
+		{((!isMainPage && performer?.id) || '') && <Performer userId={userId} performer={performer} setIsFocus={setIsFocus} isAuthenticate={isAuthenticate} backToMain={backToMain} userName={userName} setIsShowModalUserCollections={setIsShowModalUserCollections} {...props}/>}
+		{((isMainPage && userName) || '') && <Collections userId={userId} userName={userName} findCollectionElements={findCollectionElements} {...props}/>}
 		{((isShowModalUserCollections && userName) || '') && <ModalUserCollections musicianId={performer.id} setIsShowModalUserCollections={setIsShowModalUserCollections} userName={userName} userId={userId} {...props}/>}
 	</>;
 });

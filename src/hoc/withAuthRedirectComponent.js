@@ -18,19 +18,31 @@ export const withAuthRedirect = (Component) => {
 			switch(this.props.page) {
 				case 'music-page': {
 					if (this.props.isCreatedCollection) {
-						return <Routes><Route path="/music" element={<Navigate to={`/music/${this.props.userRealName}`} replace/>}/></Routes>;
+						return <Routes>
+							<Route path="/music" element={
+								<Navigate to={`/music/${this.props.userRealName}`} replace/>
+							}/>
+						</Routes>;
 					}
 					break;
 				}
 				case 'music': {
 					if (!this.props.isAuthenticate || this.props.isCreatedCollection) {
-						return <Routes><Route path="/music" element={<Navigate to={`/music/${this.props.userName}`} replace/>}/></Routes>;
+						return <Routes>
+							<Route path="/music" element={
+								<Navigate to={`/music/${this.props.userName}`} replace/>
+							}/>
+						</Routes>;
 					}
 					break;
 				}
 				default: {
 					if (this.props.isAuthenticate || this.props.isChangePassword) {
-						return <Routes><Route path="/" element={<Navigate to="/" replace/>}/></Routes>;
+						return <Routes>
+							<Route path="/" element={
+								<Navigate to="/" replace/>
+							}/>
+						</Routes>;
 					}
 					break;
 				}
