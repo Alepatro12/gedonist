@@ -19,7 +19,7 @@ import { withAuthRedirect } from './../../../hoc/withAuthRedirectComponent';
 
 const NewCollectionContainer = React.memo(props => {
 	return <>
-		<Loader isFetching={props.isFetching} />
+		<Loader isFetching={props.isFetching}/>
 		<NewCollection
 			userId={props.userId}
 			performer={props.performer}
