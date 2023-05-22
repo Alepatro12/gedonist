@@ -34,7 +34,7 @@ const AppRouter = React.memo(({ isAuthenticate }) => {
 			<Route path="/auth" element={
 				<Navigate to="/auth/login" replace/>
 			}/>
-		</Routes>;
+	</Routes>;
 });
 
 const mapStateToProps = (state) => {
