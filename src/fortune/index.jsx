@@ -29,13 +29,17 @@ const prizes = [
       color: "hsl(350 60% 52%)",
     },
     {
+      text: "G-KEKW",
+      color: "hsl(270 87% 67%)",
+    },
+    {
       text: "Belgium",
       color: "hsl(91 43% 54%)",
     },
-    // {
-    //   text: "Argentina",
-    //   color: "hsl(140 36% 74%)",
-    // },
+    {
+      text: "Argentina",
+      color: "hsl(140 36% 74%)",
+    },
 	{
       text: "Japan",
       color: "hsl(12 56% 64%)",
@@ -44,10 +48,10 @@ const prizes = [
 	// 	text: "Italy",
 	// 	color: "hsl(72 46% 54%)",
 	// },
-	// {
-	// 	text: "German",
-	// 	color: "hsl(220 56% 64%)",
-	// },
+	{
+		text: "German",
+		color: "hsl(220 56% 64%)",
+	},
 	{
     	text: "OLD-KEKW",
     	color: "hsl(300 46% 74%)",
@@ -56,12 +60,16 @@ const prizes = [
 		text: "Korea",
 		color: "hsl(160 46% 54%)",
 	},
+  // { 
+  //   text: "Drewland",
+  //   color: "hsl(343 74% 66%)",
+  // },
 	{
     	text: "Spain",
     	color: "hsl(190 46% 74%)",
     },
 	{
-		text: "JP-KEKW",
+		text: "SHOW-KEKW",
 		color: "hsl(40 56% 64%)",
 	},
 	// {
@@ -75,6 +83,10 @@ const prizes = [
 	{
 		text: "Thailand",
 		color: "hsl(222 46% 54%)",
+	},
+  {
+		text: "BAND-KEKW",
+		color: "hsl(140 56% 64%)",
 	},
 	{
 		text: "Australia",
