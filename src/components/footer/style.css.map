@@ -1,1 +1,1 @@
-{"version":3,"sources":["style.scss","style.css"],"names":[],"mappings":"AAAA;EACC,WAAA;EACA,WAAA;ACCD;ADCC;EACC,YAAA;EACA,WAAA;ACCF","file":"style.css"}
+{"version":3,"sources":["../../design-system/variables/_typography.scss","style.scss","style.css","../../design-system/variables/_color.scss"],"names":[],"mappings":"AAAQ,6GAAA;ACER;EACC,WAAA;EACA,WAAA;ACAD;ADEC;EACC,YAAA;EACA,cEUS;ADVX","file":"style.css"}

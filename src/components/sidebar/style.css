@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,400,600|Tulpen+One&display=swap");
 nav {
   display: flex;
   flex-direction: column;
@@ -11,11 +12,10 @@ nav {
 }
 nav .glitch-btn {
   font-size: 30px;
-  color: #eee;
+  color: #f8f8f8;
   margin-bottom: 50px;
+  line-height: 1;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
-}
-nav .glitch-btn {
   transform: translate(10%);
   transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -23,7 +23,7 @@ nav .glitch-btn:hover {
   color: #d38484;
 }
 nav .glitch-btn:hover:before {
-  background: #4e4e4e;
+  background: #606060;
   transform: translateX(2250%) scaleX(50) scaleY(0.2);
 }
 nav .glitch-btn:before {
@@ -34,13 +34,13 @@ nav .glitch-btn:before {
   background: #d38484;
   width: 4px;
   height: 160%;
-  padding: 0px;
+  padding: 0;
   z-index: -1;
   transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
 @keyframes glitchin {
   100% {
-    transform: translate(0px, 0px);
+    transform: translate(0, 0);
   }
   95% {
     transform: translate(0.5px, 0.05px);
@@ -49,7 +49,7 @@ nav .glitch-btn:before {
     transform: translate(0.6px, -0.3px);
   }
   85% {
-    transform: translate(1.2px, 0px);
+    transform: translate(1.2px, 0);
   }
   80% {
     transform: translate(1.2px, 0.2px);
@@ -88,7 +88,7 @@ nav .glitch-btn:before {
     transform: translate(6px, 0.75px);
   }
   20% {
-    transform: translate(0px, -1.6px);
+    transform: translate(0, -1.6px);
   }
   15% {
     transform: translate(-5.95px, -0.85px);

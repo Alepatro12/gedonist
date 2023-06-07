@@ -1,4 +1,3 @@
-import './App.css';
 import './style.css';
 import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter, useLocation } from "react-router-dom";

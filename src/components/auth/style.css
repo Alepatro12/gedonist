@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,400,600|Tulpen+One&display=swap");
 .authentication {
   width: 330px;
   min-width: 250px;
@@ -11,16 +12,15 @@
 }
 .authentication__title {
   margin: 0 0 5px;
-  font-size: 28px;
+  font-size: 30px;
   text-align: center;
-  line-height: 36px;
-  color: #eee;
-  font-family: Roboto, sans-serif;
+  line-height: 1.4;
+  color: #f8f8f8;
+  font-family: "Roboto", sans-serif;
 }
 .authentication__title--subtext {
   margin-bottom: 10px;
   font-size: 18px;
-  line-height: 27px;
 }
 .authentication__input {
   width: 95%;
@@ -30,7 +30,7 @@
   margin-left: 2.5%;
   padding-left: 15px;
   padding-right: 30px;
-  font-family: Roboto, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   box-sizing: border-box;
   border-radius: 5px;
@@ -38,7 +38,7 @@
   transition: all 0.2s ease-in-out;
 }
 .authentication__input:focus {
-  box-shadow: 0 5px 5px #ddd;
+  box-shadow: 0 5px 5px #dfdfdf;
 }
 .authentication__input--remember {
   display: flex;
@@ -47,8 +47,8 @@
 }
 .authentication__label {
   display: flex;
-  color: #eee;
-  font-family: Roboto, sans-serif;
+  color: #f8f8f8;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   text-shadow: 3px 5px 4px rgba(0, 0, 0, 0.9);
   cursor: pointer;
@@ -58,7 +58,7 @@
   margin-top: 5px;
 }
 .authentication__text-label--color {
-  color: #eee;
+  color: #f8f8f8;
 }
 .authentication__checkbox {
   height: 25px;
@@ -79,7 +79,7 @@
   height: 45px;
   display: block;
   margin-left: 2.5%;
-  font-family: Roboto, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   border: none;
   border-radius: 24px;
@@ -89,7 +89,7 @@
 .authentication__button--primary {
   margin-top: 10px;
   background-color: #27b13c;
-  color: #eee;
+  color: #f8f8f8;
 }
 .authentication__button--primary:hover {
   background-color: #209732;
@@ -98,7 +98,7 @@
   display: flex;
   text-align: center;
   margin-bottom: 10px;
-  background-color: #eee;
+  background-color: #f8f8f8;
   text-shadow: none;
 }
 .authentication__button--default:hover {
@@ -111,7 +111,7 @@
   margin-top: 8px;
   padding: 3px;
   text-align: center;
-  color: #eee;
+  color: #f8f8f8;
   background-color: #dc3545;
   border-radius: 3px;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.2);
