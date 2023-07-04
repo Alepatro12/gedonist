@@ -1,13 +1,14 @@
+@import './../../design-system';
 @import './../../style/mixins.scss';
 
 .email-warning {
-	padding: 0 15px;
-	background: linear-gradient(119.23deg, rgba(255, 200, 223, 0.7) 0%, rgba(255, 197, 165, 0.7) 99%);
-	line-height: 38px;
+	padding: 10px 15px;
+	background: linear-gradient(119.23deg, $purple-100 0%, $yellow-100 99%);
+	line-height: $line-height-xl;
 	text-align: center;
 
 	@include mq('phone') {
 		padding: 10px;
-		line-height: 1.5em;
+		line-height: $line-height-lg;
 	}
 }

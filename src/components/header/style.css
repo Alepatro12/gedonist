@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,400,600|Tulpen+One&display=swap");
 .head {
   width: 100%;
   display: flex;
@@ -22,7 +23,6 @@
   width: 35px;
   height: 35px;
   padding: 7px 11px 9px 1px;
-  font-size: 0;
   background: transparent;
   cursor: pointer;
 }
@@ -45,7 +45,7 @@
   content: "";
   position: absolute;
   top: -9px;
-  left: 0px;
+  left: 0;
   width: 26px;
   height: 4.5px;
   border-radius: 50%;
@@ -56,7 +56,7 @@
   content: "";
   position: absolute;
   bottom: -9px;
-  left: 0px;
+  left: 0;
   width: 26px;
   height: 4.5px;
   border-radius: 50%;
@@ -90,13 +90,13 @@
 }
 .head__logo {
   color: #fff;
-  line-height: 1em;
+  line-height: 1;
   font-size: 64px;
   font-family: "Times New Roman", sans-serif;
 }
 @media only screen and (max-width: 991px) {
   .head__logo {
-    font-size: 36px;
+    font-size: 30px;
   }
 }
 .head__registration {
@@ -119,7 +119,7 @@
   margin-top: 10px;
   padding: 3px;
   text-align: center;
-  color: #eee;
+  color: #f8f8f8;
   background-color: #d38484;
   border-radius: 5px;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.2);

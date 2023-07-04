@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,400,600|Tulpen+One&display=swap');
+
+// Typography
+$font-size-xl: 18px;
+$font-size-base: 16px;
+$font-size-m: 14px;
+$font-size-s: 12px;
+
+$h1-font-size: $font-size-base * 1.875;
+$h2-font-size: $font-size-base * 1.5;
+$h3-font-size: $font-size-base * 1.25;
+$h4-font-size: $font-size-base * 1.125;
+
+$font-size-logo: $font-size-base * 4;
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+$line-height-xs: 1;
+$line-height-s: 1.2;
+$line-height-m: 1.25;
+$line-height-lg: 1.4;
+$line-height-xl: 2;
+
+$font-family-sans-serif: 'Roboto', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+$font-family-sans-serif-mini: 'Roboto', sans-serif;
+$font-family-lobster: 'Lobster', Georgia, Times, serif;
+$font-family-logo: 'Times New Roman', sans-serif;
+$font-family-serif: 'Cormorant Garamond', serif;

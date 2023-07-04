@@ -1,9 +1,11 @@
+@import './../../design-system';
+
 footer {
 	width: 100%;
 	padding: 1%;
 
 	.law {
 		float: right;
-		color: #aaa;
+		color: $gray-200;
 	}
 }

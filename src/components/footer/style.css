@@ -1,8 +1,9 @@
+@import url("https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,400,600|Tulpen+One&display=swap");
 footer {
   width: 100%;
   padding: 1%;
 }
 footer .law {
   float: right;
-  color: #aaa;
+  color: #dfdfdf;
 }/*# sourceMappingURL=style.css.map */

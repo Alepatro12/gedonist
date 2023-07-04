@@ -1,5 +1,5 @@
+@import './../../design-system';
 @import './../../style/mixins.scss';
-@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,400,600|Tulpen+One&display=swap');
 
 %button-cross {
 	&::before, &::after {
@@ -9,7 +9,7 @@
 		display: block;
 		width: 20px;
 		height: 2px;
-		background: #000;
+		background: $black;
 	}
 }
 
@@ -21,7 +21,7 @@
 		display: flex;
 		width: 850px;
 		height: 600px;
-		box-shadow: 0 0 50px rgba(0, 0, 0, .3);
+		box-shadow: 0 0 50px rgba($black, .3);
 	
 		@include mq('tablet') {
 			flex-direction: column;
@@ -52,11 +52,11 @@
 		display: flex;
 		justify-content: flex-end;
 		margin-top: 15px;
-		font-family: 'Cormorant Garamond', serif;
-		font-size: 18px;
-		color: #333;
+		font-family: $font-family-serif;
+		font-size: $font-size-xl;
+		color: $gray-600;
 		text-decoration: underline;
-		text-decoration-color: #888;
+		text-decoration-color: $gray-400;
 		cursor: pointer;
 
 		&--close-one {
@@ -79,12 +79,12 @@
 	}
 
 	&__button-link {
-		color: #333;
-		text-decoration-color: #888;
+		color: $gray-600;
+		text-decoration-color: $gray-400;
 
 		&:hover {
-			color: #333;
-			text-decoration-color: #888;
+			color: $gray-600;
+			text-decoration-color: $gray-400;
 		}
 	}
 
@@ -93,8 +93,8 @@
 		height: 100%;
 		padding: 14px;
 		text-align: center;
-		font-family: 'Cormorant Garamond', serif;
-		font-size: 18px;
+		font-family: $font-family-serif;
+		font-size: $font-size-xl;
 
 		@include mq('phone') {
 			padding: 10px;
@@ -125,11 +125,11 @@
 
 	&__page {
 		width: 50%;
-		background-color: #F5F5F5;
-		background-image: linear-gradient(90deg, #dfdfdf 0%, rgba(247,247,247,0) 18%);
+		background-color: $gray-100;
+		background-image: linear-gradient(90deg, $gray-200 0%, rgba($gray-100, 0) 18%);
 		
 		&:nth-of-type(1) {
-			background-image: linear-gradient(-90deg, #dfdfdf 0%, rgba(247,247,247,0) 18%);
+			background-image: linear-gradient(-90deg, $gray-200 0%, rgba($gray-100, 0) 18%);
 		}
 
 		@include mq('tablet') {
@@ -137,7 +137,7 @@
 			min-width: 250px;
 			max-width: 500px;
 			justify-content: center;
-			background-image: linear-gradient(-90deg, #dfdfdf 0%, rgba(247,247,247,0) 18%);
+			background-image: linear-gradient(-90deg, $gray-200 0%, rgba($gray-100, 0) 18%);
 
 			&--1 {
 				display: flex;
@@ -154,7 +154,7 @@
 	&__parametr {
 		width: 100px;
 		text-transform: uppercase;
-		font-size: 14px;
+		font-size: $font-size-m;
 	}
 
 	&__row {
@@ -171,7 +171,7 @@
 
 	&__title {
 		margin-bottom: 20px;
-		font-size: 17px;
+		font-size: $font-size-xl;
 		text-transform: uppercase;
 		letter-spacing: 1px;
 	}
@@ -180,7 +180,6 @@
 .check {
 	display: block;
 	margin-bottom: 10px;
-	font-size: 15px;
 
 	&__input {
 		float: left;
@@ -191,7 +190,7 @@
 		cursor: pointer;
 
 		&:hover {
-			background-color: #aaa;
+			background-color: $gray-400;
 		}
 	}
 
@@ -205,11 +204,11 @@
     justify-content: space-between;
 	margin-bottom: 25px;
 	padding: 0 14px;
-    font-size: 28px;
-	color: #fff;
+    font-size: $h1-font-size;
+	color: $white;
 
 	&__change {
-		font-size: 24px;
+		font-size: $h2-font-size;
 		text-decoration: underline;
 	}
 
@@ -217,16 +216,16 @@
 		cursor: pointer;
 
 		&:hover {
-			color: #aaa;
+			color: $gray-400;
 		}
 	}
 
 	&__link {
 		padding-right: 14px;
-		color: #fff;
+		color: $white;
 
 		&:hover {
-			color: #aaa;
+			color: $gray-400;
 		}
 	}
 }
@@ -271,7 +270,7 @@
 		overflow: hidden;
 
 		&--empty {
-			background-color: #666;
+			background-color: $gray-400;
 		}
 
 		@include mq('tablet') {
@@ -288,7 +287,7 @@
 	}
 
 	&__shadow {
-		box-shadow: 3px 3px 3px #555;
+		box-shadow: 3px 3px 3px $gray-500;
 
 		&:hover {
 			position: absolute;
@@ -302,9 +301,9 @@
 		padding: 0 10px 5px;
 		text-align: center;
 		font: 400 16px/1 'Lobster', cursive;
-		color: #888;
-		background-color: #F8F8F8;
-		border: 10px solid #F8F8F8;
+		color: $gray-400;
+		background-color: $gray-100;
+		border: 10px solid $gray-100;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -358,7 +357,7 @@
 		position: relative;
 		display: inline-block;
 		border-radius: 6px;
-		background-color: #dfdfdf;
+		background-color: $gray-200;
 		text-align: left;
 		vertical-align: middle;
 		z-index: 8;
@@ -381,7 +380,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-color: #444;
+		background-color: $gray-600;
 		opacity: .6;
 		overflow: hidden;
 		z-index: 7;
@@ -390,13 +389,13 @@
 }
 
 .modal-collections {
-	width: 250px;
-	background-color: #F5F5F5;
+	width: 275px;
+	background-color: $gray-100;
 
 	&__header {
 		padding: 20px 50px 20px 20px;
 		border-radius: 6px 6px 0 0;
-		background-color: #f2f2f2;
+		background-color: $gray-100;
 	}
 
 	&__footer {
@@ -414,8 +413,8 @@
 
 	&__title {
 		margin: 0;
-		font-size: 16px;
-		line-height: 1.2;
+		font-size: $h4-font-size;
+		line-height: $line-height-s;
 	}
 
 	&__close {
@@ -426,7 +425,7 @@
 		height: 24px;
 		border: 0;
 		outline: 0;
-		opacity: 0.4;
+		opacity: .4;
 		cursor: pointer;
 
 		&:hover {
@@ -453,9 +452,9 @@
 	&__new-collection {
 		border: 0;
 		outline: 0;
-		opacity: 0.4;
+		opacity: .4;
 		cursor: pointer;
-		transition: opacity ease 0.5s;
+		transition: opacity ease .5s;
 	
 		@extend %button-cross;
 
@@ -481,10 +480,10 @@
 	right: 0;
 	max-height: 280px;
 	padding: 5px 16px;
-	background-color: #fff;
-	border: 1px solid #ddd;
+	background-color: $white;
+	border: 1px solid $gray-200;
 	border-radius: 5px;
-	box-shadow: 0 10px 29px rgba(92,141,255,.22);
+	box-shadow: 0 10px 29px rgba($gray-600, .22);
 	overflow-y: scroll;
 	z-index: 7;
 
@@ -492,8 +491,8 @@
 		position: relative;
 		display: flex;
 		margin-bottom: 10px;
-		color: #2a2935;
-		border-bottom: 1px solid #ddd;
+		color: $gray-600;
+		border-bottom: 1px solid $gray-200;
 	}
 
 	&__block-img {
@@ -519,13 +518,14 @@
 
 	&__title {
 		margin-bottom: 5px;
-		line-height: 20px;
-		font-weight: 500;
+		font-size: $font-size-m;
+		line-height: $line-height-s;
+		font-weight: $font-weight-medium;
 	}
 
 	&__title-original {
-		font-size: 12px;
-		color: #666;
+		font-size: $font-size-s;
+		color: $gray-500;
 	}
 }
 
@@ -551,7 +551,7 @@
 	}
 
 	&__image {
-		border: 10px solid #F8F8F8;
+		border: 10px solid $gray-100;
 
 		@include mq('tablet') {
 			position: absolute;
@@ -571,9 +571,9 @@
 		padding: 0 10px 5px;
 		text-align: center;
 		font: 400 18px/1 'Lobster', cursive;
-		color: #888;
-		background-color: #F8F8F8;
-		border: 10px solid #F8F8F8;
+		color: $gray-400;
+		background-color: $gray-100;
+		border: 10px solid $gray-100;
 
 		@include mq('tablet') {
 			&--margin {
@@ -583,7 +583,7 @@
 	}
 
 	&__shadow {
-		box-shadow: 3px 3px 3px #777;
+		box-shadow: 3px 3px 3px $gray-400;
 	}
 
 	&__title {
@@ -591,9 +591,9 @@
 		padding: 0 10px 5px;
 		text-align: center;
 		font: 400 16px/1 'Lobster', cursive;
-		color: #888;
-		background-color: #F8F8F8;
-		border: 10px solid #F8F8F8;
+		color: $gray-400;
+		background-color: $gray-100;
+		border: 10px solid $gray-100;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -616,15 +616,15 @@
 		width: 25%;
 		max-width: 100px;
 		margin-left: 10px;
-		font-size: 16px;
-		color: #fff;
-		background-color: #37cd8f;
+		font-size: $font-size-base;
+		color: $white;
+		background-color: $green-200;
 		border: 0;
 		border-radius: 6px;
-		box-shadow: 0 5px 15px rgba(48,181,126,.7);
+		box-shadow: 0 5px 15px rgba($green-200, .7);
 
 		&:hover {
-			background-color: #2eb87e;
+			background-color: $green-300;
 			cursor: pointer;
 		}
 	}
@@ -633,8 +633,8 @@
 		width: 100%;
 		height: 30px;
 		padding: 8px;
-		font-size: 16px;
-		border: 1px solid #37cd8f;
+		font-size: $font-size-base;
+		border: 1px solid $green-200;
 		border-radius: 6px;
 	}
 }
