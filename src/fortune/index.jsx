@@ -44,10 +44,10 @@ const prizes = [
       text: "Japan",
       color: "hsl(12 56% 64%)",
   },
-	// {3
-	// 	text: "Italy",
-	// 	color: "hsl(72 46% 54%)",
-	// },
+	{
+		text: "Italy",
+		color: "hsl(72 46% 54%)",
+	},
 	{
 		text: "German",
 		color: "hsl(220 56% 64%)",
@@ -60,10 +60,10 @@ const prizes = [
 		text: "Korea",
 		color: "hsl(160 46% 54%)",
 	},
-  // { 
-  //   text: "Drewland",
-  //   color: "hsl(343 74% 66%)",
-  // },
+  { 
+    text: "Mystland",
+    color: "hsl(343 74% 66%)",
+  },
 	{
     	text: "Spain",
     	color: "hsl(190 46% 74%)",
@@ -92,10 +92,10 @@ const prizes = [
 		text: "Australia",
 		color: "hsl(350 40% 80%)",
 	},
-	// {
-	// 	text: "Mexico",
-	// 	color: "hsl(310 56% 66%)",
-	// },
+	{
+		text: "Mexico",
+		color: "hsl(310 56% 66%)",
+	},
   ];
   
   useLayoutEffect(() => {

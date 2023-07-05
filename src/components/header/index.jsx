@@ -10,7 +10,7 @@ const Header = React.memo(({ isAuthenticate, isDisabled, userName, getLogout, at
 					<MenuButton/>
 				</div>
 				<div className="head__logo">
-					<NavLink to="/" title="Перейти на Главную">Gedonist</NavLink>
+					<NavLink to="/" title="Перейти на Главную" translate="no">Gedonist</NavLink>
 				</div>
 			</div>
 			<div className="head__registration">
