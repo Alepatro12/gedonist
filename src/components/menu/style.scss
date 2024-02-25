@@ -12,6 +12,11 @@ $curve: cubic-bezier(.23, 1, .32, 1);
 		display: flex;
 	}
 
+	&__block {
+		display: flex;
+		flex-direction: column;
+	}
+
 	.glitch-btn {
 		font-size: $h1-font-size;
 		color: $gray-100;

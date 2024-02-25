@@ -9,6 +9,10 @@
     display: flex;
   }
 }
+.menu__block {
+  display: flex;
+  flex-direction: column;
+}
 .menu .glitch-btn {
   font-size: 30px;
   color: #f8f8f8;

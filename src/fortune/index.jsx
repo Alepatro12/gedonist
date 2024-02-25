@@ -5,7 +5,7 @@ const Fortune = () => {
 	// надписи и цвета на секторах
 const prizes = [
     {
-      text: "Canada",
+      text: "Devil May Cry",
       color: "hsl(197 30% 43%)",
     },
     // { 
@@ -13,89 +13,89 @@ const prizes = [
     //   color: "hsl(173 58% 39%)",
     // },
     { 
-      text: "The United States",
+      text: "The Legend of Tianding",
       color: "hsl(43 74% 66%)",
     },
     {
-      text: "B-KEKW",
+      text: "Frostpunk",
       color: "hsl(27 87% 67%)",
     },
     {
-      text: "France",
+      text: "The Closing Shift",
       color: "hsl(12 76% 61%)",
     },
     {
-      text: "Ireland",
+      text: "DreadOut",
       color: "hsl(350 60% 52%)",
     },
     {
-      text: "G-KEKW",
+      text: "The Coma: Cutting Class",
       color: "hsl(270 87% 67%)",
     },
     {
-      text: "Belgium",
+      text: "Call of the Sea",
       color: "hsl(91 43% 54%)",
     },
     {
-      text: "Argentina",
+      text: "Detention",
       color: "hsl(140 36% 74%)",
     },
 	{
-      text: "Japan",
+      text: "Fantasy Wars",
       color: "hsl(12 56% 64%)",
   },
 	{
-		text: "Italy",
+		text: "Fable: The Lost Chapters",
 		color: "hsl(72 46% 54%)",
 	},
 	{
-		text: "German",
+		text: "Draugen",
 		color: "hsl(220 56% 64%)",
 	},
 	{
-    	text: "OLD-KEKW",
+    	text: "American McGee's Alice",
     	color: "hsl(300 46% 74%)",
     },
-	{
-		text: "Korea",
-		color: "hsl(160 46% 54%)",
-	},
-  { 
-    text: "Mystland",
-    color: "hsl(343 74% 66%)",
-  },
-	{
-    	text: "Spain",
-    	color: "hsl(190 46% 74%)",
-    },
-	{
-		text: "SHOW-KEKW",
-		color: "hsl(40 56% 64%)",
-	},
+	// {
+	// 	text: "Korea",
+	// 	color: "hsl(160 46% 54%)",
+	// },
+  // { 
+  //   text: "Mystland",
+  //   color: "hsl(343 74% 66%)",
+  // },
+	// {
+  //   	text: "Spain",
+  //   	color: "hsl(190 46% 74%)",
+  //   },
+	// {
+	// 	text: "SHOW-KEKW",
+	// 	color: "hsl(40 56% 64%)",
+	// },
 	// {
 	// 	text: "Sweden",
 	// 	color: "hsl(320 46% 54%)",
 	// },
-	{
-		text: "The United Kingdom",
-		color: "hsl(240 26% 64%)",
-	},
-	{
-		text: "Thailand",
-		color: "hsl(222 46% 54%)",
-	},
-  {
-		text: "BAND-KEKW",
-		color: "hsl(140 56% 64%)",
-	},
-	{
-		text: "Australia",
-		color: "hsl(350 40% 80%)",
-	},
-	{
-		text: "Mexico",
-		color: "hsl(310 56% 66%)",
-	},
+	// {
+	// 	text: "The United Kingdom",
+	// 	color: "hsl(240 26% 64%)",
+	// },
+	// {
+	// 	text: "Thailand",
+	// 	color: "hsl(222 46% 54%)",
+	// },
+  // {
+	// 	text: "BAND-KEKW",
+	// 	color: "hsl(140 56% 64%)",
+	// },
+	// {
+	// 	text: "Australia",
+	// 	color: "hsl(350 40% 80%)",
+	// },
+	// {
+	// 	text: "Mexico",
+	// 	color: "hsl(310 56% 66%)",
+	// },
   ];
   
   useLayoutEffect(() => {
@@ -258,7 +258,7 @@ const prizes = [
 			<div className="deal-wheel">
 				<ul className="spinner"></ul>
 				<div className="ticker"></div>
-				<button className="btn-spin">Жми сюда, mraz</button>
+				<button className="btn-spin">Кликайте сюда, госпожа</button>
 			</div>
 		</div>
 	);
