@@ -65,7 +65,7 @@ a, a:hover {
 .background--auth {
   background-image: url(./img/registration-o.jpg);
 }
-.background--music {
+.background--gma, .background--music {
   background-image: url(./img/music-o.jpg);
 }
 

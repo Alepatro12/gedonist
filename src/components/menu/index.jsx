@@ -29,7 +29,9 @@ const Menu = ({
 
 	return (
 		<div className="menu">
-			{blockPageLink}
+			<div className="menu__block">
+				{blockPageLink}
+			</div>
 		</div>
 	);
 }

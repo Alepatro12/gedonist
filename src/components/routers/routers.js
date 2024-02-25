@@ -11,12 +11,14 @@ const NewPasswordContainer = React.lazy(() => import('../auth/new-password/conta
 const AuthenticateContainer = React.lazy(() => import('../auth/authenticate/container'));
 const ChangePasswordContainer = React.lazy(() => import('../auth/change-password/container'));
 const Fortune = React.lazy(() => import('../../fortune/index'));
+const GMA2023 = React.lazy(() => import('../gma/container'));
 
 export const commonRouters = [
     {element: Home, path: '/*', exact: true},
     {element: Menu, path: '/menu', exact: true},
     {element: About, path: '/about', exact: true},
     {element: Music, path: '/music/*', exact: true},
+    {element: GMA2023, path: '/gma/*', exact: true},
 ];
 
 export const unauthorizedUserRouters = [

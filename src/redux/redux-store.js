@@ -5,6 +5,7 @@ import menuReducer from './menu-reducer';
 import thunkMiddleware from 'redux-thunk';
 import appReducer from './app-reducer';
 import musicReducer from './music-reducer';
+import gmaReducer from './gma-reducer';
 
 const reducers = combineReducers({
 	authenticationData: checkAuthenticationReducer,
@@ -12,6 +13,7 @@ const reducers = combineReducers({
 	appData: appReducer,
 	form: formReducer,
 	music: musicReducer,
+	gma: gmaReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

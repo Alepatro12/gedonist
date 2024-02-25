@@ -1,0 +1,545 @@
+@import './../../design-system';
+@import './../../style/mixins.scss';
+
+%button-cross {
+	&::before, &::after {
+		content: '';
+		position: absolute;
+		top: 10px;
+		display: block;
+		width: 20px;
+		height: 2px;
+		background: $black;
+	}
+}
+
+.block-information {
+	display: flex;
+	justify-content: center;
+
+	&__block {
+		display: flex;
+		width: 850px;
+		height: 600px;
+		box-shadow: 0 0 50px rgba($black, .3);
+	
+		@include mq('tablet') {
+			flex-direction: column;
+			height: auto;
+			width: 100%;
+			min-width: 250px;
+			max-width: 500px;
+		}
+	
+		@include mq('phone') {
+			max-width: 330px;
+		}
+	}
+
+	&__block-link {
+		position: relative;
+		height: 30px;
+		width: 30px;
+		margin-left: 10px;
+	}
+
+	&__block-links {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	&__button {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 15px;
+		font-family: $font-family-serif;
+		font-size: $font-size-xl;
+		color: $gray-600;
+		text-decoration: underline;
+		text-decoration-color: $gray-400;
+		cursor: pointer;
+
+		&--close-one {
+			margin-top: 0;
+
+			@include mq('tablet') {
+				display: none;
+			}
+		}
+
+		&--close-two {
+			display: none;
+			margin-top: 0;
+			margin-bottom: 10px;
+
+			@include mq('tablet') {
+				display: flex;
+			}
+		}
+	}
+
+	&__button-link {
+		color: $gray-600;
+		text-decoration-color: $gray-400;
+
+		&:hover {
+			color: $gray-600;
+			text-decoration-color: $gray-400;
+		}
+	}
+
+	&__content {
+		position: relative;
+		height: 100%;
+		padding: 14px;
+		text-align: center;
+		font-family: $font-family-serif;
+		font-size: $font-size-xl;
+
+		@include mq('phone') {
+			padding: 10px;
+		}
+	}
+
+	&__img-country {
+		position: relative;
+		bottom: 5px;
+		height: 26px;
+		width: 30px;
+		margin-left: 5px;
+	}
+
+	&__line {
+		margin-bottom: 5px;
+	}
+
+	&__link {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+	}
+
+	&__margin {
+		margin-left: 10px;
+	}
+
+	&__page {
+		width: 50%;
+		background-color: $gray-100;
+		background-image: linear-gradient(90deg, $gray-200 0%, rgba($gray-100, 0) 18%);
+		
+		&:nth-of-type(1) {
+			background-image: linear-gradient(-90deg, $gray-200 0%, rgba($gray-100, 0) 18%);
+		}
+
+		@include mq('tablet') {
+			width: 100%;
+			min-width: 250px;
+			max-width: 500px;
+			justify-content: center;
+			background-image: linear-gradient(-90deg, $gray-200 0%, rgba($gray-100, 0) 18%);
+
+			&--1 {
+				display: flex;
+				margin-bottom: -10px;
+				padding-bottom: 10px;
+			}
+		}
+
+		@include mq('phone') {
+			max-width: 330px;
+		}
+	}
+
+	&__parametr {
+		width: 100px;
+		text-transform: uppercase;
+		font-size: $font-size-m;
+	}
+
+	&__row {
+		display: flex;
+		margin-bottom: 15px;
+		padding-bottom: 3px;
+		text-align: left;
+		border-bottom: 1px solid;
+
+		&--border-bottom {
+			border-bottom: 0;
+		}
+	}
+
+	&__title {
+		margin-bottom: 20px;
+		font-size: $font-size-xl;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+}
+
+.check {
+	display: block;
+	margin-bottom: 10px;
+
+	&__input {
+		float: left;
+		width: 1.25em;
+		height: 1.25em;
+		margin-right: 10px;
+		border-radius: 5px;
+		cursor: pointer;
+
+		&:hover {
+			background-color: $gray-400;
+		}
+	}
+
+	&__label {
+		cursor: pointer;
+	}
+}
+
+.collection-header {
+	display: flex;
+    justify-content: space-between;
+	margin-bottom: 25px;
+	padding: 0 14px;
+    font-size: $h1-font-size;
+	color: $white;
+
+	&__change {
+		font-size: $h2-font-size;
+		text-decoration: underline;
+	}
+
+	&__delete {
+		cursor: pointer;
+
+		&:hover {
+			color: $gray-400;
+		}
+	}
+
+	&__link {
+		padding-right: 14px;
+		color: $white;
+
+		&:hover {
+			color: $gray-400;
+		}
+	}
+}
+
+.item {
+	height: 225px;
+	width: 175px;
+	margin-right: 30px;
+	margin-bottom: 100px;
+    padding-right: 14px;
+    padding-left: 14px;
+
+	@include mq('tablet') {
+		height: 200px;
+		width: 150px;
+		margin-right: 20px;
+	}
+
+	@include mq('phone') {
+		margin-right: 10px;
+	}
+
+	&__block {
+		position: absolute;
+	}
+
+	&__image {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+
+		&--height {
+			height: auto !important;
+		}
+	}
+
+	&__image-block {
+		position: relative;
+		height: 225px;
+		width: 175px;
+		overflow: hidden;
+
+		&--empty {
+			background-color: $gray-400;
+		}
+
+		@include mq('tablet') {
+			height: 200px;
+			width: 150px;
+		}
+	}
+
+	&__link {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		z-index: 1;
+	}
+
+	&__shadow {
+		box-shadow: 3px 3px 3px $gray-500;
+
+		&:hover {
+			z-index: 5;
+		}
+	}
+
+	&__title {
+		position: absolute;
+		width: 100%;
+		padding: 0 10px 5px;
+		text-align: center;
+		font: 400 16px/1 'Lobster', cursive;
+		color: $gray-400;
+		background-color: $gray-100;
+		border: 10px solid $gray-100;
+
+		&:hover {
+			z-index: 5;
+		}
+	}
+
+	&:hover {
+		transform: scale(1.1);
+		z-index: 5;
+	}
+}
+
+.item-list {
+	display: flex;
+	position: relative;
+	flex-wrap: wrap;
+
+	&--center {
+		justify-content: center;
+
+		@include mq('phone') {
+			justify-content: unset;
+		}
+	}
+}
+
+.modal {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	text-align: center;
+	z-index: 7;
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	&::after {
+		content: '';
+		display: inline-block;
+		height: 100%;
+		vertical-align: middle;
+	}
+
+	@include mq('phone') {
+		&::after {
+			display: none;
+		}
+	}
+
+	&__window {
+		position: relative;
+		display: inline-block;
+		border-radius: 6px;
+		background-color: $gray-200;
+		text-align: left;
+		vertical-align: middle;
+		z-index: 8;
+		transform: translateZ(0);
+
+		@include mq('phone') {
+			display: block;
+			top: 0;
+			left: 0;
+			width: 100% !important;
+			max-width: 100% !important;
+			min-height: 100vh !important;
+			border-radius: 0;
+		}
+	}
+
+	&__mask {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: $gray-600;
+		opacity: .6;
+		overflow: hidden;
+		z-index: 7;
+		user-select: none;
+	}
+}
+
+.modal-collections {
+	width: 275px;
+	background-color: $gray-100;
+
+	&__header {
+		padding: 20px 50px 20px 20px;
+		border-radius: 6px 6px 0 0;
+		background-color: $gray-100;
+	}
+
+	&__footer {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		padding: 20px;
+		border-radius: 0 0 6px 6px;
+		cursor: pointer;
+	}
+
+	&__content {
+		padding: 15px 20px;
+	}
+
+	&__title {
+		margin: 0;
+		font-size: $h4-font-size;
+		line-height: $line-height-s;
+	}
+
+	&__close {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		width: 24px;
+		height: 24px;
+		border: 0;
+		outline: 0;
+		opacity: .4;
+		cursor: pointer;
+
+		&:hover {
+			opacity: .8;
+		}
+	
+		@extend %button-cross;
+
+		&::before {
+			transform: rotate(45deg);
+		}
+
+		&::after {
+			transform: rotate(-45deg);
+		}
+	}
+
+	&__new-collection-cross {
+		position: relative;
+		width: 20px;
+		margin-right: 10px;
+	}
+
+	&__new-collection {
+		border: 0;
+		outline: 0;
+		opacity: .4;
+		cursor: pointer;
+		transition: opacity ease .5s;
+	
+		@extend %button-cross;
+
+		&::before {
+			transform: rotate(90deg);
+		}
+	}
+
+	&__new-collection-link {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		z-index: 1;
+	}
+}
+
+.poster {
+	max-width: 275px;
+	max-height: 400px;
+	margin-top: 20px;
+	margin-left: 70px;
+
+	@include mq('tablet') {
+		height: 100%;
+		width: 100%;
+		max-height: 100%;
+		margin-top: 10px;
+		margin-left: 0;
+
+		&__image-block {
+			position: relative;
+			height: 300px;
+			max-width: 275px;
+			overflow: hidden;
+		}
+	}
+
+	&__image {
+		border: 10px solid $gray-100;
+
+		@include mq('tablet') {
+			position: absolute;
+			height: 300px !important;
+			width: 100%;
+			max-width: 275px !important;
+			object-fit: cover;
+
+			&--height {
+				height: auto !important;
+			}
+		}
+	}
+
+	&__original-title {
+		margin-top: -10px;
+		padding: 0 10px 5px;
+		text-align: center;
+		font: 400 18px/1 'Lobster', cursive;
+		color: $gray-400;
+		background-color: $gray-100;
+		border: 10px solid $gray-100;
+
+		@include mq('tablet') {
+			&--margin {
+				margin-top: 0;
+			}
+		}
+	}
+
+	&__shadow {
+		box-shadow: 3px 3px 3px $gray-400;
+	}
+
+	&__title {
+		margin-top: -10px;
+		padding: 0 10px 5px;
+		text-align: center;
+		font: 400 16px/1 'Lobster', cursive;
+		color: $gray-400;
+		background-color: $gray-100;
+		border: 10px solid $gray-100;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
