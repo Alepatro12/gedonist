@@ -108,17 +108,17 @@ const Collection = React.memo(({
 
 	return <div>
 		{ nominationId ?
-			<div className="collection-header">
+			<div className="gma-collection-header">
 				<span>{nominationName}</span>
-				<div className="collection-header__change">
-					<NavLink to="/gma/2023" className="collection-header__link">Назад</NavLink>
+				<div className="gma-collection-header__change">
+					<NavLink to="/gma/2023" className="gma-collection-header__link">Назад</NavLink>
 				</div>
 			</div>
 		: <></> }
-		<div className="item-list item-list--center">
+		<div className="gma-item-list gma-item-list--center">
 			{blockMainNominations}
 		</div>
-		<div className="item-list">
+		<div className="gma-item-list">
 			{blockNominations}
 		</div>
 	</div>;
@@ -175,18 +175,18 @@ const NominationBlock = React.memo(({
 		imageId = element.imageId;
 	}
 
-	const emptyClass = imageId ? '' : ' item__image-block--empty';
+	const emptyClass = imageId ? '' : ' gma-item__image-block--empty';
 
 	return <>
-		<div className="item" key={id}>
-			<div className="item__block">
+		<div className="gma-item" key={id}>
+			<div className="gma-item__block">
 				{ !nominationId &&
-					<NavLink to={`/gma/2023?nomination=${id}`} className="item__link"></NavLink>
+					<NavLink to={`/gma/2023?nomination=${id}`} className="gma-item__link"></NavLink>
 				}
-				<div className="item__shadow">
-					<div className={`item__image-block${emptyClass}`}>
+				<div className="gma-item__shadow">
+					<div className={`gma-item__image-block${emptyClass}`}>
 						<LazyLoadImage
-							className="item__image"
+							className="gma-item__image"
 							effect="blur"
 							src={`./../../img/gma/${nominationTypeName}/${imageId ? imageId : 'default'}.jpg`}
 							alt={name}
@@ -195,7 +195,7 @@ const NominationBlock = React.memo(({
 							height="100%"
 						/>
 					</div>
-					<div className="item__title"><span>{name}</span></div>
+					<div className="gma-item__title"><span>{name}</span></div>
 				</div>
 			</div>
 		</div>

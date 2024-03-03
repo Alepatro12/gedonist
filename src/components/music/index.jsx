@@ -717,9 +717,9 @@ const LocalitySection = React.memo(({
 	country = '',
 	countryId = 0
 }) => {
-	const regionName = region && region !== locality ? `, ${region}` : '';
-	const countryName = country && country !== regionName ? `, ${country}` : '';
-	const address = `${locality}${regionName}${countryName}`;
+	const regionName = region && region !== locality ? region : '';
+	const countryName = country && country !== regionName ? country : '';
+	const address = `${locality}${regionName ? ', ' : ''}${regionName}${countryName ? ', ' : ''}${countryName}`;
 
 	return locality ?
 		<GeoSectionBlock title="Место рождения" address={address} countryName={countryName} countryId={countryId}/>
