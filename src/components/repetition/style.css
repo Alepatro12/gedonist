@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,400,600|Tulpen+One&display=swap");
+.repetition {
+  display: flex;
+  justify-content: center;
+  font-family: "Cormorant Garamond", serif;
+}
+.repetition__block {
+  display: flex;
+  width: 850px;
+  min-height: 600px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+}
+@media only screen and (max-width: 991px) {
+  .repetition__block {
+    display: block;
+    min-height: auto;
+    min-width: 250px;
+    max-width: 500px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .repetition__block {
+    max-width: 330px;
+  }
+}
+.repetition__content {
+  position: relative;
+  height: 100%;
+  padding: 15px;
+  font-size: 18px;
+  text-align: center;
+}
+.repetition__front-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.repetition__menu {
+  margin-top: 50px;
+  font-size: 24px;
+}
+@media only screen and (max-width: 991px) {
+  .repetition__menu {
+    margin-top: 0;
+    font-size: 20px;
+  }
+}
+.repetition__menu-block {
+  margin: 10px 0 50px;
+}
+.repetition__menu-page-number {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+}
+.repetition__name {
+  margin: 5px 0 -5px;
+}
+.repetition__number-page {
+  margin: 5px 0 -5px;
+}
+.repetition__page {
+  width: 50%;
+  background-color: #f8f8f8;
+  background-image: linear-gradient(90deg, #dfdfdf 0%, rgba(248, 248, 248, 0) 18%);
+}
+.repetition__page:nth-of-type(1) {
+  background-image: linear-gradient(-90deg, #dfdfdf 0%, rgba(248, 248, 248, 0) 18%);
+}
+@media only screen and (max-width: 991px) {
+  .repetition__page {
+    width: 100%;
+    background-image: linear-gradient(-90deg, #dfdfdf 0%, rgba(248, 248, 248, 0) 18%);
+  }
+}
+.repetition__row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  border-bottom: 1px dotted #000;
+}
+.repetition__title {
+  margin-bottom: 100px;
+  font-size: 30px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+@media only screen and (max-width: 991px) {
+  .repetition__title {
+    margin: 35px 0 25px;
+    font-size: 24px;
+  }
+}/*# sourceMappingURL=style.css.map */

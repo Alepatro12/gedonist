@@ -1,0 +1,81 @@
+import React from 'react';
+import Repetition from './index';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import Loader from './../../common/loader/index';
+import { getUserId } from './../../../redux/selectors';
+import {
+	getName,
+	getCounter,
+	getIsChecking,
+	getPageNumbers,
+	getDisciplineId,
+	getCurrentQuestion,
+} from './../../../redux/repetition-selectors';
+import {
+	checkAnswer,
+	skipQuestion,
+	findDiscipline,
+	moveNextQuestion,
+} from './../../../redux/repetition-reducer';
+
+/**
+ * Get the discipline repetition page
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {bool} isFetching Loader show flag
+ * @param {Object} props
+ * @returns {HTMLElement}
+ */
+const RepetitionDisciplineClassContainer = React.memo(({
+	isFetching,
+	...props
+}) => {
+	return <>
+		<Loader isFetching={isFetching}/>
+		<Repetition {...props}/>
+	</>;
+});
+
+/**
+ * Get parameters for the discipline repetition page
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ * 
+ * @param {Object} state
+ * @returns {Object}
+ */
+const mapStateToProps = (state) => {
+	return {
+		page: 'repetition-discipline',
+		name: getName(state),
+		userId: getUserId(state),
+		counter: getCounter(state),
+		isChecking: getIsChecking(state),
+		pageNumbers: getPageNumbers(state),
+		disciplineId: getDisciplineId(state),
+		currentQuestion: getCurrentQuestion(state),
+	};
+}
+
+/**
+ * Pass parameters to the discipline repetition page
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ * 
+ * @returns {HTMLElement}
+ */
+const RepetitionDisciplineContainer = compose(
+	connect(mapStateToProps, {
+		checkAnswer,
+		skipQuestion,
+		findDiscipline,
+		moveNextQuestion,
+	})
+) (RepetitionDisciplineClassContainer);
+
+export default RepetitionDisciplineContainer;
