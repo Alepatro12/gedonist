@@ -41,7 +41,7 @@
 
 		&--close-one {
 			display: flex;
-			justify-content: end;
+			justify-content: flex-end;
 			margin-top: 0;
 
 			@include mq('tablet') {
@@ -157,7 +157,7 @@
 		@include mq('tablet') {
 			position: relative;
 			display: flex;
-			justify-content: end;
+			justify-content: flex-end;
 		}
 	}
 

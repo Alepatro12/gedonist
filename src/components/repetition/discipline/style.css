@@ -40,7 +40,7 @@
 }
 .repetition-discipline__button--close-one {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin-top: 0;
 }
 @media only screen and (max-width: 991px) {
@@ -151,7 +151,7 @@
   .repetition-discipline__page-number-second {
     position: relative;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
   }
 }
 @media only screen and (max-width: 991px) {
