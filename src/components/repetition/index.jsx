@@ -77,7 +77,7 @@ const DisciplineBlock = React.memo(({
 	pageNumber = 0,
 }) => {
 	return <>
-		<div className="repetition__row" key={pageNumber}>
+		<div className="repetition__row">
 			<div className="repetition__name">
 				<NavLink to={`/repetition/${link}`}>{name}</NavLink>
 			</div>

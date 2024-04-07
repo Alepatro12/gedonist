@@ -162,6 +162,8 @@
 	}
 
 	&__question {
+		width: 100%;
+
 		@include mq('tablet') {
 			&--final {
 				min-height: 80px;

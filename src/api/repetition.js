@@ -17,6 +17,6 @@ const instance = axios.create({
  */
 export const getMenuAPI = (userId = 0) => {
 	return instance
-		.post('repetition.php', { userId })
+		.post('repetition-controller.php', { userId })
 		.then(response => response.data)
 };

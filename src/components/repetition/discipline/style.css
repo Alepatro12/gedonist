@@ -154,6 +154,9 @@
     justify-content: flex-end;
   }
 }
+.repetition-discipline__question {
+  width: 100%;
+}
 @media only screen and (max-width: 991px) {
   .repetition-discipline__question--final {
     min-height: 80px;
