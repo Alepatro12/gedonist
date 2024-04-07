@@ -15,15 +15,15 @@ import { NavLink, useLocation } from 'react-router-dom';
  * @returns {HTMLElement}
  */
 const RepetitionDiscipline = React.memo(({
-	userId,
-	disciplineId,
-	findDiscipline,
+	userId = 0,
+	disciplineId = 0,
+	findDiscipline = () => {},
 	...props
 }) => {
 	const location = useLocation();
-	const disciplineName = location.pathname.replace(/\/repetition\//, '');
 
 	useLayoutEffect(() => {
+		const disciplineName = location.pathname.replace(/\/repetition\//, '');
 		let disciplineId = 0;
 
 		switch(disciplineName) {
@@ -34,7 +34,7 @@ const RepetitionDiscipline = React.memo(({
 				disciplineId = 2;
 				break;
 			default:
-				disciplineId = 1;
+				disciplineId = 0;
 				break;
 		}
 
@@ -95,7 +95,7 @@ const RepetitionDisciplineBlock = React.memo(({
 						/>
 						: <></>
 					}
-					<div className="repetition-discipline__page-number-first">{ pageNumbers.first }</div>
+					<div className="repetition-discipline__page-number-first">{ pageNumbers?.first || 2 }</div>
 				</div>
 				<div className="repetition-discipline__page repetition-discipline__page--second">
 					<div className="repetition-discipline__content">
@@ -103,7 +103,7 @@ const RepetitionDisciplineBlock = React.memo(({
 							<NavLink to="/repetition" className="repetition-discipline__button-link">Меню</NavLink>
 						</div>
 						<div className={`repetition-discipline__answer ${ isChecking ? '' : 'hidden' }`}>{ currentQuestion.answer }</div>
-						<div className="repetition-discipline__page-number-second">{ isMobile() ? pageNumbers.first : pageNumbers.second }</div>
+						<div className="repetition-discipline__page-number-second">{ isMobile() ? pageNumbers?.first || 2 : pageNumbers?.second || 3 }</div>
 					</div>
 				</div>
 			</div>
@@ -145,11 +145,11 @@ const ButtonBlock = React.memo(({
 			<div
 				className="repetition-discipline__button"
 				onClick={ isChecking ? repeatQuestion : skipQuestion }
-			>{isChecking ? 'Повторить' : 'Пропустить'}</div>
+			>{ isChecking ? 'Повторить' : 'Пропустить' }</div>
 			<div
 				className="repetition-discipline__button"
 				onClick={ isChecking ? getNextQuestion : checkAnswer }
-			>{isChecking ? 'Далее' : 'Проверить'}</div>
+			>{ isChecking ? 'Далее' : 'Проверить' }</div>
 		</div>
 	</>;
 });

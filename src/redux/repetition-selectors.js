@@ -16,7 +16,7 @@ export const getMenu = (state) => state.repetition.menu;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {Array}
+ * @returns {number}
  */
 export const getDisciplineId = (state) => state.repetition.disciplineId;
 
@@ -27,7 +27,7 @@ export const getDisciplineId = (state) => state.repetition.disciplineId;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {Array}
+ * @returns {String}
  */
 export const getName = (state) => state.repetition.name;
 
@@ -38,7 +38,7 @@ export const getName = (state) => state.repetition.name;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {Array}
+ * @returns {Object}
  */
 export const getPageNumbers = (state) => state.repetition.pageNumbers;
 
@@ -49,7 +49,7 @@ export const getPageNumbers = (state) => state.repetition.pageNumbers;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {Array}
+ * @returns {Object}
  */
 export const getCurrentQuestion = (state) => state.repetition.currentQuestion;
 
@@ -60,7 +60,7 @@ export const getCurrentQuestion = (state) => state.repetition.currentQuestion;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {Array}
+ * @returns {bool}
  */
 export const getIsChecking = (state) => state.repetition.isChecking;
 
@@ -71,7 +71,7 @@ export const getIsChecking = (state) => state.repetition.isChecking;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {Array}
+ * @returns {number}
  */
 export const getCounter = (state) => state.repetition.counter;
 
@@ -82,6 +82,6 @@ export const getCounter = (state) => state.repetition.counter;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {boolean}
+ * @returns {bool}
  */
 export const getIsFetching = (state) => state.repetition.isFetching;

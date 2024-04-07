@@ -30,7 +30,7 @@ import {
  * @returns {HTMLElement}
  */
 const RepetitionDisciplineClassContainer = React.memo(({
-	isFetching,
+	isFetching = false,
 	...props
 }) => {
 	return <>
@@ -48,7 +48,7 @@ const RepetitionDisciplineClassContainer = React.memo(({
  * @param {Object} state
  * @returns {Object}
  */
-const mapStateToProps = (state) => {
+const mapStateToProps = (state = {}) => {
 	return {
 		page: 'repetition-discipline',
 		name: getName(state),

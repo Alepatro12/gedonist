@@ -216,7 +216,7 @@ const setNextQuestion = (isRepeat = false, error = {}) => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {boolean} isFetching
+ * @param {bool} isFetching
  * @returns {Object}
  */
 const setIsFetching = (isFetching = false) => {
@@ -232,7 +232,7 @@ const setIsFetching = (isFetching = false) => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {boolean} isDisabled
+ * @param {bool} isDisabled
  * @returns {Object}
  */
 const setIsDisabled = (isDisabled = false) => {
@@ -248,7 +248,7 @@ const setIsDisabled = (isDisabled = false) => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {boolean} isToggle
+ * @param {bool} isToggle
  * @returns {Function}
  */
 const setToggle = (isToggle = false) => {
@@ -358,11 +358,8 @@ export const moveNextQuestion = ({
 		dispatch(setToggle(true));
 
 		const response = isRepeat || priority
-			? await getChangeQuestionAPI({
-				isRepeat,
-				priority,
-				...props
-			}) : {};
+			? await getChangeQuestionAPI({ isRepeat, priority, ...props })
+			: {};
 
 		dispatch(setNextQuestion(isRepeat, response));
 		dispatch(setToggle(false));

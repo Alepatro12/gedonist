@@ -32,7 +32,7 @@ export function isMobile(userAgent = navigator.userAgent) {
 	}
 
 	for (const deviceName in MOBILE) {
-		if (userAgent.toLowerCase().indexOf(MOBILE[deviceName]) > 0) {
+		if (userAgent.toLowerCase().includes(MOBILE[deviceName])) {
 			isMobile = true;
 		}
 	}

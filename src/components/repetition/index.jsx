@@ -50,7 +50,7 @@ const RepetitionBlock = React.memo(({ menu = [] }) => {
 					<div className="repetition__content">
 						<div className="repetition__menu">Меню</div>
 						<div className="repetition__menu-block">
-							{ menu.map(paragraph => <DisciplineBlock key={paragraph.id} {...paragraph}/>) }
+							{ menu?.map(paragraph => <DisciplineBlock key={paragraph.id} {...paragraph}/>) }
 						</div>
 						<div className="repetition__menu-page-number">1</div>
 					</div>
@@ -74,7 +74,7 @@ const RepetitionBlock = React.memo(({ menu = [] }) => {
 const DisciplineBlock = React.memo(({
 	name = '',
 	link = '',
-	pageNumber = '',
+	pageNumber = 0,
 }) => {
 	return <>
 		<div className="repetition__row" key={pageNumber}>

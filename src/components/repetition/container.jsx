@@ -18,7 +18,7 @@ import { getMenu, getIsFetching } from './../../redux/repetition-selectors';
  * @returns {HTMLElement}
  */
 const RepetitionClassContainer = React.memo(({
-	isFetching,
+	isFetching = false,
 	...props
 }) => {
 	return <>
@@ -36,7 +36,7 @@ const RepetitionClassContainer = React.memo(({
  * @param {Object} state
  * @returns {Object}
  */
-const mapStateToProps = (state) => {
+const mapStateToProps = (state = {}) => {
 	return {
 		page: 'repetition',
 		menu: getMenu(state),

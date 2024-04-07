@@ -104,15 +104,13 @@
   width: 50%;
   padding: 15px;
   background-color: #f8f8f8;
-  background-image: linear-gradient(-90deg, #dfdfdf 0%, rgba(248, 248, 248, 0) 18%);
-}
-.repetition-discipline__page--second {
   background-image: linear-gradient(90deg, #dfdfdf 0%, rgba(248, 248, 248, 0) 18%);
 }
 .repetition-discipline__page--first {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: linear-gradient(-90deg, #dfdfdf 0%, rgba(248, 248, 248, 0) 18%);
 }
 @media only screen and (max-width: 991px) {
   .repetition-discipline__page {

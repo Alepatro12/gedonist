@@ -109,16 +109,13 @@
 		width: 50%;
 		padding: 15px;
 		background-color: $gray-100;
-		background-image: linear-gradient(-90deg, $gray-200 0%, rgba($gray-100, 0) 18%);
-		
-		&--second {
-			background-image: linear-gradient(90deg, $gray-200 0%, rgba($gray-100, 0) 18%);
-		}
+		background-image: linear-gradient(90deg, $gray-200 0%, rgba($gray-100, 0) 18%);
 
 		&--first {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			background-image: linear-gradient(-90deg, $gray-200 0%, rgba($gray-100, 0) 18%);
 		}
 
 		@include mq('tablet') {
