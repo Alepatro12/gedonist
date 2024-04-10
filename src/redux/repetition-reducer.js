@@ -91,6 +91,7 @@ const repetitionReducer = (state = initialState, action = {}) => {
 			return {
 				...state,
 				counter: 0,
+				isChecking: false,
 				name: action.name,
 				error: { ...action.error },
 				disciplineId: action.disciplineId,
