@@ -18,6 +18,10 @@ const TOGGLE_IS_DISABLED = 'menu/TOGGLE_IS_DISABLED';
  */
 const GET_MENU = 'menu/GET_MENU';
 
+/**
+ * @const
+ * @type {Object} Initial state
+ */
 const initialState = {
 	menu: [],
 	isFetching: false,
@@ -28,12 +32,23 @@ const initialState = {
 	},
 };
 
+/**
+ * Reducer the Sidebar
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} state Old state
+ * @param {Object} action New date
+ * @returns {Object} New state
+ */
 const menuReducer = (state = initialState, action = {}) => {
 	switch (action.type) {
 		case GET_MENU: {
 			return {
 				...state,
 				menu: [ ...action.menu ],
+				error: { ...action.error },
 			};
 		}
 		case TOGGLE_IS_FETCHING: {
@@ -116,7 +131,7 @@ const setToggle = (isToggle = false) => {
 	return (dispatch) => {
 		dispatch(setIsFetching(isToggle));
 		dispatch(setIsDisabled(isToggle));
-	}
+	};
 };
 
 /**
@@ -138,7 +153,7 @@ export const findMenu = (userId = 0, userType = 0, isAdminPanel = false) => {
 
 		dispatch(setMenu(response));
 		dispatch(setToggle(false));
-	}
+	};
 };
 
 export default menuReducer;

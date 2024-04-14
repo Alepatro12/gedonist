@@ -3,7 +3,7 @@ import { SERVER_BASE_URL } from './constants';
 
 const instance = axios.create({
 	baseURL: `${SERVER_BASE_URL}menu/`,
-	headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+	headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 });
 
 /**
@@ -20,5 +20,5 @@ const instance = axios.create({
 export const getMenuAPI = (userId = 0, userType = 0, isAdminPanel = false) => {
 	return instance
 		.post('menu-controller.php', { userId, userType, isAdminPanel })
-		.then(response => response.data)
+		.then(response => response.data);
 };
