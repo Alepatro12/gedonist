@@ -16,25 +16,34 @@ const ChangePasswordContainer = React.lazy(() => import('../auth/change-password
 const MusicChangeCollection = React.lazy(() => import('../music/change-collection/container'));
 
 export const commonRouters = [
-    {element: Home, path: '/*', exact: true},
-    {element: Menu, path: '/menu', exact: true},
-    {element: About, path: '/about', exact: true},
-    {element: Music, path: '/music/*', exact: true},
-    {element: GMA2023, path: '/gma/*', exact: true},
+	{element: Home, path: '/*', exact: true},
+	{element: Menu, path: '/menu', exact: true},
+	{element: About, path: '/about', exact: true},
+	{element: Music, path: '/music/*', exact: true},
+	{element: GMA2023, path: '/gma/*', exact: true},
 ];
 
 export const unauthorizedUserRouters = [
-    {element: LoginContainer, path: '/auth/login/*', exact: true},
-    {element: NewPasswordContainer, path: '/auth/new-password/*', exact: true},
-    {element: AuthenticateContainer, path: '/auth/authenticate/*', exact: true},
-    {element: ChangePasswordContainer, path: '/auth/change-password/*', exact: true},
+	{element: LoginContainer, path: '/auth/login/*', exact: true},
+	{element: NewPasswordContainer, path: '/auth/new-password/*', exact: true},
+	{element: AuthenticateContainer, path: '/auth/authenticate/*', exact: true},
+	{element: ChangePasswordContainer, path: '/auth/change-password/*', exact: true},
 ];
 
 export const authorizedUserRouters = [
-    {element: Fortune, path: '/fortune', exact: true},
-    {element: Repetition, path: '/repetition', exact: true},
-    {element: MusicNewCollection, path: '/music/new-collection', exact: true},
-    {element: RepetitionDiscipline, path: '/repetition/javascript', exact: true},
-    {element: MusicChangeCollection, path: '/music/change-collection', exact: true},
-    {element: RepetitionDiscipline, path: '/repetition/english-grammar', exact: true},
+	{element: Fortune, path: '/fortune', exact: true},
+	{element: Repetition, path: '/repetition', exact: true},
+	{element: MusicNewCollection, path: '/music/new-collection', exact: true},
+	{element: RepetitionDiscipline, path: '/repetition/javascript', exact: true},
+	{element: MusicChangeCollection, path: '/music/change-collection', exact: true},
+	{element: RepetitionDiscipline, path: '/repetition/english-grammar', exact: true},
+];
+
+/**
+ * @const
+ * @type {Array} Admin Panel Pages
+ */
+export const moderatorRouters = [
+	{element: Home, path: '/admin-panel', exact: true},
+	{element: Menu, path: '/admin-panel/menu', exact: true},
 ];

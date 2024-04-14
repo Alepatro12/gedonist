@@ -19,6 +19,11 @@
   margin-bottom: 50px;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
 }
+@media only screen and (max-width: 767px) {
+  .menu .glitch-btn {
+    font-size: 24px;
+  }
+}
 .menu .glitch-btn {
   transform: translate(10%);
   transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
