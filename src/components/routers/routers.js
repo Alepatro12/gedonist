@@ -6,6 +6,7 @@ const Menu = React.lazy(() => import('../menu/container'));
 const Music = React.lazy(() => import('../music/container'));
 const GMA2023 = React.lazy(() => import('../gma/container'));
 const Fortune = React.lazy(() => import('../../fortune/index'));
+const AdminPanel = React.lazy(() => import('../admin-panel/index'));
 const Repetition = React.lazy(() => import('../repetition/container'));
 const LoginContainer = React.lazy(() => import('../auth/login/container'));
 const NewPasswordContainer = React.lazy(() => import('../auth/new-password/container'));
@@ -44,6 +45,6 @@ export const authorizedUserRouters = [
  * @type {Array} Admin Panel Pages
  */
 export const moderatorRouters = [
-	{element: Home, path: '/admin-panel', exact: true},
 	{element: Menu, path: '/admin-panel/menu', exact: true},
+	{element: AdminPanel, path: '/admin-panel', exact: true},
 ];
