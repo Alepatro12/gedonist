@@ -21,7 +21,10 @@ const App = ({initialized, initializedApp}) => {
 		.split('/')[0];
 
 	useEffect(() => {
-		initializedApp(location.search);
+		if (!initialized) {
+			initializedApp(location.search);
+		}
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [initialized]);
 

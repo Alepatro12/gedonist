@@ -178,6 +178,15 @@ export const getNewPasswordError = (state) => {
  * @param {Object} state
  * @returns {Array}
  */
-export const getMenu = (state) => {
-	return state.menu;
-}
+export const getMenu = (state) => state.menu.menu;
+
+/**
+ * Get user type
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} state
+ * @returns {number}
+ */
+export const getUserType = (state) => state.authenticationData.userType;

@@ -19,6 +19,7 @@ const NEW_PASSWORD = 'checkAuthentication/NEW_PASSWORD';
 
 let initialState = {
 	userId: 0,
+	userType: 0,
 	userName: '',
 	emailStatus: 0,
 	isFetching: false,
@@ -49,6 +50,7 @@ const checkAuthenticationReducer = (state = initialState, action) => {
 			return {
 				...state,
 				userId: action.userId,
+				userType: action.userType,
 				userName: action.userName,
 				emailStatus: action.emailStatus,
 				isAuthenticate: action.isAuthenticate,
@@ -67,6 +69,7 @@ const checkAuthenticationReducer = (state = initialState, action) => {
 			return {
 				...state,
 				userId: action.userId,
+				userType: action.userType,
 				userName: action.userName,
 				emailStatus: action.emailStatus,
 				isAuthenticate: action.isAuthenticate,
@@ -80,6 +83,7 @@ const checkAuthenticationReducer = (state = initialState, action) => {
 			return {
 				...state,
 				userId: action.userId,
+				userType: action.userType,
 				userName: action.userName,
 				emailStatus: action.emailStatus,
 				isAuthenticate: action.isAuthenticate,
@@ -103,6 +107,7 @@ const checkAuthenticationReducer = (state = initialState, action) => {
 			return {
 				...state,
 				userId: action.userId,
+				userType: action.userType,
 				userName: action.userName,
 				emailStatus: action.emailStatus,
 				isAuthenticate: action.isAuthenticate,
@@ -123,9 +128,17 @@ const checkAuthenticationReducer = (state = initialState, action) => {
 	}
 };
 
-export const checkUser = ({ userName = '', userId = 0, emailStatus = 0, errorCode = 0, errorText = '' }) => {
+export const checkUser = ({
+	userId = 0,
+	userType = 0,
+	userName = '',
+	errorCode = 0,
+	errorText = '',
+	emailStatus = 0,
+}) => {
 	return {
 		userId,
+		userType,
 		userName,
 		errorCode,
 		errorText,
@@ -156,9 +169,17 @@ const setIsChangePassword = (isChangePassword = false) => {
 	}
 };
 
-const attemptLogin = ({ userName = '', userId = 0, emailStatus = 0, errorCode = 0, errorText = '' }) => {
+const attemptLogin = ({
+	userId = 0,
+	userType = 0,
+	userName = '',
+	errorCode = 0,
+	errorText = '',
+	emailStatus = 0,
+}) => {
 	return {
 		userId,
+		userType,
 		userName,
 		errorCode,
 		errorText,
@@ -168,9 +189,17 @@ const attemptLogin = ({ userName = '', userId = 0, emailStatus = 0, errorCode = 
 	}
 };
 
-const attemptRegistration = ({ userName = '', userId = 0, emailStatus = 0, errorCode = 0, errorText = '' }) => {
+const attemptRegistration = ({
+	userId = 0,
+	userType = 0,
+	userName = '',
+	errorCode = 0,
+	errorText = '',
+	emailStatus = 0,
+}) => {
 	return {
 		userId,
+		userType,
 		userName,
 		errorCode,
 		errorText,
@@ -189,9 +218,18 @@ const attemptChangePassword = ({ isChangePassword = false, errorCode = 0, errorT
 	}
 };
 
-const attemptNewPassword = ({ isChangePassword = false, userName = '', userId = 0, emailStatus = 0, errorCode = 0, errorText = '' }) => {
+const attemptNewPassword = ({
+	userId = 0,
+	userType = 0,
+	userName = '',
+	errorCode = 0,
+	errorText = '',
+	emailStatus = 0,
+	isChangePassword = false,
+}) => {
 	return {
 		userId,
+		userType,
 		userName,
 		errorCode,
 		errorText,

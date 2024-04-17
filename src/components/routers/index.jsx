@@ -1,15 +1,35 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { getIsAuthenticate } from './../../redux/selectors';
+import { getIsAuthenticate, getUserType } from './../../redux/selectors';
 import { connect } from 'react-redux';
 import {
 	commonRouters,
+	moderatorRouters,
 	authorizedUserRouters,
-	unauthorizedUserRouters
+	unauthorizedUserRouters,
 } from './routers';
+import {
+	USER_TYPE_DEFAULT,
+	USER_TYPE_MODERATOR,
+	USER_TYPE_ADMINISTRATOR,
+} from '../../utils/constants';
 
-const AppRouter = React.memo(({ isAuthenticate }) => {
-	const addRouters = isAuthenticate ? authorizedUserRouters : unauthorizedUserRouters;
+const AppRouter = React.memo(({ isAuthenticate = false, userType = 0 }) => {
+	let addRouters = [];
+
+	switch(userType) {
+		case USER_TYPE_MODERATOR:
+		case USER_TYPE_ADMINISTRATOR:
+			addRouters = authorizedUserRouters.concat(moderatorRouters);
+			break;
+		case USER_TYPE_DEFAULT:
+			addRouters = authorizedUserRouters;
+			break;
+		default:
+			addRouters = unauthorizedUserRouters;
+			break;
+	}
+
 	const routers = commonRouters.concat(addRouters);
 	const authRedirect = isAuthenticate ?
 		<Route path="/auth/*" element={
@@ -39,6 +59,7 @@ const AppRouter = React.memo(({ isAuthenticate }) => {
 
 const mapStateToProps = (state) => {
 	return {
+		userType: getUserType(state),
 		isAuthenticate: getIsAuthenticate(state),
 	}
 };

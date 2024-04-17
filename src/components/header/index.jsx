@@ -70,9 +70,10 @@ const Login = React.memo(({ attemptIsChangePassword }) => {
 const MenuButton = React.memo(() => {
 	const pathname = useLocation().pathname;
 	const navigate = useNavigate();
+	const menuUrl = pathname.includes('/admin-panel') ? '/admin-panel/menu' : '/menu';
 
 	const initMenu = () => {
-		return pathname === '/menu';
+		return ['/menu', '/admin-panel/menu'].includes(pathname);
 	};
 
 	let [isOpenMenu, setOpenMenu] = useState(initMenu());
@@ -101,7 +102,7 @@ const MenuButton = React.memo(() => {
 	})
 
 	return <>
-		<NavLink to="/menu" title="Открыть меню" className="head__menu js-menu" onClick={ toggleMenu }>
+		<NavLink to={ menuUrl } title="Открыть меню" className="head__menu js-menu" onClick={ toggleMenu }>
 			<span className={`head__menu-icon ${ isOpenMenu ? 'head__menu-icon--active' : '' }`}></span>
 		</NavLink>
 	</>
