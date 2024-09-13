@@ -30,12 +30,6 @@ const GET_DISCIPLINE = 'repetition/GET_DISCIPLINE';
 
 /**
  * @const
- * @type {string} Action type - get discipline ID
- */
-const GET_DISCIPLINE_ID = 'repetition/GET_DISCIPLINE_ID';
-
-/**
- * @const
  * @type {string} Action type - skip question
  */
 const SKIP_QUESTION = 'repetition/SKIP_QUESTION';
@@ -119,12 +113,6 @@ const repetitionReducer = (state = initialState, action = {}) => {
 				counter: action.isRepeat ? state.counter : ++state.counter,
 				currentQuestion: { ...state.questions.pop() },
 				error: { ...action.error },
-			};
-		}
-		case GET_DISCIPLINE_ID: {
-			return {
-				...state,
-				disciplineId: action.disciplineId,
 			};
 		}
 		case TOGGLE_IS_FETCHING: {
@@ -298,22 +286,6 @@ export const findDiscipline = (userId = 0, disciplineId = 0) => {
 		dispatch(setDiscipline(response));
 		dispatch(setToggle(false));
 	}
-};
-
-/**
- * Set discipline ID
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @param {number} disciplineId discipline ID
- * @returns {Object}
- */
-export const setDisciplineId = (disciplineId = 0) => {
-	return {
-		disciplineId,
-		type: GET_DISCIPLINE_ID,
-	};
 };
 
 /**

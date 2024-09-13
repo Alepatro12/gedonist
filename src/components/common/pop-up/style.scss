@@ -1,0 +1,22 @@
+@import './../../../design-system';
+
+.popup {
+	position: absolute;
+	width: 400px;
+	max-height: 280px;
+	margin-top: 10px;
+	padding: 5px 16px;
+	background-color: $white;
+	border: 1px solid $gray-200;
+	border-radius: 5px;
+	box-shadow: 0 10px 29px rgba($gray-600, .22);
+	overflow-y: scroll;
+	z-index: 7;
+
+	&__block {
+		margin-bottom: 10px;
+		font-size: $font-size-m;
+		color: $gray-600;
+		border-bottom: 1px solid $gray-200;
+	}
+}

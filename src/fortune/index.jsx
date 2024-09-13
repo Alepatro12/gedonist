@@ -5,7 +5,7 @@ const Fortune = () => {
 	// надписи и цвета на секторах
 const prizes = [
     {
-      text: "Devil May Cry",
+      text: "OMORI",
       color: "hsl(197 30% 43%)",
     },
     // { 
@@ -13,47 +13,47 @@ const prizes = [
     //   color: "hsl(173 58% 39%)",
     // },
     { 
-      text: "The Legend of Tianding",
+      text: "The Witcher",
       color: "hsl(43 74% 66%)",
     },
     {
-      text: "Frostpunk",
+      text: "NieR Replicant ver.1.22474487139..",
       color: "hsl(27 87% 67%)",
     },
     {
-      text: "The Closing Shift",
+      text: "Vampire: The Masquerade - Bloodlines",
       color: "hsl(12 76% 61%)",
     },
     {
-      text: "DreadOut",
+      text: "Final Fantasy XV",
       color: "hsl(350 60% 52%)",
     },
     {
-      text: "The Coma: Cutting Class",
+      text: "Dragon Age: Origins",
       color: "hsl(270 87% 67%)",
     },
     {
-      text: "Call of the Sea",
+      text: "Stronghold Legends",
       color: "hsl(91 43% 54%)",
     },
     {
-      text: "Detention",
+      text: "Kingdom Come: Deliverance",
       color: "hsl(140 36% 74%)",
     },
 	{
-      text: "Fantasy Wars",
+      text: "Total War: Warhammer II",
       color: "hsl(12 56% 64%)",
   },
 	{
-		text: "Fable: The Lost Chapters",
+		text: "Code Vein",
 		color: "hsl(72 46% 54%)",
 	},
 	{
-		text: "Draugen",
+		text: "King Arthur: The Role-playing Wargame",
 		color: "hsl(220 56% 64%)",
 	},
 	{
-    	text: "American McGee's Alice",
+    	text: "Mass Effect: Andromeda",
     	color: "hsl(300 46% 74%)",
     },
 	// {

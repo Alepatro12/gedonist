@@ -1,0 +1,85 @@
+.btn {
+	display: inline-block;
+	min-height: $btn-height;
+	padding: 0 $btn-padding-x;
+	font-size: $btn-font-size;
+	font-weight: $btn-font-weight;
+	color: $btn-color;
+	text-decoration: none;
+	text-align: center;
+	align-content: center;
+	white-space: nowrap;
+	user-select: none;
+	background-color: $btn-bg;
+	border: none;
+	border-radius: $btn-border-radius;
+	outline: none;
+	cursor: pointer;
+	transition: all 0.3s;
+
+	&:active,
+	&:hover {
+		color: $btn-color;
+		text-decoration: none;
+		background: $btn-bg-active;
+	}
+
+	&[disabled] {
+		opacity: $btn-disabled-opacity;
+		pointer-events: none;
+	}
+}
+
+.btn-block {
+	display: block;
+	width: 100%;
+}
+
+.btn-link {
+	font-weight: $font-weight-normal;
+	color: $btn-link-color;
+	text-decoration: underline;
+	text-decoration-color: $btn-line-color;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: $spacer-0;
+	transition: all 0.3s;
+
+	&:active {
+		background: transparent;
+	}
+
+	&:hover {
+		color: $btn-link-color-hover;
+		text-decoration-color: $btn-line-color-hover;
+		background: transparent;
+	}
+}
+
+.btn-target {
+	height: $btn-height-target;
+	min-width: $btn-width-target;
+	padding: $btn-padding-y-target $btn-padding-x-target;
+	border-radius: $btn-border-radius-target;
+}
+
+.btn-target-second {
+	color: $btn-second-color;
+	background-color: $btn-second-bg;
+
+	&:active,
+	&:hover {
+		background: $btn-second-bg-active;
+		color: $btn-second-color;
+	}
+
+	&[disabled] {
+		background-color: rgba($btn-second-bg, $btn-disabled-opacity);
+	}
+
+	&.active {
+		color: $btn-color;
+		background-color: $btn-bg;
+	}
+}
