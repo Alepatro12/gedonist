@@ -43,7 +43,7 @@ export const getName = (state) => state.adminRepetition.name;
 export const getIsFetching = (state) => state.adminRepetition.isFetching;
 
 /**
- * Get fetching status
+ * Get creation question flag
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
@@ -71,7 +71,7 @@ export const getIsShowSuccess = (state) => state.adminRepetition.isShowSuccess;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {bool}
+ * @returns {String}
  */
 export const getResultText = (state) => state.adminRepetition.resultText;
 
@@ -93,7 +93,7 @@ export const getIsShowError = (state) => state.adminRepetition.isShowError;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {bool}
+ * @returns {Array}
  */
 export const getQuestions = (state) => state.adminRepetition.questions;
 
@@ -104,6 +104,6 @@ export const getQuestions = (state) => state.adminRepetition.questions;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {bool}
+ * @returns {Array}
  */
 export const getAnswers = (state) => state.adminRepetition.answers;

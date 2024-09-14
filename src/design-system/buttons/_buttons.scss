@@ -1,7 +1,7 @@
 .btn {
 	display: inline-block;
 	min-height: $btn-height;
-	padding: 0 $btn-padding-x;
+	padding: $spacer-0 $btn-padding-x;
 	font-size: $btn-font-size;
 	font-weight: $btn-font-weight;
 	color: $btn-color;
@@ -15,7 +15,7 @@
 	border-radius: $btn-border-radius;
 	outline: none;
 	cursor: pointer;
-	transition: all 0.3s;
+	transition: all .3s;
 
 	&:active,
 	&:hover {
@@ -44,7 +44,7 @@
 	border: none;
 	cursor: pointer;
 	padding: $spacer-0;
-	transition: all 0.3s;
+	transition: all .3s;
 
 	&:active {
 		background: transparent;

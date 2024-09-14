@@ -4,11 +4,11 @@
 	scrollbar-width: thin;
 
 	&::-webkit-scrollbar {
-		width: 20px;
+		width: $spacer-7;
 	}
 
 	&::-webkit-scrollbar-thumb {
-		border: 8px solid transparent;
+		border: $spacer-3 solid transparent;
 		background-clip: padding-box;
 		background-color: $gray-300;
 		border-radius: $border-radius-m;
@@ -16,7 +16,7 @@
 
 	&::-webkit-scrollbar-button {
 		display: none;
-		height: 0;
+		height: $spacer-0;
 	}
 
 	&::-webkit-scrollbar-corner {
@@ -25,7 +25,7 @@
 
 	&::-webkit-scrollbar-track {
 		background: $gray-200;
-		border: 8px solid $bg-color;
+		border: $spacer-3 solid $bg-color;
 		border-radius: $border-radius-m;
 	}
 }

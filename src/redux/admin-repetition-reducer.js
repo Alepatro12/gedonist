@@ -57,12 +57,6 @@ const SET_QUESTIONS = 'admin-repetition/SET_QUESTIONS';
 
 /**
  * @const
- * @type {string} Action type - set answers
- */
-const SET_ANSWERS = 'admin-repetition/SET_ANSWERS';
-
-/**
- * @const
  * @type {string} Action type - delete question
  */
 const DELETE_QUESTION = 'admin-repetition/DELETE_QUESTION';
@@ -72,6 +66,12 @@ const DELETE_QUESTION = 'admin-repetition/DELETE_QUESTION';
  * @type {string} Action type - edit question
  */
 const EDITE_QUESTION = 'admin-repetition/EDIT_QUESTION';
+
+/**
+ * @const
+ * @type {string} Action type - clear error notification
+ */
+const SET_EDITING_QUESTION = 'admin-repetition/SET_EDITING_QUESTION';
 
 const initialState = {
 	name: '',
@@ -109,16 +109,8 @@ const adminRepetitionReducer = (state = initialState, action = {}) => {
 				isShowError: false,
 				isShowSuccess: false,
 				error: { ...action.error },
-				questions: action.questions || [],
-			};
-		}
-		case SET_ANSWERS: {
-			return {
-				...state,
-				isShowError: false,
-				isShowSuccess: false,
-				error: { ...action.error },
 				answers: action.answers || [],
+				questions: action.questions || [],
 			};
 		}
 		case EDITE_QUESTION:
@@ -139,6 +131,11 @@ const adminRepetitionReducer = (state = initialState, action = {}) => {
 				isShowError: false,
 			};
 		}
+		case SET_EDITING_QUESTION:
+			return {
+				...state,
+				isCreationQuestion: false,
+			};
 		case SET_CREATION_NEW_QUESTION: {
 			return {
 				...state,
@@ -264,33 +261,14 @@ const setNewQuestion = ({
  */
 const setQuestions = ({
 	error = {},
+	answers = [],
 	questions = [],
 }) => {
 	return {
 		error,
+		answers,
 		questions,
 		type: SET_QUESTIONS,
-	};
-};
-
-/**
- * Set answers
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @param {Array} answers Answers array
- * @param {Object} error
- * @returns {Object}
- */
-const setAnswers = ({
-	error = {},
-	answers = [],
-}) => {
-	return {
-		error,
-		answers,
-		type: SET_ANSWERS,
 	};
 };
 
@@ -444,6 +422,18 @@ export const clearError = () => {
 };
 
 /**
+ * Set editing question
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @returns {Object}
+ */
+export const setEditingQuestion = () => {
+	return { type: SET_EDITING_QUESTION };
+};
+
+/**
  * Create question
  *
  * @author Alessandro Vilanni
@@ -482,12 +472,7 @@ export const search = (disciplineId = 0, request = '', isSearchAnswer = false) =
 
 		const response = await getSearchQuestionAPI(disciplineId, request, isSearchAnswer);
 
-		if (isSearchAnswer) {
-			dispatch(setAnswers(response));
-		} else {
-			dispatch(setQuestions(response));
-		}
-
+		dispatch(setQuestions(response));
 		dispatch(setToggle(false));
 	}
 };

@@ -63,6 +63,7 @@ const AdminRepetitionDiscipline = React.memo(({
  * @param {Function} createQuestion Request to create question
  * @param {Function} deleteQuestion Request to delete question
  * @param {bool} isCreationQuestion Question creation flag
+ * @param {Function} setEditingQuestion Set editing question
  * @param {Function} setCreationQuestion Request to start creating a question
  * @returns {HTMLElement}
  */
@@ -77,6 +78,7 @@ const RepetitionDisciplineBlock = React.memo(({
 	createQuestion = () => {},
 	deleteQuestion = () => {},
 	isCreationQuestion = false,
+	setEditingQuestion = () => {},
 	setCreationQuestion = () => {},
 	...props
 }) => {
@@ -164,9 +166,10 @@ const RepetitionDisciplineBlock = React.memo(({
 			answer: valueAnswer,
 			question: valueQuestion,
 		}));
+		setEditingQuestion();
 	};
 
-	const handleChange = event => {
+	const handleChange = (event) => {
 		setQusetion((prev) => ({...prev, [event.target.name]: event.target.value}));
 	};
 
@@ -383,14 +386,14 @@ const QuestionEditingBlock = React.memo(({
 }) => {
 	return <>
 		<Textarea
+			id="question"
 			placeholder="вопрос"
-			name="question"
 			value={question}
 			handleChange={ handleChange }
 		/>
 		<Textarea
+			id="answer"
 			placeholder="ответ"
-			name="answer"
 			value={answer}
 			handleChange={ handleChange }
 		/>
@@ -403,23 +406,24 @@ const QuestionEditingBlock = React.memo(({
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {String} name Input name
+ * @param {String} id Input ID
  * @param {String} value Input value
  * @param {String} placeholder Input placeholder
  * @param {Function} handleChange Fixing changes to the question
  * @returns {HTMLElement}
  */
 const Textarea = React.memo(({
-	name='',
+	id = '',
 	value = '',
 	placeholder = '',
 	handleChange = () => {},
 }) => {
 	return <>
 		<textarea
+			id={`textarea-${id}`}
 			className="input scroll admin-repetition-discipline__textarea"
 			placeholder={`Введите ${placeholder}`}
-			name={name}
+			name={id}
 			value={ value }
 			onChange = { handleChange }
 		></textarea>

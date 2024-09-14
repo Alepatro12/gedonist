@@ -71,9 +71,9 @@ export const editQuestionAPI = (question = {}, disciplineId = 0) => {
 		.post('discipline-controller.php', {
 			disciplineId,
 			isEditQuestion: true,
-			questionId: question.id,
-			answer: question.answer,
-			question: question.question,
+			questionId: question?.id,
+			answer: question?.answer,
+			question: question?.question,
 		})
 		.then(response => response.data);
 };

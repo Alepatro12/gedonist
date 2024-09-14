@@ -4,8 +4,8 @@
 .admin-repetition-discipline {
 	display: flex;
 	flex-direction: column;
-    align-items: center;
-	font-size: 18px;
+	align-items: center;
+	font-size: $font-size-xl;
 
 	&__block {
 		width: 960px;
@@ -23,7 +23,7 @@
 
 		@include mq('tablet') {
 			width: 100%;
-			margin-bottom: 20px;
+			margin-bottom: $spacer-7;
 		}
 	}
 
@@ -31,7 +31,7 @@
 		display: flex;
 		width: 620px;
 		justify-content: space-between;
-		margin-top: 20px;
+		margin-top: $spacer-7;
 
 		@include mq('tablet') {
 			display: block;
@@ -42,7 +42,7 @@
 	&__edit-block {
 		display: flex;
 		justify-content: space-between;
-		margin-top: 20px;
+		margin-top: $spacer-7;
 
 		@include mq('tablet') {
 			display: block;
@@ -62,7 +62,7 @@
 	&__filters {
 		display: flex;
 		justify-content: space-between;
-		margin-top: 20px;
+		margin-top: $spacer-7;
 
 		@include mq('tablet') {
 			display: block;
@@ -80,7 +80,7 @@
 		@include mq('tablet') {
 			height: 300px;
 			width: 100%;
-			margin-top: 20px;
+			margin-top: $spacer-7;
 		}
 	}
 
