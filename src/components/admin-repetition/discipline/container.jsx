@@ -11,7 +11,6 @@ import {
 	deleteQuestion,
 	createQuestion,
 	findDiscipline,
-	setEditingQuestion,
 	setCreationQuestion,
 } from './../../../redux/admin-repetition-reducer';
 import {
@@ -85,7 +84,6 @@ const AdminRepetitionDisciplineContainer = compose(
 		deleteQuestion,
 		createQuestion,
 		findDiscipline,
-		setEditingQuestion,
 		setCreationQuestion,
 	})
 ) (AdminRepetitionDisciplineClassContainer);

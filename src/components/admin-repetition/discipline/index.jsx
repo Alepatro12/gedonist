@@ -63,7 +63,6 @@ const AdminRepetitionDiscipline = React.memo(({
  * @param {Function} createQuestion Request to create question
  * @param {Function} deleteQuestion Request to delete question
  * @param {bool} isCreationQuestion Question creation flag
- * @param {Function} setEditingQuestion Set editing question
  * @param {Function} setCreationQuestion Request to start creating a question
  * @returns {HTMLElement}
  */
@@ -78,7 +77,6 @@ const RepetitionDisciplineBlock = React.memo(({
 	createQuestion = () => {},
 	deleteQuestion = () => {},
 	isCreationQuestion = false,
-	setEditingQuestion = () => {},
 	setCreationQuestion = () => {},
 	...props
 }) => {
@@ -166,7 +164,7 @@ const RepetitionDisciplineBlock = React.memo(({
 			answer: valueAnswer,
 			question: valueQuestion,
 		}));
-		setEditingQuestion();
+		setCreationQuestion(false);
 	};
 
 	const handleChange = (event) => {

@@ -67,12 +67,6 @@ const DELETE_QUESTION = 'admin-repetition/DELETE_QUESTION';
  */
 const EDITE_QUESTION = 'admin-repetition/EDIT_QUESTION';
 
-/**
- * @const
- * @type {string} Action type - clear error notification
- */
-const SET_EDITING_QUESTION = 'admin-repetition/SET_EDITING_QUESTION';
-
 const initialState = {
 	name: '',
 	menu: [],
@@ -131,11 +125,6 @@ const adminRepetitionReducer = (state = initialState, action = {}) => {
 				isShowError: false,
 			};
 		}
-		case SET_EDITING_QUESTION:
-			return {
-				...state,
-				isCreationQuestion: false,
-			};
 		case SET_CREATION_NEW_QUESTION: {
 			return {
 				...state,
@@ -152,7 +141,7 @@ const adminRepetitionReducer = (state = initialState, action = {}) => {
 				...state,
 				isShowError: false,
 				isShowSuccess: false,
-				isCreationQuestion: true,
+				isCreationQuestion: action.isCreationQuestion,
 			};
 		}
 		case GET_MENU: {
@@ -367,10 +356,14 @@ export const findDiscipline = (userId = 0, disciplineId = 0) => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
+ * @param {bool} isCreationQuestion Question creation flag
  * @returns {Object}
  */
-export const setCreationQuestion = () => {
-	return { type: SET_CREATION_QUESTION };
+export const setCreationQuestion = (isCreationQuestion = true) => {
+	return {
+		isCreationQuestion,
+		type: SET_CREATION_QUESTION,
+	};
 };
 
 /**
@@ -419,18 +412,6 @@ export const setEditedQuestion = ({ error = {}, resultText = '', }) => {
  */
 export const clearError = () => {
 	return { type: CLEAR_ERROR };
-};
-
-/**
- * Set editing question
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @returns {Object}
- */
-export const setEditingQuestion = () => {
-	return { type: SET_EDITING_QUESTION };
 };
 
 /**
