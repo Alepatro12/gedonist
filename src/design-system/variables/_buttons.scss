@@ -1,0 +1,30 @@
+// Buttons
+$btn-height: 30px;
+$btn-padding-x: .75em;
+$btn-disabled-opacity: .4;
+$btn-font-size: $font-size-base;
+$btn-font-weight: $font-weight-normal;
+$btn-border-radius: $border-radius-xs;
+
+// base btn
+$btn-color: $white;
+$btn-bg: $green-200;
+$btn-bg-active: $green-300;
+
+// link btn
+$btn-link-color: $gray-600;
+$btn-link-color-hover: $black;
+$btn-line-color: $gray-400;
+$btn-line-color-hover: $gray-500;
+
+// target btn
+$btn-height-target: 45px;
+$btn-width-target: 300px;
+$btn-padding-x-target: $spacer-7;
+$btn-padding-y-target: $spacer-4;
+$btn-border-radius-target: $border-radius-l;
+
+// second btn
+$btn-second-color: $green-200;
+$btn-second-bg: $gray-100;
+$btn-second-bg-active: $green-100;

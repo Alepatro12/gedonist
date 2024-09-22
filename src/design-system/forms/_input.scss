@@ -1,0 +1,41 @@
+.input {
+	display: block;
+	padding: $input-padding-y $input-padding-x;
+
+	font-size: $input-font-size;
+	color: $input-color;
+	line-height: $input-line-height;
+
+	background-color: $input-background;
+	border: 1px solid $input-border;
+	border-radius: $input-border-radius;
+
+	&::placeholder {
+		color: $input-placeholder-color;
+		opacity: 1;
+	}
+
+	&:focus {
+		outline: none;
+		border: $green-300 solid 1px;
+
+		&::placeholder {
+			color: $input-placeholder-color-focus;
+		}
+	}
+
+	&:disabled,
+	&[readonly] {
+		background-color: $input-background-disabled;
+		opacity: 1;
+	}
+}
+
+textarea.input {
+	min-height: calc(#{$input-padding-y} * 2 + #{$input-font-size * $input-line-height} + 2px);
+	resize: none;
+}
+
+textarea.scroll {
+	@include ds-scroll($bg-color: $input-background);
+}

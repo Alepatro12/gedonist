@@ -1,0 +1,109 @@
+@import './../../../design-system';
+@import './../../../style/mixins.scss';
+
+.admin-repetition-discipline {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: $font-size-xl;
+
+	&__block {
+		width: 960px;
+
+		@include mq('tablet') {
+			width: 100%;
+		}
+	}
+
+	&__btn {
+		height: 30px;
+	}
+
+	&__btn-target {
+
+		@include mq('tablet') {
+			width: 100%;
+			margin-bottom: $spacer-7;
+		}
+	}
+
+	&__buttons-block {
+		display: flex;
+		width: 620px;
+		justify-content: space-between;
+		margin-top: $spacer-7;
+
+		@include mq('tablet') {
+			width: 100%;
+			flex-direction: column-reverse;
+		}
+	}
+
+	&__edit-block {
+		display: flex;
+		justify-content: space-between;
+		margin-top: $spacer-7;
+
+		@include mq('tablet') {
+			display: block;
+		}
+	}
+
+	&__error {
+		margin-top: 10px;
+
+		@include mq('tablet') {
+			margin-top: -10px;
+			margin-bottom: 15px;
+		}
+	}
+
+	&__input {
+		height: 30px;
+		width: 400px;
+
+		@include mq('tablet') {
+			width: 100%;
+			margin-top: 10px;
+		}
+	}
+
+	&__filters {
+		display: flex;
+		justify-content: space-between;
+		margin-top: $spacer-7;
+
+		@include mq('tablet') {
+			display: block;
+		}
+	}
+
+	&__success {
+		margin-top: 10px;
+
+		@include mq('tablet') {
+			margin-bottom: 15px;
+		}
+	}
+
+	&__textarea {
+		height: 500px;
+		width: 470px;
+
+		@include mq('tablet') {
+			height: 300px;
+			width: 100%;
+			margin-top: $spacer-7;
+		}
+	}
+
+	&__title {
+		font-family: $font-family-serif;
+		font-size: $h1-font-size;
+		color: $red-200;
+
+		@include mq('tablet') {
+			font-size: $h2-font-size;
+		}
+	}
+}

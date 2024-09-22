@@ -4,98 +4,150 @@ import React, { useLayoutEffect } from 'react';
 const Fortune = () => {
 	// надписи и цвета на секторах
 const prizes = [
+  //   {
+  //     text: "OMORI",
+  //     color: "hsl(197 30% 43%)",
+  //   },
+  //   { 
+  //     text: "The Witcher",
+  //     color: "hsl(43 74% 66%)",
+  //   },
+  //   {
+  //     text: "NieR Replicant ver.1.22474487139..",
+  //     color: "hsl(27 87% 67%)",
+  //   },
+  //   {
+  //     text: "Vampire: The Masquerade - Bloodlines",
+  //     color: "hsl(12 76% 61%)",
+  //   },
+  //   {
+  //     text: "Final Fantasy XV",
+  //     color: "hsl(350 60% 52%)",
+  //   },
+  //   {
+  //     text: "Dragon Age: Origins",
+  //     color: "hsl(270 87% 67%)",
+  //   },
+  //   {
+  //     text: "Stronghold Legends",
+  //     color: "hsl(91 43% 54%)",
+  //   },
+  //   {
+  //     text: "Kingdom Come: Deliverance",
+  //     color: "hsl(140 36% 74%)",
+  //   },
+	// {
+  //     text: "Total War: Warhammer II",
+  //     color: "hsl(12 56% 64%)",
+  // },
+	// {
+	// 	text: "Code Vein",
+	// 	color: "hsl(72 46% 54%)",
+	// },
+	// {
+	// 	text: "King Arthur: The Role-playing Wargame",
+	// 	color: "hsl(220 56% 64%)",
+	// },
+	// {
+  //   	text: "Mass Effect: Andromeda",
+  //   	color: "hsl(300 46% 74%)",
+  //   },
+  //   {
+  //     text: "OMORI",
+  //     color: "hsl(197 30% 43%)",
+  //   },
+  //   { 
+  //     text: "The Witcher",
+  //     color: "hsl(43 74% 66%)",
+  //   },
+  //   {
+  //     text: "NieR Replicant ver.1.22474487139..",
+  //     color: "hsl(27 87% 67%)",
+  //   },
+  //   {
+  //     text: "Vampire: The Masquerade - Bloodlines",
+  //     color: "hsl(12 76% 61%)",
+  //   },
+  //   {
+  //     text: "Final Fantasy XV",
+  //     color: "hsl(350 60% 52%)",
+  //   },
+  //   {
+  //     text: "Dragon Age: Origins",
+  //     color: "hsl(270 87% 67%)",
+  //   },
+  //   {
+  //     text: "Stronghold Legends",
+  //     color: "hsl(91 43% 54%)",
+  //   },
+  //   {
+  //     text: "Star Wars: Knights of the Old Republic",
+  //     color: "hsl(140 36% 74%)",
+  //   },
+	// {
+  //     text: "Total War: Warhammer II",
+  //     color: "hsl(12 56% 64%)",
+  // },
+	// {
+	// 	text: "Code Vein",
+	// 	color: "hsl(72 46% 54%)",
+	// },
+	// {
+	// 	text: "King Arthur: The Role-playing Wargame",
+	// 	color: "hsl(220 56% 64%)",
+	// },
+	// {
+  //   	text: "Mass Effect: Andromeda",
+  //   	color: "hsl(300 46% 74%)",
+  //   },
     {
-      text: "Devil May Cry",
+      text: "The Count Lucanor",
       color: "hsl(197 30% 43%)",
     },
-    // { 
-    //   text: "Taiwan",
-    //   color: "hsl(173 58% 39%)",
-    // },
     { 
-      text: "The Legend of Tianding",
+      text: "Frostpunk",
       color: "hsl(43 74% 66%)",
     },
     {
-      text: "Frostpunk",
+      text: "DreadOut",
       color: "hsl(27 87% 67%)",
     },
     {
-      text: "The Closing Shift",
+      text: "Call of the Sea",
       color: "hsl(12 76% 61%)",
     },
     {
-      text: "DreadOut",
+      text: "Warhammer 40,000: Dawn of War",
       color: "hsl(350 60% 52%)",
     },
     {
-      text: "The Coma: Cutting Class",
+      text: "Draugen",
       color: "hsl(270 87% 67%)",
     },
     {
-      text: "Call of the Sea",
+      text: "The Legend of Tianding",
       color: "hsl(91 43% 54%)",
     },
     {
-      text: "Detention",
+      text: "The Closing Shift",
       color: "hsl(140 36% 74%)",
     },
 	{
-      text: "Fantasy Wars",
+      text: "The Coma: Cutting Class",
       color: "hsl(12 56% 64%)",
   },
 	{
-		text: "Fable: The Lost Chapters",
+		text: "Detention",
 		color: "hsl(72 46% 54%)",
 	},
 	{
-		text: "Draugen",
+		text: "Fable",
 		color: "hsl(220 56% 64%)",
 	},
 	{
-    	text: "American McGee's Alice",
+    	text: "Alice: Madness Returns",
     	color: "hsl(300 46% 74%)",
     },
-	// {
-	// 	text: "Korea",
-	// 	color: "hsl(160 46% 54%)",
-	// },
-  // { 
-  //   text: "Mystland",
-  //   color: "hsl(343 74% 66%)",
-  // },
-	// {
-  //   	text: "Spain",
-  //   	color: "hsl(190 46% 74%)",
-  //   },
-	// {
-	// 	text: "SHOW-KEKW",
-	// 	color: "hsl(40 56% 64%)",
-	// },
-	// {
-	// 	text: "Sweden",
-	// 	color: "hsl(320 46% 54%)",
-	// },
-	// {
-	// 	text: "The United Kingdom",
-	// 	color: "hsl(240 26% 64%)",
-	// },
-	// {
-	// 	text: "Thailand",
-	// 	color: "hsl(222 46% 54%)",
-	// },
-  // {
-	// 	text: "BAND-KEKW",
-	// 	color: "hsl(140 56% 64%)",
-	// },
-	// {
-	// 	text: "Australia",
-	// 	color: "hsl(350 40% 80%)",
-	// },
-	// {
-	// 	text: "Mexico",
-	// 	color: "hsl(310 56% 66%)",
-	// },
   ];
   
   useLayoutEffect(() => {

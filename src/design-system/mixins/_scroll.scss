@@ -1,0 +1,31 @@
+@mixin ds-scroll($bg-color: $white) {
+	/* Firefox*/
+	scrollbar-color: $gray-300 $gray-200;
+	scrollbar-width: thin;
+
+	&::-webkit-scrollbar {
+		width: $spacer-7;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border: $spacer-3 solid transparent;
+		background-clip: padding-box;
+		background-color: $gray-300;
+		border-radius: $border-radius-m;
+	}
+
+	&::-webkit-scrollbar-button {
+		display: none;
+		height: $spacer-0;
+	}
+
+	&::-webkit-scrollbar-corner {
+		background-color: transparent;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: $gray-200;
+		border: $spacer-3 solid $bg-color;
+		border-radius: $border-radius-m;
+	}
+}
