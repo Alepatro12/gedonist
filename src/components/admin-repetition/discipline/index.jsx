@@ -101,11 +101,14 @@ const RepetitionDisciplineBlock = React.memo(({
 	};
 
 	const startCreationQuestion = () => {
-		if (!question.question || !question.answer) {
+		const answer = question?.answer.trim();
+		const questionStr = question?.question.trim();
+
+		if (!questionStr || !answer) {
 			return;
 		}
 
-		createQuestion(disciplineId, question.question, question.answer);
+		createQuestion(disciplineId, questionStr, answer);
 	};
 
 	const searchQuestion = (event) => {
@@ -181,12 +184,20 @@ const RepetitionDisciplineBlock = React.memo(({
 	};
 
 	const startEditQuestion = () => {
+		const answer = question?.answer.trim();
+		const questionStr = question?.question.trim();
 
-		if (!question.id || !question.answer || !question.question) {
+		if (!question.id || !answer || !questionStr) {
 			return;
 		}
 
-		editQuestion(question, disciplineId);
+		editQuestion({
+				answer,
+				id: question.id,
+				question: questionStr,
+			},
+			disciplineId
+		);
 	};
 
 	return <>

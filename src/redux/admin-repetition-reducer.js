@@ -98,13 +98,16 @@ const initialState = {
 const adminRepetitionReducer = (state = initialState, action = {}) => {
 	switch (action.type) {
 		case SET_QUESTIONS: {
+			const answers = action.answers?.length ? action.answers : state.answers;
+			const questions = action.questions?.length ? action.questions : state.questions;
+
 			return {
 				...state,
+				answers,
+				questions,
 				isShowError: false,
 				isShowSuccess: false,
 				error: { ...action.error },
-				answers: action.answers || [],
-				questions: action.questions || [],
 			};
 		}
 		case EDITE_QUESTION:
