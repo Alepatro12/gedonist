@@ -526,8 +526,8 @@ textarea.scroll::-webkit-scrollbar-track {
 }
 @media only screen and (max-width: 991px) {
   .admin-repetition-discipline__buttons-block {
-    display: block;
     width: 100%;
+    flex-direction: column-reverse;
   }
 }
 .admin-repetition-discipline__edit-block {
@@ -538,6 +538,15 @@ textarea.scroll::-webkit-scrollbar-track {
 @media only screen and (max-width: 991px) {
   .admin-repetition-discipline__edit-block {
     display: block;
+  }
+}
+.admin-repetition-discipline__error {
+  margin-top: 10px;
+}
+@media only screen and (max-width: 991px) {
+  .admin-repetition-discipline__error {
+    margin-top: -10px;
+    margin-bottom: 15px;
   }
 }
 .admin-repetition-discipline__input {
@@ -560,8 +569,13 @@ textarea.scroll::-webkit-scrollbar-track {
     display: block;
   }
 }
-.admin-repetition-discipline__result {
+.admin-repetition-discipline__success {
   margin-top: 10px;
+}
+@media only screen and (max-width: 991px) {
+  .admin-repetition-discipline__success {
+    margin-bottom: 15px;
+  }
 }
 .admin-repetition-discipline__textarea {
   height: 500px;

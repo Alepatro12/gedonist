@@ -98,8 +98,8 @@ const initialState = {
 const adminRepetitionReducer = (state = initialState, action = {}) => {
 	switch (action.type) {
 		case SET_QUESTIONS: {
-			const answers = action.answers?.length ? action.answers : state.answers;
-			const questions = action.questions?.length ? action.questions : state.questions;
+			const answers = action.answers?.length || action.error?.code ? action.answers : state.answers;
+			const questions = action.questions?.length || action.error?.code ? action.questions : state.questions;
 
 			return {
 				...state,
@@ -112,10 +112,13 @@ const adminRepetitionReducer = (state = initialState, action = {}) => {
 		}
 		case EDITE_QUESTION:
 		case DELETE_QUESTION: {
+			const answers = action.error?.code ? state.answers : [];
+			const questions = action.error?.code ? state.questions : [];
+
 			return {
 				...state,
-				answers: [],
-				questions: [],
+				answers,
+				questions,
 				error: { ...action.error },
 				resultText: action.resultText,
 				isShowError: Boolean(action.error?.code),
@@ -129,10 +132,13 @@ const adminRepetitionReducer = (state = initialState, action = {}) => {
 			};
 		}
 		case SET_CREATION_NEW_QUESTION: {
+			const answers = action.error?.code ? state.answers : [];
+			const questions = action.error?.code ? state.questions : [];
+
 			return {
 				...state,
-				answers: [],
-				questions: [],
+				answers,
+				questions,
 				resultText: action.resultText,
 				isShowError: Boolean(action.error?.code),
 				isShowSuccess: !Boolean(action.error?.code),

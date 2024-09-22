@@ -34,8 +34,8 @@
 		margin-top: $spacer-7;
 
 		@include mq('tablet') {
-			display: block;
 			width: 100%;
+			flex-direction: column-reverse;
 		}
 	}
 
@@ -46,6 +46,15 @@
 
 		@include mq('tablet') {
 			display: block;
+		}
+	}
+
+	&__error {
+		margin-top: 10px;
+
+		@include mq('tablet') {
+			margin-top: -10px;
+			margin-bottom: 15px;
 		}
 	}
 
@@ -69,8 +78,12 @@
 		}
 	}
 
-	&__result {
+	&__success {
 		margin-top: 10px;
+
+		@include mq('tablet') {
+			margin-bottom: 15px;
+		}
 	}
 
 	&__textarea {

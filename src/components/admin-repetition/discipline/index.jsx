@@ -371,7 +371,7 @@ const ResultBlock = React.memo(({
 	isSuccess = false,
 }) => {
 	return <>
-		<div className={`alert alert-${ isSuccess ? 'success' : 'error pointer' } admin-repetition-discipline__result`}>
+		<div className={`alert alert-${ isSuccess ? 'success' : 'error pointer' } admin-repetition-discipline__${ isSuccess ? 'success' : 'error' }`}>
 			{ resultText }
 		</div>
 	</>;
