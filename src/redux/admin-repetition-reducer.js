@@ -165,6 +165,12 @@ const adminRepetitionReducer = (state = initialState, action = {}) => {
 				name: action.name,
 				error: { ...action.error },
 				disciplineId: action.disciplineId,
+				answers: [],
+				questions: [],
+				resultText: '',
+				isShowError: false,
+				isShowSuccess: false,
+				isCreationQuestion: false,
 			};
 		}
 		case TOGGLE_IS_FETCHING: {
