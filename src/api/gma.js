@@ -15,7 +15,7 @@ const instance = axios.create({
  * @param {String} year
  * @returns {Object}
  */
-export const getNominationsAPI = (year = 2023) => {
+export const getNominationsAPI = (year = 2024) => {
 	return instance
 		.post('nominations.php', { year })
 		.then(response => response.data)
@@ -31,7 +31,7 @@ export const getNominationsAPI = (year = 2023) => {
  * @param {number} musicianId Musician ID
  * @returns {Object}
  */
-export const getNomineesAPI = (nominationId = 0, year = 2023) => {
+export const getNomineesAPI = (nominationId = 0, year = 2024) => {
 	return instance
 		.post('nominees.php', { nominationId, year })
 		.then(response => response.data)

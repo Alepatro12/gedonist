@@ -111,7 +111,7 @@ const Collection = React.memo(({
 			<div className="gma-collection-header">
 				<span>{nominationName}</span>
 				<div className="gma-collection-header__change">
-					<NavLink to="/gma/2023" className="gma-collection-header__link">Назад</NavLink>
+					<NavLink to="/gma/2024" className="gma-collection-header__link">Назад</NavLink>
 				</div>
 			</div>
 		: <></> }
@@ -181,7 +181,7 @@ const NominationBlock = React.memo(({
 		<div className="gma-item" key={id}>
 			<div className="gma-item__block">
 				{ !nominationId &&
-					<NavLink to={`/gma/2023?nomination=${id}`} className="gma-item__link"></NavLink>
+					<NavLink to={`/gma/2024?nomination=${id}`} className="gma-item__link"></NavLink>
 				}
 				<div className="gma-item__shadow">
 					<div className={`gma-item__image-block${emptyClass}`}>

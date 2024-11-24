@@ -503,6 +503,7 @@ textarea.scroll::-webkit-scrollbar-track {
 }
 .repetition-discipline__answer {
   margin-top: 20px;
+  white-space: pre-wrap;
 }
 @media only screen and (max-width: 991px) {
   .repetition-discipline__answer {
@@ -652,6 +653,7 @@ textarea.scroll::-webkit-scrollbar-track {
 }
 .repetition-discipline__question {
   width: 100%;
+  white-space: pre-wrap;
 }
 @media only screen and (max-width: 991px) {
   .repetition-discipline__question--final {

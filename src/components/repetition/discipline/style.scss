@@ -9,6 +9,7 @@
 
 	&__answer {
 		margin-top: 20px;
+		white-space: pre-wrap;
 
 		@include mq('tablet') {
 			margin-top: 0;
@@ -163,6 +164,7 @@
 
 	&__question {
 		width: 100%;
+		white-space: pre-wrap;
 
 		@include mq('tablet') {
 			&--final {
