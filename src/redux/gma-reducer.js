@@ -65,7 +65,7 @@ let initialState = {
 	isFetching: false,
 	isDisabled: false,
 	isFocus: false,
-	year: 2023,
+	year: 2024,
 	nominees: [],
 	nominations: [],
 	collectionId: 0,
@@ -361,7 +361,7 @@ export const backToMain = () => {
  * @param {String} userName
  * @returns {Function}
  */
-export const findNominees = (nominationId = 0, year = 2023) => {
+export const findNominees = (nominationId = 0, year = 2024) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
@@ -398,7 +398,7 @@ export const setIsShowModalUserCollections = (isShow = false) => {
  * @param {number} musicianId
  * @returns {Function}
  */
-export const findNominations = (year = 2023) => {
+export const findNominations = (year = 2024) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 

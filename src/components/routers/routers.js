@@ -4,7 +4,7 @@ const Home = React.lazy(() => import('../home/index'));
 const About = React.lazy(() => import('../about/index'));
 const Menu = React.lazy(() => import('../menu/container'));
 const Music = React.lazy(() => import('../music/container'));
-const GMA2023 = React.lazy(() => import('../gma/container'));
+const GMA = React.lazy(() => import('../gma/container'));
 const Fortune = React.lazy(() => import('../../fortune/index'));
 const AdminPanel = React.lazy(() => import('../admin-panel/index'));
 const Repetition = React.lazy(() => import('../repetition/container'));
@@ -23,7 +23,7 @@ export const commonRouters = [
 	{element: Menu, path: '/menu', exact: true},
 	{element: About, path: '/about', exact: true},
 	{element: Music, path: '/music/*', exact: true},
-	{element: GMA2023, path: '/gma/*', exact: true},
+	{element: GMA, path: '/gma/*', exact: true},
 ];
 
 export const unauthorizedUserRouters = [
