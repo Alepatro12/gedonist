@@ -121,3 +121,10 @@
 		}
 	}
 }
+
+.gma {
+	&__center {
+		display: flex;
+		justify-content: center;
+	}
+}

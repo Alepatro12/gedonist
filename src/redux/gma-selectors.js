@@ -205,3 +205,16 @@ export const getNominationTypeId = (state) => {
 export const getNominationName = (state) => {
 	return state.gma.nominationName;
 }
+
+/**
+ * Get collection user ID
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} state
+ * @returns {Array}
+ */
+export const getWinnerArtist = (state) => {
+	return state.gma.winnerArtist;
+}

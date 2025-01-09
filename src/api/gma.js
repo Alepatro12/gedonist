@@ -51,3 +51,18 @@ export const getCollectionElementsAPI = (collectionId = 0) => {
 		.post('collection.php', { collectionId })
 		.then(response => response.data)
 };
+
+/**
+ * Get the user's music artist collections
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {number} nominationId Nomination ID
+ * @returns {Object}
+ */
+export const getWinnerAPI = (nominationId = 0, year = 2024) => {
+	return instance
+		.post('nominees.php', { nominationId, year, isShowWinner: true })
+		.then(response => response.data)
+};

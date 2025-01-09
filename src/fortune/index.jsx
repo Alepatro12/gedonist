@@ -25,55 +25,7 @@ const prizes = [
   //     color: "hsl(350 60% 52%)",
   //   },
   //   {
-  //     text: "Dragon Age: Origins",
-  //     color: "hsl(270 87% 67%)",
-  //   },
-  //   {
-  //     text: "Stronghold Legends",
-  //     color: "hsl(91 43% 54%)",
-  //   },
-  //   {
-  //     text: "Kingdom Come: Deliverance",
-  //     color: "hsl(140 36% 74%)",
-  //   },
-	// {
-  //     text: "Total War: Warhammer II",
-  //     color: "hsl(12 56% 64%)",
-  // },
-	// {
-	// 	text: "Code Vein",
-	// 	color: "hsl(72 46% 54%)",
-	// },
-	// {
-	// 	text: "King Arthur: The Role-playing Wargame",
-	// 	color: "hsl(220 56% 64%)",
-	// },
-	// {
-  //   	text: "Mass Effect: Andromeda",
-  //   	color: "hsl(300 46% 74%)",
-  //   },
-  //   {
-  //     text: "OMORI",
-  //     color: "hsl(197 30% 43%)",
-  //   },
-  //   { 
-  //     text: "The Witcher",
-  //     color: "hsl(43 74% 66%)",
-  //   },
-  //   {
-  //     text: "NieR Replicant ver.1.22474487139..",
-  //     color: "hsl(27 87% 67%)",
-  //   },
-  //   {
-  //     text: "Vampire: The Masquerade - Bloodlines",
-  //     color: "hsl(12 76% 61%)",
-  //   },
-  //   {
-  //     text: "Final Fantasy XV",
-  //     color: "hsl(350 60% 52%)",
-  //   },
-  //   {
-  //     text: "Dragon Age: Origins",
+  //     text: "Othercide",
   //     color: "hsl(270 87% 67%)",
   //   },
   //   {
@@ -101,7 +53,7 @@ const prizes = [
   //   	color: "hsl(300 46% 74%)",
   //   },
     {
-      text: "The Count Lucanor",
+      text: "Elven Legacy",
       color: "hsl(197 30% 43%)",
     },
     { 
@@ -117,7 +69,7 @@ const prizes = [
       color: "hsl(12 76% 61%)",
     },
     {
-      text: "Warhammer 40,000: Dawn of War",
+      text: "Devil May Cry 2",
       color: "hsl(350 60% 52%)",
     },
     {
@@ -137,7 +89,7 @@ const prizes = [
       color: "hsl(12 56% 64%)",
   },
 	{
-		text: "Detention",
+		text: "Warhammer 40,000: Dawn of War - Winter Assault",
 		color: "hsl(72 46% 54%)",
 	},
 	{

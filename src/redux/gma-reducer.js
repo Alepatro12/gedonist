@@ -1,4 +1,5 @@
 import {
+	getWinnerAPI,
 	getNomineesAPI,
 	getNominationsAPI,
 	getCollectionElementsAPI
@@ -60,6 +61,12 @@ const GET_NOMINATIONS = 'music/GET_NOMINATIONS';
  */
 const GET_NOMINEES = 'music/GET_NOMINEES';
 
+/**
+ * @const
+ * @type {string} Action type - get collection
+ */
+const GET_WINNER_ARTIST = 'music/GET_WINNER_ARTIST';
+
 let initialState = {
 	isMainPage: true,
 	isFetching: false,
@@ -68,6 +75,7 @@ let initialState = {
 	year: 2024,
 	nominees: [],
 	nominations: [],
+	winnerArtist: {},
 	collectionId: 0,
 	nominationId: 0,
 	countCollections: 0,
@@ -96,6 +104,12 @@ let initialState = {
  */
 const musicReducer = (state = initialState, action = {}) => {
 	switch (action.type) {
+		case GET_WINNER_ARTIST: {
+			return {
+				...state,
+				winnerArtist: { ...action.winnerArtist },
+			};
+		}
 		case GET_COLLECTIONS: {
 			let changeState = {};
 
@@ -166,6 +180,7 @@ const musicReducer = (state = initialState, action = {}) => {
 				nominationId: 0,
 				nominationName: '',
 				nominationTypeId: 0,
+				winnerArtist: {},
 				nominations: [ ...action.nominations ],
 			};
 		}
@@ -208,6 +223,29 @@ const setNominations = ({
 		errorCode,
 		nominations,
 		type: GET_NOMINATIONS,
+	}
+};
+
+/**
+ * Set user's collection
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Array} userCollections
+ * @param {number} userId
+ * @param {number} errorCode
+ * @returns {Object}
+ */
+const setWinnerArtist = ({
+	winnerArtist = [],
+	errorCode = 0,
+	}
+) => {
+	return {
+		errorCode,
+		winnerArtist,
+		type: GET_WINNER_ARTIST,
 	}
 };
 
@@ -425,6 +463,27 @@ export const findCollectionElements = (collectionId = 0, userName = '') => {
 		const response = await getCollectionElementsAPI(collectionId);
 
 		dispatch(setCollectionElements(response, userName));
+		dispatch(setToggle(false));
+	}
+};
+
+/**
+ * Find user's collection
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {number} userId
+ * @param {number} musicianId
+ * @returns {Function}
+ */
+export const findWinner = (nominationId = 0) => {
+	return async (dispatch) => {
+		dispatch(setToggle(true));
+
+		const response = await getWinnerAPI(nominationId);
+
+		dispatch(setWinnerArtist(response));
 		dispatch(setToggle(false));
 	}
 };
