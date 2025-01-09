@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import Loader from './../common/loader/index';
 import {
 	getUserId,
+	getUserType,
 	getIsFetching,
 	getIsAuthenticate
 } from './../../redux/selectors';
@@ -16,12 +17,14 @@ import {
 	getNominations,
 	getNominationId,
 	getCollectionId,
+	getWinnerArtist,
 	getNominationName,
 	getCollectionName,
 	getUserCollections,
 	getNominationTypeId
 } from './../../redux/gma-selectors';
 import {
+	findWinner,
 	backToMain,
 	findNominees,
 	findNominations
@@ -57,6 +60,7 @@ const MusicClassContainer = React.memo(({
 const mapStateToProps = (state) => {
 	return {
 		page: 'gma',
+		userType: getUserType(state),
 		nominees: getNominees(state),
 		isAuthenticate: getIsAuthenticate(state),
 		collectionId: getCollectionId(state),
@@ -66,6 +70,7 @@ const mapStateToProps = (state) => {
 		userId: getUserId(state),
 		collections: getCollections(state),
 		nominations: getNominations(state),
+		winnerArtist: getWinnerArtist(state),
 		collectionName: getCollectionName(state),
 		userCollections: getUserCollections(state),
 		nominationId: getNominationId(state),
@@ -84,6 +89,7 @@ const MusicContainer = compose(
 	connect(mapStateToProps, {
 		findNominees,
 		backToMain,
+		findWinner,
 		findNominations,
 	})
 ) (MusicClassContainer);

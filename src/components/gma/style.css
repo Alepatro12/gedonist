@@ -604,4 +604,9 @@ textarea.scroll::-webkit-scrollbar-track {
   .gma-item-list--center {
     justify-content: unset;
   }
+}
+
+.gma__center {
+  display: flex;
+  justify-content: center;
 }/*# sourceMappingURL=style.css.map */
