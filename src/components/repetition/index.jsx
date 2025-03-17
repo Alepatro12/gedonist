@@ -1,5 +1,5 @@
 import './style.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import React, { useLayoutEffect } from 'react';
 
 /**
@@ -16,15 +16,19 @@ import React, { useLayoutEffect } from 'react';
 const Repetition = React.memo(({
 	menu = [],
 	userId = 0,
+	ownerName = '',
 	findMenu = () => {},
 }) => {
+	const { ownerName: newOwnerName = '' } = useParams();
+	const isChangeOwner = ownerName === newOwnerName;
+
 	useLayoutEffect(() => {
-		findMenu(userId);
+		findMenu(userId, newOwnerName);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [userId]);
+	}, [userId, isChangeOwner]);
 
 	return menu.length
-		? <RepetitionBlock menu={menu}/>
+		? <RepetitionBlock menu={menu} ownerName={ownerName}/>
 		: <></>;
 });
 
@@ -37,7 +41,18 @@ const Repetition = React.memo(({
  * @param {Array} menu List of disciplines
  * @returns {HTMLElement}
  */
-const RepetitionBlock = React.memo(({ menu = [] }) => {
+const RepetitionBlock = React.memo(({ menu = [], ownerName = '' }) => {
+	let menuBlock = '';
+	let pageNumber = 0;
+
+	if (menu) {
+		menuBlock = menu?.map(paragraph => {
+			pageNumber += 2;
+
+			return <DisciplineBlock key={paragraph.id} ownerName={ownerName} pageNumber={pageNumber} {...paragraph}/>
+		})
+	}
+
 	return <>
 		<div className="repetition">
 			<div className="repetition__block">
@@ -50,7 +65,7 @@ const RepetitionBlock = React.memo(({ menu = [] }) => {
 					<div className="repetition__content">
 						<div className="repetition__menu">Меню</div>
 						<div className="repetition__menu-block">
-							{ menu?.map(paragraph => <DisciplineBlock key={paragraph.id} {...paragraph}/>) }
+							{ menuBlock }
 						</div>
 						<div className="repetition__menu-page-number">1</div>
 					</div>
@@ -72,14 +87,15 @@ const RepetitionBlock = React.memo(({ menu = [] }) => {
  * @returns {HTMLElement}
  */
 const DisciplineBlock = React.memo(({
+	id = 0,
 	name = '',
-	link = '',
+	ownerName = '',
 	pageNumber = 0,
 }) => {
 	return <>
 		<div className="repetition__row">
 			<div className="repetition__name">
-				<NavLink to={`/repetition/${link}`}>{name}</NavLink>
+				<NavLink to={`/repetition/subject/${ownerName}/${id}`}>{name}</NavLink>
 			</div>
 			<div className="repetition__number-page">{pageNumber}</div>
 		</div>

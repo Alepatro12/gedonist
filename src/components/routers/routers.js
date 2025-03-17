@@ -35,11 +35,11 @@ export const unauthorizedUserRouters = [
 
 export const authorizedUserRouters = [
 	{element: Fortune, path: '/fortune', exact: true},
-	{element: Repetition, path: '/repetition', exact: true},
+	{element: Repetition, path: '/repetition/menu/:ownerName', exact: true},
 	{element: MusicNewCollection, path: '/music/new-collection', exact: true},
-	{element: RepetitionDiscipline, path: '/repetition/javascript', exact: true},
+	{element: RepetitionDiscipline, path: '/repetition/subject/:ownerName/:subjectId', exact: true},
 	{element: MusicChangeCollection, path: '/music/change-collection', exact: true},
-	{element: RepetitionDiscipline, path: '/repetition/english-grammar', exact: true},
+	{element: AdminRepetitionDiscipline, path: '/repetition/edit-questions/:ownerName/:subjectId', exact: true},
 ];
 
 /**
@@ -49,7 +49,4 @@ export const authorizedUserRouters = [
 export const moderatorRouters = [
 	{element: Menu, path: '/admin-panel/menu', exact: true},
 	{element: AdminPanel, path: '/admin-panel', exact: true},
-	{element: AdminRepetition, path: '/admin-panel/repetition', exact: true},
-	{element: AdminRepetitionDiscipline, path: '/admin-panel/repetition/javascript', exact: true},
-	{element: AdminRepetitionDiscipline, path: '/admin-panel/repetition/english-grammar', exact: true},
 ];

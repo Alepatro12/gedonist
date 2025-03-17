@@ -157,4 +157,36 @@ nav {
 			opacity: 1;
 		}
 	}
+
+	.sub-menu {
+		margin-top: -30px;
+		margin-left: 50px;
+
+		&__glitch-btn {
+			margin-bottom: 20px;
+			font-size: 26px;
+			line-height: $line-height-xs;
+			text-shadow: 2px 4px 3px rgba($black, .3);
+			transform: translate(10%);
+			transition: all .8s $curve;
+
+			&--selected {
+				text-decoration: underline $red-200;
+				text-decoration-thickness: 4px;
+			}
+
+			&:hover {
+				text-decoration: underline $red-200;
+				text-decoration-thickness: 4px;
+			}
+		}
+
+		&__link {
+			color: $gray-100;
+
+			&:hover {
+				color: $red-200;
+			}
+		}
+	}
 }

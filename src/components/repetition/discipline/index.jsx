@@ -1,7 +1,8 @@
 import './style.css';
 import React, { useLayoutEffect } from 'react';
 import { isMobile } from '../../../utils/utils';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
+import DropDownMenu from './../../common/drop-down-menu';
 
 /**
  * Render the discipline repetition page
@@ -16,36 +17,27 @@ import { NavLink, useLocation } from 'react-router-dom';
  */
 const RepetitionDiscipline = React.memo(({
 	userId = 0,
+	subMenu = [],
 	disciplineId = 0,
 	findDiscipline = () => {},
 	...props
 }) => {
-	const location = useLocation();
+	const { ownerName = '', subjectId = 0 } = useParams();
 
 	useLayoutEffect(() => {
-		const disciplineName = location.pathname.replace(/\/repetition\//, '');
-		let disciplineId = 0;
-
-		switch(disciplineName) {
-			case 'javascript':
-				disciplineId = 1;
-				break;
-			case 'english-grammar':
-				disciplineId = 2;
-				break;
-			default:
-				disciplineId = 0;
-				break;
+		if (!ownerName || !subjectId) {
+			return;
 		}
 
-
-		findDiscipline(userId, disciplineId);
+		findDiscipline(userId, subjectId);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [location]);
+	}, [ownerName, subjectId]);
 
 	return disciplineId
-		? <RepetitionDisciplineBlock userId={userId} disciplineId={disciplineId} {...props}/>
-		: <></>;
+		? <>
+			<DropDownMenu subMenu={subMenu}></DropDownMenu>
+			<RepetitionDisciplineBlock userId={userId} disciplineId={disciplineId} ownerName={ownerName} {...props}/>
+		</> : <></>;
 });
 
 /**
@@ -64,6 +56,7 @@ const RepetitionDiscipline = React.memo(({
 const RepetitionDisciplineBlock = React.memo(({
 	name = '',
 	counter = 0,
+	ownerName = '',
 	pageNumbers = {},
 	isChecking = false,
 	currentQuestion = {},
@@ -76,7 +69,7 @@ const RepetitionDisciplineBlock = React.memo(({
 			<div className="repetition-discipline__block">
 				<div className="repetition-discipline__page repetition-discipline__page--first">
 					<div className="repetition-discipline__button repetition-discipline__button--close-two">
-						<NavLink to="/repetition" className="repetition-discipline__button-link">Меню</NavLink>
+						<NavLink to={`/repetition/menu/${ownerName}`} className="repetition-discipline__button-link">Меню</NavLink>
 					</div>
 					<div className="repetition-discipline__title">{ name }</div>
 					<div className="repetition-discipline__counter">{ counter }</div>
@@ -89,8 +82,7 @@ const RepetitionDisciplineBlock = React.memo(({
 					{ hasQuestion
 						? <ButtonBlock
 							isChecking={isChecking}
-							questionId={currentQuestion.id}
-							priority={Number(currentQuestion.priority)}
+							questionAnswerId={currentQuestion.qaId}
 							{...props}
 						/>
 						: <></>
@@ -100,7 +92,7 @@ const RepetitionDisciplineBlock = React.memo(({
 				<div className="repetition-discipline__page repetition-discipline__page--second">
 					<div className="repetition-discipline__content">
 						<div className="repetition-discipline__button repetition-discipline__button--close-one">
-							<NavLink to="/repetition" className="repetition-discipline__button-link">Меню</NavLink>
+							<NavLink to={`/repetition/menu/${ownerName}`} className="repetition-discipline__button-link">Меню</NavLink>
 						</div>
 						<div className={`repetition-discipline__answer ${ isChecking ? '' : 'hidden' }`}>{ currentQuestion.answer }</div>
 						<div className="repetition-discipline__page-number-second">{ isMobile() ? pageNumbers?.first || 2 : pageNumbers?.second || 3 }</div>
@@ -120,7 +112,7 @@ const RepetitionDisciplineBlock = React.memo(({
  * @param {number} userId
  * @param {number} priority Prioritize the importance of repetition
  * @param {bool} isChecking Response check flag
- * @param {number} questionId Question ID
+ * @param {number} questionAnswerId Question ID
  * @param {number} disciplineId Discipline ID
  * @param {Function} checkAnswer Response check function
  * @param {Function} skipQuestion Skip question function
@@ -129,16 +121,15 @@ const RepetitionDisciplineBlock = React.memo(({
  */
 const ButtonBlock = React.memo(({
 	userId = 0,
-	priority = 0,
-	questionId = 0,
+	questionAnswerId = 0,
 	disciplineId = 0,
 	isChecking = false,
 	checkAnswer = () => {},
 	skipQuestion = () => {},
 	moveNextQuestion = () => {},
 }) => {
-	const repeatQuestion = () => moveNextQuestion({ isRepeat: true, userId, disciplineId, questionId, priority });
-	const getNextQuestion = () => moveNextQuestion({ isRepeat: false, userId, disciplineId, questionId, priority });
+	const repeatQuestion = () => moveNextQuestion({ isRepeat: true, userId, disciplineId, questionAnswerId });
+	const getNextQuestion = () => moveNextQuestion({ isRepeat: false, userId, disciplineId, questionAnswerId });
 
 	return <>
 		<div className="repetition-discipline__buttons-block">

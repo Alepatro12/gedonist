@@ -50,6 +50,7 @@ const initialState = {
 	name: '',
 	menu: [],
 	counter: 0,
+	ownerName: '',
 	questions: [],
 	pageNumbers: {},
 	disciplineId: 0,
@@ -79,6 +80,7 @@ const repetitionReducer = (state = initialState, action = {}) => {
 			return {
 				...state,
 				menu: [ ...action.menu ],
+				ownerName: action.ownerName,
 			};
 		}
 		case GET_DISCIPLINE: {
@@ -142,10 +144,11 @@ const repetitionReducer = (state = initialState, action = {}) => {
  * @param {Object} error
  * @returns {Object}
  */
-const setMenu = ({ menu = [], error = {} }) => {
+const setMenu = ({ menu = [], error = {} }, ownerName = '') => {
 	return {
 		menu,
 		error,
+		ownerName,
 		type: GET_MENU,
 	};
 };
@@ -256,13 +259,13 @@ const setToggle = (isToggle = false) => {
  * @param {number} userId
  * @returns {Function}
  */
-export const findMenu = (userId = 0) => {
+export const findMenu = (userId = 0, ownerName = '') => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await getMenuAPI(userId);
+		const response = await getMenuAPI(userId, ownerName);
 
-		dispatch(setMenu(response));
+		dispatch(setMenu(response, ownerName));
 		dispatch(setToggle(false));
 	}
 };
@@ -322,17 +325,11 @@ export const checkAnswer = () => {
  * @param {bool} isRepeat Question repeat flag
  * @returns {Function}
  */
-export const moveNextQuestion = ({
-	priority = 0,
-	isRepeat = false,
-	...props
-}) => {
+export const moveNextQuestion = ({ isRepeat = false, ...props }) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = isRepeat || priority
-			? await getChangeQuestionAPI({ isRepeat, priority, ...props })
-			: {};
+		const response = await getChangeQuestionAPI({ isRepeat, ...props });
 
 		dispatch(setNextQuestion(isRepeat, response));
 		dispatch(setToggle(false));

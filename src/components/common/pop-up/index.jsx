@@ -1,5 +1,6 @@
 import './style.css';
 import React, { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 
 /**
  * Get a list of search results
@@ -14,6 +15,7 @@ import React, { useEffect } from 'react';
  * @returns {HTMLElement}
  */
 const PopUp = React.memo(({
+	isLink = false,
 	isFocus = false,
 	results = [],
 	hideFocus = () => {},
@@ -22,6 +24,7 @@ const PopUp = React.memo(({
 	const handleClickOutside = (event) => {
 		if (
 			event.target.nodeName !== 'INPUT'
+			&& !event.target.classList.contains('js-sub-menu')
 			&& !event.target.classList.contains('js-search-result')
 		) {
 			hideFocus(false);
@@ -45,23 +48,38 @@ const PopUp = React.memo(({
 
 	const blockPopUp =
 		results.map(result => {
-			let dataAttributes = {};
+			if (isLink) {
+				return <div key={result.id} className="popup__block popup__block--menu">
+					<NavLink
+						to={result.link}
+						className="popup__link"
+						onClick={ choiceOption }
+					>
+						<div className="popup__name">{result.name}</div>
+					</NavLink>
+				</div>;
+			} else {
+				let dataAttributes = {};
 
-			for (const key in result) {
-				dataAttributes[`data-${key}`] = result[key];
+				for (const key in result) {
+					dataAttributes[`data-${key}`] = result[key];
+				}
+
+				return <div
+					className="popup__block"
+					key={result.id}
+					onClick={ choiceOption }
+					{...dataAttributes}
+				>{result.record}</div>;
 			}
-
-			return <div
-				className="popup__block"
-				key={result.id}
-				onClick={ choiceOption }
-				{...dataAttributes}
-			>{result.record}</div>;
 		});
 	;
 
 	return <>
-		<div className="popup js-search-result" hidden={!isFocus || !results.length}>
+		<div
+			className={`popup js-search-result ${ isLink ? 'popup--menu' : '' }`}
+			hidden={!isFocus || !results.length}
+		>
 			{blockPopUp}
 		</div>
 	</>;

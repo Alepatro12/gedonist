@@ -85,3 +85,14 @@ export const getCounter = (state) => state.repetition.counter;
  * @returns {bool}
  */
 export const getIsFetching = (state) => state.repetition.isFetching;
+
+/**
+ * Get owner name
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} state
+ * @returns {String}
+ */
+export const getOwnerName = (state) => state.repetition.ownerName;

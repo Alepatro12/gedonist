@@ -1,6 +1,6 @@
 import './style.css';
 import PopUp from './../../common/pop-up';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import React, { useLayoutEffect, useEffect } from 'react';
 
 /**
@@ -20,27 +20,16 @@ const AdminRepetitionDiscipline = React.memo(({
 	findDiscipline = () => {},
 	...props
 }) => {
-	const location = useLocation();
+	const { ownerName = '', subjectId = 0 } = useParams();
 
 	useLayoutEffect(() => {
-		const disciplineName = location.pathname.replace(/\/admin-panel\/repetition\//, '');
-		let disciplineId = 0;
-
-		switch(disciplineName) {
-			case 'javascript':
-				disciplineId = 1;
-				break;
-			case 'english-grammar':
-				disciplineId = 2;
-				break;
-			default:
-				disciplineId = 0;
-				break;
+		if (!ownerName || !subjectId) {
+			return;
 		}
 
-		findDiscipline(userId, disciplineId);
+		findDiscipline(userId, subjectId);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [location]);
+	}, [ownerName, subjectId]);
 
 	return disciplineId
 		? <RepetitionDisciplineBlock userId={userId} disciplineId={disciplineId} {...props}/>

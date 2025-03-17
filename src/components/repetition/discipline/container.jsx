@@ -3,7 +3,7 @@ import Repetition from './index';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Loader from './../../common/loader/index';
-import { getUserId } from './../../../redux/selectors';
+import { getUserId, getSubMenu } from './../../../redux/selectors';
 import {
 	getName,
 	getCounter,
@@ -54,6 +54,7 @@ const mapStateToProps = (state = {}) => {
 		name: getName(state),
 		userId: getUserId(state),
 		counter: getCounter(state),
+		subMenu: getSubMenu(state),
 		isChecking: getIsChecking(state),
 		pageNumbers: getPageNumbers(state),
 		disciplineId: getDisciplineId(state),
