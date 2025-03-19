@@ -483,11 +483,11 @@ export const search = (disciplineId = 0, request = '', isSearchAnswer = false) =
  * @param {number} disciplineId Discipline ID
  * @returns {Function}
  */
-export const deleteQuestion = (questionId = 0, disciplineId = 0) => {
+export const deleteQuestion = (data) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await deleteQuestionAPI(questionId, disciplineId);
+		const response = await deleteQuestionAPI(data);
 
 		dispatch(setDeletedQuestion(response));
 		dispatch(setToggle(false));
@@ -504,11 +504,11 @@ export const deleteQuestion = (questionId = 0, disciplineId = 0) => {
  * @param {number} disciplineId Discipline ID
  * @returns {Function}
  */
-export const editQuestion = (question = {}, disciplineId = 0) => {
+export const editQuestion = (data = {}, disciplineId = 0) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await editQuestionAPI(question, disciplineId);
+		const response = await editQuestionAPI(data, disciplineId);
 
 		dispatch(setEditedQuestion(response));
 		dispatch(setToggle(false));

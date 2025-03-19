@@ -50,9 +50,9 @@ export const getSearchQuestionAPI = (disciplineId = 0, request = '', isSearchAns
  * @param {number} disciplineId Discipline ID
  * @returns {Object}
  */
-export const deleteQuestionAPI = (questionId = 0, disciplineId = 0) => {
+export const deleteQuestionAPI = (data) => {
 	return instance
-		.post('discipline-controller.php', { questionId, disciplineId, isDeleteQuestion: true })
+		.post('discipline-controller.php', { isDeleteQuestion: true, ...data })
 		.then(response => response.data);
 };
 
@@ -66,14 +66,8 @@ export const deleteQuestionAPI = (questionId = 0, disciplineId = 0) => {
  * @param {number} disciplineId Discipline ID
  * @returns {Object}
  */
-export const editQuestionAPI = (question = {}, disciplineId = 0) => {
+export const editQuestionAPI = (data = {}, disciplineId = 0) => {
 	return instance
-		.post('discipline-controller.php', {
-			disciplineId,
-			isEditQuestion: true,
-			questionId: question?.id,
-			answer: question?.answer,
-			question: question?.question,
-		})
+		.post('discipline-controller.php', { disciplineId, ...data })
 		.then(response => response.data);
 };

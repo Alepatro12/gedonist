@@ -143,6 +143,8 @@ const RepetitionDisciplineBlock = React.memo(({
 		question = '',
 		answer = '',
 		record = '',
+		answer_id: answerId = 0,
+		question_id: questionId = 0,
 	} = {}) => {
 		if ((!question && !answer) || !id) {
 			return;
@@ -153,8 +155,12 @@ const RepetitionDisciplineBlock = React.memo(({
 
 		setQusetion(() => ({
 			id,
+			answerId,
+			questionId,
 			answer: valueAnswer,
 			question: valueQuestion,
+			oldAnswer: valueAnswer,
+			oldQuestion: valueQuestion,
 		}));
 		setCreationQuestion(false);
 	};
@@ -165,11 +171,16 @@ const RepetitionDisciplineBlock = React.memo(({
 
 	const startDeleteQuestion = () => {
 
-		if (!question.id) {
+		if (!question.id || !question.questionId || !question.answerId) {
 			return;
 		}
 
-		deleteQuestion(question.id, disciplineId);
+		deleteQuestion({
+			disciplineId,
+			answerId: question.answerId,
+			questionId: question.questionId,
+			questionAnswerId: question.id,
+		});
 	};
 
 	const startEditQuestion = () => {
@@ -182,8 +193,12 @@ const RepetitionDisciplineBlock = React.memo(({
 
 		editQuestion({
 				answer,
-				id: question.id,
 				question: questionStr,
+				answerId: question.answerId,
+				questionId: question.questionId,
+				questionAnswerId: question.id,
+				isEditAnswer: question.oldAnswer !== answer,
+				isEditQuestion: question.oldQuestion !== questionStr,
 			},
 			disciplineId
 		);

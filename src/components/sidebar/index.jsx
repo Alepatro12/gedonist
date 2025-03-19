@@ -102,10 +102,10 @@ const SidebarBlock = ({
 			let subMenuBlock = '';
 
 			if (pageLink.subMenu?.length) {
-				subMenuBlock = <SubMenuBlock subMenu={pageLink.subMenu} backToMain={backToMain} />;
+				subMenuBlock = <SubMenuBlock subMenu={pageLink.subMenu} backToMain={backToMain} key={`sub-${pageLink.link}`}/>;
 			}
 
-			return <>
+			return <React.Fragment key={pageLink.link}>
 				<NavLink className={`glitch-btn js-sidebar-${pageLink.link}`} to={`/${link}`} key={pageLink.link} onClick={ isBack }>
 					<div className="title">{pageLink.name}</div>
 					<div className="mask">
@@ -113,7 +113,7 @@ const SidebarBlock = ({
 					</div>
 				</NavLink>
 				{ subMenuBlock }
-			</>;
+			</React.Fragment>;
 		})
 	;
 
