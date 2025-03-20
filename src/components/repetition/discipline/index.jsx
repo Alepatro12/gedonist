@@ -82,7 +82,7 @@ const RepetitionDisciplineBlock = React.memo(({
 					{ hasQuestion
 						? <ButtonBlock
 							isChecking={isChecking}
-							questionAnswerId={currentQuestion.qaId}
+							questionAnswerId={currentQuestion.qa_id}
 							{...props}
 						/>
 						: <></>
