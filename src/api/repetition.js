@@ -13,6 +13,7 @@ const instance = axios.create({
  * @version 1.0.0
  *
  * @param {number} userId
+ * @param {string} ownerName Page owner name
  * @returns {Object}
  */
 export const getMenuAPI = (userId = 0, ownerName = '') => {

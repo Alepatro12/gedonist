@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import AdminRepetitionDiscipline from './index';
+import RepetitionEditQuestion from './index';
 import Loader from './../../common/loader/index';
 import { getUserId } from './../../../redux/selectors';
 import {
@@ -12,7 +12,7 @@ import {
 	createQuestion,
 	findDiscipline,
 	setCreationQuestion,
-} from './../../../redux/admin-repetition-reducer';
+} from './../../../redux/repetition-edit-questions-reducer';
 import {
 	getName,
 	getAnswers,
@@ -22,10 +22,10 @@ import {
 	getDisciplineId,
 	getIsShowSuccess,
 	getIsCreationQuestion,
-} from './../../../redux/admin-repetition-selectors';
+} from './../../../redux/repetition-edit-questions-selectors';
 
 /**
- * Get the admin discipline repetition page
+ * Get the edit question discipline repetition page
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
@@ -34,18 +34,18 @@ import {
  * @param {Object} props
  * @returns {HTMLElement}
  */
-const AdminRepetitionDisciplineClassContainer = React.memo(({
+const RepetitionEditQuestionClassContainer = React.memo(({
 	isFetching = false,
 	...props
 }) => {
 	return <>
 		<Loader isFetching={isFetching}/>
-		<AdminRepetitionDiscipline {...props}/>
+		<RepetitionEditQuestion {...props}/>
 	</>;
 });
 
 /**
- * Get parameters for the admin discipline repetition page
+ * Get parameters for the edit question discipline repetition page
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
@@ -55,7 +55,7 @@ const AdminRepetitionDisciplineClassContainer = React.memo(({
  */
 const mapStateToProps = (state = {}) => {
 	return {
-		page: 'admin-repetition-discipline',
+		page: 'repetition-edit-question',
 		name: getName(state),
 		userId: getUserId(state),
 		answers: getAnswers(state),
@@ -69,14 +69,14 @@ const mapStateToProps = (state = {}) => {
 }
 
 /**
- * Pass parameters to the admin discipline repetition page
+ * Pass parameters to the edit question discipline repetition page
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
  * 
  * @returns {HTMLElement}
  */
-const AdminRepetitionDisciplineContainer = compose(
+const RepetitionEditQuestionContainer = compose(
 	connect(mapStateToProps, {
 		search,
 		clearError,
@@ -86,6 +86,6 @@ const AdminRepetitionDisciplineContainer = compose(
 		findDiscipline,
 		setCreationQuestion,
 	})
-) (AdminRepetitionDisciplineClassContainer);
+) (RepetitionEditQuestionClassContainer);
 
-export default AdminRepetitionDisciplineContainer;
+export default RepetitionEditQuestionContainer;

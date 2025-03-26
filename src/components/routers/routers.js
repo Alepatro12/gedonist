@@ -9,14 +9,13 @@ const Fortune = React.lazy(() => import('../../fortune/index'));
 const AdminPanel = React.lazy(() => import('../admin-panel/index'));
 const Repetition = React.lazy(() => import('../repetition/container'));
 const LoginContainer = React.lazy(() => import('../auth/login/container'));
-const AdminRepetition = React.lazy(() => import('../admin-repetition/container'));
 const NewPasswordContainer = React.lazy(() => import('../auth/new-password/container'));
 const AuthenticateContainer = React.lazy(() => import('../auth/authenticate/container'));
 const MusicNewCollection = React.lazy(() => import('../music/new-collection/container'));
 const RepetitionDiscipline = React.lazy(() => import('../repetition/discipline/container'));
 const ChangePasswordContainer = React.lazy(() => import('../auth/change-password/container'));
 const MusicChangeCollection = React.lazy(() => import('../music/change-collection/container'));
-const AdminRepetitionDiscipline = React.lazy(() => import('../admin-repetition/discipline/container'));
+const RepetitionEditQuestion = React.lazy(() => import('../repetition/edit-question/container'));
 
 export const commonRouters = [
 	{element: Home, path: '/*', exact: true},
@@ -39,7 +38,7 @@ export const authorizedUserRouters = [
 	{element: MusicNewCollection, path: '/music/new-collection', exact: true},
 	{element: RepetitionDiscipline, path: '/repetition/subject/:ownerName/:subjectId', exact: true},
 	{element: MusicChangeCollection, path: '/music/change-collection', exact: true},
-	{element: AdminRepetitionDiscipline, path: '/repetition/edit-questions/:ownerName/:subjectId', exact: true},
+	{element: RepetitionEditQuestion, path: '/repetition/edit-questions/:ownerName/:subjectId', exact: true},
 ];
 
 /**

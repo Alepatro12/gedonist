@@ -7,7 +7,7 @@
  * @param {Object} state
  * @returns {Array}
  */
-export const getMenu = (state) => state.adminRepetition.menu;
+export const getMenu = (state) => state.repetitionEditQuestions.menu;
 
 /**
  * Get discipline ID
@@ -18,7 +18,7 @@ export const getMenu = (state) => state.adminRepetition.menu;
  * @param {Object} state
  * @returns {number}
  */
-export const getDisciplineId = (state) => state.adminRepetition.disciplineId;
+export const getDisciplineId = (state) => state.repetitionEditQuestions.disciplineId;
 
 /**
  * Get name of discipline
@@ -29,7 +29,7 @@ export const getDisciplineId = (state) => state.adminRepetition.disciplineId;
  * @param {Object} state
  * @returns {String}
  */
-export const getName = (state) => state.adminRepetition.name;
+export const getName = (state) => state.repetitionEditQuestions.name;
 
 /**
  * Get fetching status
@@ -40,7 +40,7 @@ export const getName = (state) => state.adminRepetition.name;
  * @param {Object} state
  * @returns {bool}
  */
-export const getIsFetching = (state) => state.adminRepetition.isFetching;
+export const getIsFetching = (state) => state.repetitionEditQuestions.isFetching;
 
 /**
  * Get creation question flag
@@ -51,7 +51,7 @@ export const getIsFetching = (state) => state.adminRepetition.isFetching;
  * @param {Object} state
  * @returns {bool}
  */
-export const getIsCreationQuestion = (state) => state.adminRepetition.isCreationQuestion;
+export const getIsCreationQuestion = (state) => state.repetitionEditQuestions.isCreationQuestion;
 
 /**
  * Get show success flag
@@ -62,7 +62,7 @@ export const getIsCreationQuestion = (state) => state.adminRepetition.isCreation
  * @param {Object} state
  * @returns {bool}
  */
-export const getIsShowSuccess = (state) => state.adminRepetition.isShowSuccess;
+export const getIsShowSuccess = (state) => state.repetitionEditQuestions.isShowSuccess;
 
 /**
  * Get result text
@@ -73,7 +73,7 @@ export const getIsShowSuccess = (state) => state.adminRepetition.isShowSuccess;
  * @param {Object} state
  * @returns {String}
  */
-export const getResultText = (state) => state.adminRepetition.resultText;
+export const getResultText = (state) => state.repetitionEditQuestions.resultText;
 
 /**
  * Get show error flag
@@ -84,7 +84,7 @@ export const getResultText = (state) => state.adminRepetition.resultText;
  * @param {Object} state
  * @returns {bool}
  */
-export const getIsShowError = (state) => state.adminRepetition.isShowError;
+export const getIsShowError = (state) => state.repetitionEditQuestions.isShowError;
 
 /**
  * Get questions
@@ -95,7 +95,7 @@ export const getIsShowError = (state) => state.adminRepetition.isShowError;
  * @param {Object} state
  * @returns {Array}
  */
-export const getQuestions = (state) => state.adminRepetition.questions;
+export const getQuestions = (state) => state.repetitionEditQuestions.questions;
 
 /**
  * Get answers
@@ -106,4 +106,4 @@ export const getQuestions = (state) => state.adminRepetition.questions;
  * @param {Object} state
  * @returns {Array}
  */
-export const getAnswers = (state) => state.adminRepetition.answers;
+export const getAnswers = (state) => state.repetitionEditQuestions.answers;

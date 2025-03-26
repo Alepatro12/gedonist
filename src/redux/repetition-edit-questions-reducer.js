@@ -3,69 +3,62 @@ import {
 	deleteQuestionAPI,
 	getSearchQuestionAPI,
 	getCreationQuestionAPI,
-} from './../api/admin-repetition-discipline';
-import { getMenuAPI } from './../api/admin-repetition';
+} from './../api/repetition-edit-question';
 import { getDisciplineAPI } from './../api/repetition-discipline';
 
 /**
  * @const
  * @type {string} Action type - toggle is fetching
  */
-const TOGGLE_IS_FETCHING = 'admin-repetition/TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FETCHING = 'repetition-edit-questions/TOGGLE_IS_FETCHING';
 
 /**
  * @const
  * @type {string} Action type - toggle is disabled
  */
-const TOGGLE_IS_DISABLED = 'admin-repetition/TOGGLE_IS_DISABLED';
-
-/**
- * @const
- * @type {string} Action type - get menu of repetition
- */
-const GET_MENU = 'admin-repetition/GET_MENU';
+const TOGGLE_IS_DISABLED = 'repetition-edit-questions/TOGGLE_IS_DISABLED';
 
 /**
  * @const
  * @type {string} Action type - get info of discipline
  */
-const GET_DISCIPLINE = 'admin-repetition/GET_DISCIPLINE';
+const GET_DISCIPLINE = 'repetition-edit-questions/GET_DISCIPLINE';
 
 /**
  * @const
  * @type {string} Action type - set creation question
  */
-const SET_CREATION_QUESTION = 'admin-repetition/SET_CREATION_QUESTION';
+const SET_CREATION_QUESTION = 'repetition-edit-questions/SET_CREATION_QUESTION';
 
 /**
  * @const
  * @type {string} Action type - set creation new question
  */
-const SET_CREATION_NEW_QUESTION = 'admin-repetition/SET_CREATION_NEW_QUESTION';
+const SET_CREATION_NEW_QUESTION = 'repetition-edit-questions/SET_CREATION_NEW_QUESTION';
 
 /**
  * @const
  * @type {string} Action type - clear error notification
  */
-const CLEAR_ERROR = 'admin-repetition/CLEAR_ERROR';
+const CLEAR_ERROR = 'repetition-edit-questions/CLEAR_ERROR';
 
 /**
  * @const
  * @type {string} Action type - set questions
  */
-const SET_QUESTIONS = 'admin-repetition/SET_QUESTIONS';
+const SET_QUESTIONS = 'repetition-edit-questions/SET_QUESTIONS';
 
 /**
  * @const
  * @type {string} Action type - delete question
  */
-const DELETE_QUESTION = 'admin-repetition/DELETE_QUESTION';
+const DELETE_QUESTION = 'repetition-edit-questions/DELETE_QUESTION';
 
 /**
  * @const
  * @type {string} Action type - edit question
  */
-const EDITE_QUESTION = 'admin-repetition/EDIT_QUESTION';
+const EDITE_QUESTION = 'repetition-edit-questions/EDIT_QUESTION';
 
 const initialState = {
 	name: '',
@@ -86,7 +79,7 @@ const initialState = {
 };
 
 /**
- * Reducer the admin repetition pages
+ * Reducer the edit question repetition pages
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
@@ -95,7 +88,7 @@ const initialState = {
  * @param {Object} action New date
  * @returns {Object} New state
  */
-const adminRepetitionReducer = (state = initialState, action = {}) => {
+const RepetitionEditQuestionsReducer = (state = initialState, action = {}) => {
 	switch (action.type) {
 		case SET_QUESTIONS: {
 			const answers = action.answers?.length || action.error?.code ? action.answers : state.answers;
@@ -153,12 +146,6 @@ const adminRepetitionReducer = (state = initialState, action = {}) => {
 				isCreationQuestion: action.isCreationQuestion,
 			};
 		}
-		case GET_MENU: {
-			return {
-				...state,
-				menu: [ ...action.menu ],
-			};
-		}
 		case GET_DISCIPLINE: {
 			return {
 				...state,
@@ -188,24 +175,6 @@ const adminRepetitionReducer = (state = initialState, action = {}) => {
 		default:
 			return state;
 	}
-};
-
-/**
- * Set admin repetition menu
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @param {Array} menu List of disciplines 
- * @param {Object} error
- * @returns {Object}
- */
-const setMenu = ({ menu = [], error = {} }) => {
-	return {
-		menu,
-		error,
-		type: GET_MENU,
-	};
 };
 
 /**
@@ -321,26 +290,6 @@ const setToggle = (isToggle = false) => {
 	return (dispatch) => {
 		dispatch(setIsFetching(isToggle));
 		dispatch(setIsDisabled(isToggle));
-	}
-};
-
-/**
- * Find admin menu of repetition
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @param {number} userId
- * @returns {Function}
- */
-export const findMenu = (userId = 0) => {
-	return async (dispatch) => {
-		dispatch(setToggle(true));
-
-		const response = await getMenuAPI(userId);
-
-		dispatch(setMenu(response));
-		dispatch(setToggle(false));
 	}
 };
 
@@ -515,4 +464,4 @@ export const editQuestion = (data = {}, disciplineId = 0) => {
 	}
 };
 
-export default adminRepetitionReducer;
+export default RepetitionEditQuestionsReducer;

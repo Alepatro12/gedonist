@@ -23,7 +23,7 @@ export const getDisciplineAPI = (userId = 0, disciplineId = 0) => {
 };
 
 /**
- * Change priority of quest
+ * Edit question history
  *
  * @author Alessandro Vilanni
  * @version 1.0.0

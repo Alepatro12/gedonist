@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import React, { useLayoutEffect, useEffect } from 'react';
 
 /**
- * Render the admin discipline repetition page
+ * Render the edit question discipline repetition page
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
@@ -14,7 +14,7 @@ import React, { useLayoutEffect, useEffect } from 'react';
  * @param {Function} findDiscipline Search for discipline data
  * @returns {HTMLElement}
  */
-const AdminRepetitionDiscipline = React.memo(({
+const RepetitionEditQuestion = React.memo(({
 	userId = 0,
 	disciplineId = 0,
 	findDiscipline = () => {},
@@ -205,11 +205,11 @@ const RepetitionDisciplineBlock = React.memo(({
 	};
 
 	return <>
-		<div className="admin-repetition-discipline">
-			<h1 className="admin-repetition-discipline__title">{ name }</h1>
-			<div className="admin-repetition-discipline__block">
-				<div className="admin-repetition-discipline__filters">
-					<button className="btn admin-repetition-discipline__btn" onClick={ startSetCreationQuestion }>Создать вопрос</button>
+		<div className="repetition-edit-questions">
+			<h1 className="repetition-edit-questions__title">{ name }</h1>
+			<div className="repetition-edit-questions__block">
+				<div className="repetition-edit-questions__filters">
+					<button className="btn repetition-edit-questions__btn" onClick={ startSetCreationQuestion }>Создать вопрос</button>
 					<div>
 						<SearchInput
 							id="question"
@@ -240,7 +240,7 @@ const RepetitionDisciplineBlock = React.memo(({
 					</div>
 				</div>
 				{(isCreationQuestion || question?.id) &&
-					<div className="admin-repetition-discipline__edit-block">
+					<div className="repetition-edit-questions__edit-block">
 						<QuestionEditingBlock
 							answer={question?.answer}
 							question={question?.question}
@@ -286,7 +286,7 @@ const ButtonBlock = React.memo(({
 	startPrimaryAction = () => {},
 }) => {
 	return <>
-		<div className="admin-repetition-discipline__buttons-block">
+		<div className="repetition-edit-questions__buttons-block">
 			<Button
 				name={ isCreationQuestion ? 'Очистить' : 'Удалить' }
 				startAction={ startSecondAction }
@@ -323,7 +323,7 @@ const Button = React.memo(({
 }) => {
 	return <>
 		<div
-			className={`btn btn-target admin-repetition-discipline__btn-target ${isPrimary ? '' : 'btn-target-second' }`}
+			className={`btn btn-target repetition-edit-questions__btn-target ${isPrimary ? '' : 'btn-target-second' }`}
 			onClick={ startAction }
 		>{ name }</div>
 	</>;
@@ -353,7 +353,7 @@ const SearchInput = React.memo(({
 			autoComplete="off"
 			id={`search-${id}`}
 			placeholder={`Поиск ${placeholder}`}
-			className="input admin-repetition-discipline__input"
+			className="input repetition-edit-questions__input"
 			onChange={ search }
 			onFocus={ onFocus }
 		></input>
@@ -375,7 +375,7 @@ const ResultBlock = React.memo(({
 	isSuccess = false,
 }) => {
 	return <>
-		<div className={`alert alert-${ isSuccess ? 'success' : 'error pointer' } admin-repetition-discipline__${ isSuccess ? 'success' : 'error' }`}>
+		<div className={`alert alert-${ isSuccess ? 'success' : 'error pointer' } repetition-edit-questions__${ isSuccess ? 'success' : 'error' }`}>
 			{ resultText }
 		</div>
 	</>;
@@ -434,7 +434,7 @@ const Textarea = React.memo(({
 	return <>
 		<textarea
 			id={`textarea-${id}`}
-			className="input scroll admin-repetition-discipline__textarea"
+			className="input scroll repetition-edit-questions__textarea"
 			placeholder={`Введите ${placeholder}`}
 			name={id}
 			value={ value }
@@ -443,4 +443,4 @@ const Textarea = React.memo(({
 	</>;
 });
 
-export default AdminRepetitionDiscipline; 
+export default RepetitionEditQuestion; 

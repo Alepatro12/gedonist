@@ -495,96 +495,106 @@ textarea.scroll::-webkit-scrollbar-track {
   border-bottom-color: #27b13c;
 }
 
-.admin-repetition {
+.repetition-edit-questions {
   display: flex;
-  justify-content: center;
-  font-family: "Cormorant Garamond", serif;
-}
-.admin-repetition__block {
-  display: flex;
-  width: 850px;
-  min-height: 600px;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
-}
-@media only screen and (max-width: 991px) {
-  .admin-repetition__block {
-    display: block;
-    min-height: auto;
-    min-width: 250px;
-    max-width: 500px;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .admin-repetition__block {
-    max-width: 330px;
-  }
-}
-.admin-repetition__content {
-  position: relative;
-  height: 100%;
-  padding: 15px;
-  font-size: 18px;
-  text-align: center;
-}
-.admin-repetition__front-page {
-  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100%;
+  font-size: 18px;
 }
-.admin-repetition__menu {
-  margin-top: 50px;
-  font-size: 24px;
+.repetition-edit-questions__block {
+  width: 960px;
 }
 @media only screen and (max-width: 991px) {
-  .admin-repetition__menu {
-    margin-top: 0;
-    font-size: 20px;
-  }
-}
-.admin-repetition__menu-block {
-  margin: 10px 0 50px;
-}
-.admin-repetition__menu-page-number {
-  position: absolute;
-  bottom: 10px;
-  right: 15px;
-}
-.admin-repetition__name {
-  margin: 5px 0 -5px;
-}
-.admin-repetition__number-page {
-  margin: 5px 0 -5px;
-}
-.admin-repetition__page {
-  width: 50%;
-  background-color: #f8f8f8;
-  background-image: linear-gradient(90deg, #dfdfdf 0%, rgba(248, 248, 248, 0) 18%);
-}
-.admin-repetition__page:nth-of-type(1) {
-  background-image: linear-gradient(-90deg, #dfdfdf 0%, rgba(248, 248, 248, 0) 18%);
-}
-@media only screen and (max-width: 991px) {
-  .admin-repetition__page {
+  .repetition-edit-questions__block {
     width: 100%;
-    background-image: linear-gradient(-90deg, #dfdfdf 0%, rgba(248, 248, 248, 0) 18%);
   }
 }
-.admin-repetition__row {
+.repetition-edit-questions__btn {
+  height: 30px;
+}
+@media only screen and (max-width: 991px) {
+  .repetition-edit-questions__btn-target {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+.repetition-edit-questions__buttons-block {
+  display: flex;
+  width: 620px;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+@media only screen and (max-width: 991px) {
+  .repetition-edit-questions__buttons-block {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
+}
+.repetition-edit-questions__edit-block {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
-  border-bottom: 1px dotted #000;
-}
-.admin-repetition__title {
-  margin-bottom: 100px;
-  font-size: 30px;
-  text-align: center;
-  letter-spacing: 1px;
+  margin-top: 20px;
 }
 @media only screen and (max-width: 991px) {
-  .admin-repetition__title {
-    margin: 35px 0 25px;
+  .repetition-edit-questions__edit-block {
+    display: block;
+  }
+}
+.repetition-edit-questions__error {
+  margin-top: 10px;
+}
+@media only screen and (max-width: 991px) {
+  .repetition-edit-questions__error {
+    margin-top: -10px;
+    margin-bottom: 15px;
+  }
+}
+.repetition-edit-questions__input {
+  height: 30px;
+  width: 400px;
+}
+@media only screen and (max-width: 991px) {
+  .repetition-edit-questions__input {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+.repetition-edit-questions__filters {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+@media only screen and (max-width: 991px) {
+  .repetition-edit-questions__filters {
+    display: block;
+  }
+}
+.repetition-edit-questions__success {
+  margin-top: 10px;
+}
+@media only screen and (max-width: 991px) {
+  .repetition-edit-questions__success {
+    margin-bottom: 15px;
+  }
+}
+.repetition-edit-questions__textarea {
+  height: 500px;
+  width: 470px;
+}
+@media only screen and (max-width: 991px) {
+  .repetition-edit-questions__textarea {
+    height: 300px;
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+.repetition-edit-questions__title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 30px;
+  color: #d38484;
+}
+@media only screen and (max-width: 991px) {
+  .repetition-edit-questions__title {
     font-size: 24px;
   }
 }/*# sourceMappingURL=style.css.map */

@@ -6,7 +6,7 @@ import musicReducer from './music-reducer';
 import { reducer as formReducer } from 'redux-form';
 import repetitionReducer from './repetition-reducer';
 import checkAuthenticationReducer from './account-data-reducer';
-import adminRepetitionReducer from './admin-repetition-reducer';
+import RepetitionEditQuestionsReducer from './repetition-edit-questions-reducer';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 
 const reducers = combineReducers({
@@ -16,7 +16,7 @@ const reducers = combineReducers({
 	appData: appReducer,
 	music: musicReducer,
 	repetition: repetitionReducer,
-	adminRepetition: adminRepetitionReducer,
+	repetitionEditQuestions: RepetitionEditQuestionsReducer,
 	authenticationData: checkAuthenticationReducer,
 });
 
