@@ -10,6 +10,7 @@ import React, { useLayoutEffect } from 'react';
  *
  * @param {Array} menu List of disciplines
  * @param {number} userId
+ * @param {string} ownerName Page owner's name
  * @param {Function} findMenu Search for disciplines
  * @returns {HTMLElement}
  */
@@ -39,15 +40,15 @@ const Repetition = React.memo(({
  * @version 1.0.0
  *
  * @param {Array} menu List of disciplines
+ * @param {string} ownerName Page owner's name
  * @returns {HTMLElement}
  */
 const RepetitionBlock = React.memo(({ menu = [], ownerName = '' }) => {
 	let menuBlock = '';
-	let pageNumber = 0;
 
 	if (menu) {
 		menuBlock = menu?.map(paragraph => {
-			pageNumber += 2;
+			const pageNumber = paragraph.id % 2 ? paragraph.id : ++paragraph.id;;
 
 			return <DisciplineBlock key={paragraph.id} ownerName={ownerName} pageNumber={pageNumber} {...paragraph}/>
 		})
@@ -81,6 +82,7 @@ const RepetitionBlock = React.memo(({ menu = [], ownerName = '' }) => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
+ * @param {number} id Discipline ID
  * @param {String} name Name of discipline
  * @param {String} link Title of the discipline page
  * @param {number} pageNumber Page number

@@ -18,6 +18,7 @@ const PATHS = {
  * @param {Array} menu List of menu
  * @param {number} userId User ID
  * @param {number} userType User type
+ * @param {String} userName User name
  * @param {Function} findMenu Search for menu
  * @returns {HTMLElement}
  */
@@ -85,10 +86,21 @@ const Sidebar = React.memo(({
 		: <></>;
 });
 
+/**
+ * Get the sidebar block
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Array} menu List of menu
+ * @param {String} userName User name
+ * @param {Function} backToMain Logic when leaving a page
+ * @returns {HTMLElement}
+ */
 const SidebarBlock = ({
-	menu,
-	userName,
-	backToMain,
+	menu = [],
+	userName = '',
+	backToMain = () => {},
 }) => {
 	const isBack = (event) => {
 		if (event.currentTarget.classList.contains('js-sidebar-music')) {
@@ -124,9 +136,19 @@ const SidebarBlock = ({
 	);
 }
 
+/**
+ * Get the submenu
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Array} subMenu List of submenu
+ * @param {Function} backToMain Logic when leaving a page
+ * @returns {HTMLElement}
+ */
 const SubMenuBlock = ({
-	subMenu,
-	backToMain,
+	subMenu = [],
+	backToMain = () => {},
 }) => {
 	const isBack = (event) => {
 		if (event.currentTarget.classList.contains('js-sidebar-music')) {

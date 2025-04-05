@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import React, { useLayoutEffect, useEffect } from 'react';
 
 /**
- * Render the edit question discipline repetition page
+ * Render the edit questions discipline repetition page
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
@@ -14,7 +14,7 @@ import React, { useLayoutEffect, useEffect } from 'react';
  * @param {Function} findDiscipline Search for discipline data
  * @returns {HTMLElement}
  */
-const RepetitionEditQuestion = React.memo(({
+const RepetitionEditQuestions = React.memo(({
 	userId = 0,
 	disciplineId = 0,
 	findDiscipline = () => {},
@@ -32,7 +32,7 @@ const RepetitionEditQuestion = React.memo(({
 	}, [ownerName, subjectId]);
 
 	return disciplineId
-		? <RepetitionDisciplineBlock userId={userId} disciplineId={disciplineId} {...props}/>
+		? <RepetitionEditQuestionsBlock userId={userId} disciplineId={disciplineId} {...props}/>
 		: <></>;
 });
 
@@ -55,7 +55,7 @@ const RepetitionEditQuestion = React.memo(({
  * @param {Function} setCreationQuestion Request to start creating a question
  * @returns {HTMLElement}
  */
-const RepetitionDisciplineBlock = React.memo(({
+const RepetitionEditQuestionsBlock = React.memo(({
 	name = '',
 	resultText = '',
 	disciplineId = 0,
@@ -443,4 +443,4 @@ const Textarea = React.memo(({
 	</>;
 });
 
-export default RepetitionEditQuestion; 
+export default RepetitionEditQuestions; 

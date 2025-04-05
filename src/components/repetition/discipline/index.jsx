@@ -11,6 +11,7 @@ import DropDownMenu from './../../common/drop-down-menu';
  * @version 1.0.0
  *
  * @param {number} userId
+ * @param {Array} subMenu List of submenu
  * @param {number} disciplineId Discipline ID
  * @param {Function} findDiscipline Search for discipline data
  * @returns {HTMLElement}
@@ -48,8 +49,10 @@ const RepetitionDiscipline = React.memo(({
  *
  * @param {String} name Name of discipline
  * @param {number} counter Counter of correct answers
- * @param {bool} isChecking Response check flag
+ * @param {String} ownerName Page owner's name
+ * @param {number} disciplineId Discipline ID
  * @param {Object} pageNumbers Page numbers
+ * @param {bool} isChecking Response check flag
  * @param {Object} currentQuestion Current question data
  * @returns {HTMLElement}
  */
@@ -57,12 +60,14 @@ const RepetitionDisciplineBlock = React.memo(({
 	name = '',
 	counter = 0,
 	ownerName = '',
+	disciplineId = 0,
 	pageNumbers = {},
 	isChecking = false,
 	currentQuestion = {},
 	...props
 }) => {
 	const hasQuestion = currentQuestion?.question;
+	let firstPage = disciplineId % 2 ? disciplineId : ++disciplineId;
 
 	return <>
 		<div className="repetition-discipline">
@@ -87,7 +92,7 @@ const RepetitionDisciplineBlock = React.memo(({
 						/>
 						: <></>
 					}
-					<div className="repetition-discipline__page-number-first">{ pageNumbers?.first || 2 }</div>
+					<div className="repetition-discipline__page-number-first">{ firstPage }</div>
 				</div>
 				<div className="repetition-discipline__page repetition-discipline__page--second">
 					<div className="repetition-discipline__content">
@@ -95,7 +100,7 @@ const RepetitionDisciplineBlock = React.memo(({
 							<NavLink to={`/repetition/menu/${ownerName}`} className="repetition-discipline__button-link">Меню</NavLink>
 						</div>
 						<div className={`repetition-discipline__answer ${ isChecking ? '' : 'hidden' }`}>{ currentQuestion.answer }</div>
-						<div className="repetition-discipline__page-number-second">{ isMobile() ? pageNumbers?.first || 2 : pageNumbers?.second || 3 }</div>
+						<div className="repetition-discipline__page-number-second">{ isMobile() ? firstPage : ++firstPage }</div>
 					</div>
 				</div>
 			</div>
@@ -110,10 +115,9 @@ const RepetitionDisciplineBlock = React.memo(({
  * @version 1.0.0
  *
  * @param {number} userId
- * @param {number} priority Prioritize the importance of repetition
- * @param {bool} isChecking Response check flag
  * @param {number} questionAnswerId Question ID
  * @param {number} disciplineId Discipline ID
+ * @param {bool} isChecking Response check flag
  * @param {Function} checkAnswer Response check function
  * @param {Function} skipQuestion Skip question function
  * @param {Function} moveNextQuestion Move to next question function

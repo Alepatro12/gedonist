@@ -50,7 +50,7 @@ const RepetitionDisciplineClassContainer = React.memo(({
  */
 const mapStateToProps = (state = {}) => {
 	return {
-		page: 'repetition-discipline',
+		page: 'repetition-subject',
 		name: getName(state),
 		userId: getUserId(state),
 		counter: getCounter(state),

@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import RepetitionEditQuestion from './index';
+import RepetitionEditQuestions from './index';
 import Loader from './../../common/loader/index';
 import { getUserId } from './../../../redux/selectors';
 import {
@@ -25,7 +25,7 @@ import {
 } from './../../../redux/repetition-edit-questions-selectors';
 
 /**
- * Get the edit question discipline repetition page
+ * Get the edit questions discipline repetition page
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
@@ -34,18 +34,18 @@ import {
  * @param {Object} props
  * @returns {HTMLElement}
  */
-const RepetitionEditQuestionClassContainer = React.memo(({
+const RepetitionEditQuestionsClassContainer = React.memo(({
 	isFetching = false,
 	...props
 }) => {
 	return <>
 		<Loader isFetching={isFetching}/>
-		<RepetitionEditQuestion {...props}/>
+		<RepetitionEditQuestions {...props}/>
 	</>;
 });
 
 /**
- * Get parameters for the edit question discipline repetition page
+ * Get parameters for the edit questions discipline repetition page
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
@@ -55,7 +55,7 @@ const RepetitionEditQuestionClassContainer = React.memo(({
  */
 const mapStateToProps = (state = {}) => {
 	return {
-		page: 'repetition-edit-question',
+		page: 'repetition-edit-questions',
 		name: getName(state),
 		userId: getUserId(state),
 		answers: getAnswers(state),
@@ -69,14 +69,14 @@ const mapStateToProps = (state = {}) => {
 }
 
 /**
- * Pass parameters to the edit question discipline repetition page
+ * Pass parameters to the edit questions discipline repetition page
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
  * 
  * @returns {HTMLElement}
  */
-const RepetitionEditQuestionContainer = compose(
+const RepetitionEditQuestionsContainer = compose(
 	connect(mapStateToProps, {
 		search,
 		clearError,
@@ -86,6 +86,6 @@ const RepetitionEditQuestionContainer = compose(
 		findDiscipline,
 		setCreationQuestion,
 	})
-) (RepetitionEditQuestionClassContainer);
+) (RepetitionEditQuestionsClassContainer);
 
-export default RepetitionEditQuestionContainer;
+export default RepetitionEditQuestionsContainer;
