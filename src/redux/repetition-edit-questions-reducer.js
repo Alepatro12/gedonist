@@ -228,7 +228,8 @@ const setNewQuestion = ({
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {Array} questions Question array
+ * @param {Array} questions Questions
+ * @param {Array} answers Answers
  * @param {Object} error
  * @returns {Object}
  */
@@ -401,7 +402,7 @@ export const createQuestion = (disciplineId = 0, question = '', answer = '') => 
 };
 
 /**
- * Search questions
+ * Search questions or answers
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
@@ -428,8 +429,7 @@ export const search = (disciplineId = 0, request = '', isSearchAnswer = false) =
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {number} questionId Question ID
- * @param {number} disciplineId Discipline ID
+ * @param {Object} data
  * @returns {Function}
  */
 export const deleteQuestion = (data) => {
@@ -449,7 +449,7 @@ export const deleteQuestion = (data) => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {Object} question Question object
+ * @param {Object} data
  * @param {number} disciplineId Discipline ID
  * @returns {Function}
  */

@@ -144,9 +144,7 @@ const setToggle = (isToggle = false) => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {number} userId User ID
- * @param {number} userType User type
- * @param {bool} isAdminPanel Admin panel pages flag
+ * @param {Object} parameters
  * @returns {Function}
  */
 export const findMenu = (parameters = {}) => {

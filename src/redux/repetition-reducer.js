@@ -142,6 +142,7 @@ const repetitionReducer = (state = initialState, action = {}) => {
  *
  * @param {Array} menu List of disciplines 
  * @param {Object} error
+ * @param {String} ownerName Page owner's name
  * @returns {Object}
  */
 const setMenu = ({ menu = [], error = {} }, ownerName = '') => {
@@ -257,6 +258,7 @@ const setToggle = (isToggle = false) => {
  * @version 1.0.0
  *
  * @param {number} userId
+ * @param {String} ownerName Page owner's name
  * @returns {Function}
  */
 export const findMenu = (userId = 0, ownerName = '') => {
@@ -321,8 +323,8 @@ export const checkAnswer = () => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {number} priority Prioritize the importance of repetition
  * @param {bool} isRepeat Question repeat flag
+ * @param {Object} props
  * @returns {Function}
  */
 export const moveNextQuestion = ({ isRepeat = false, ...props }) => {

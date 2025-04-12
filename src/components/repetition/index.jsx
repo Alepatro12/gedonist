@@ -48,7 +48,7 @@ const RepetitionBlock = React.memo(({ menu = [], ownerName = '' }) => {
 
 	if (menu) {
 		menuBlock = menu?.map(paragraph => {
-			const pageNumber = paragraph.id % 2 ? paragraph.id : ++paragraph.id;;
+			const pageNumber = paragraph.id % 2 ? paragraph.id : Number(paragraph.id) + 1;
 
 			return <DisciplineBlock key={paragraph.id} ownerName={ownerName} pageNumber={pageNumber} {...paragraph}/>
 		})

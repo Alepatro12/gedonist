@@ -16,8 +16,8 @@ const reducers = combineReducers({
 	appData: appReducer,
 	music: musicReducer,
 	repetition: repetitionReducer,
-	repetitionEditQuestions: RepetitionEditQuestionsReducer,
 	authenticationData: checkAuthenticationReducer,
+	repetitionEditQuestions: RepetitionEditQuestionsReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
