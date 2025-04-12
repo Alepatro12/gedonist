@@ -17,6 +17,10 @@
 
 	&__btn {
 		height: 30px;
+
+		&--border {
+			border: 1px solid $green-200 !important;
+		}
 	}
 
 	&__btn-target {

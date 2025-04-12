@@ -90,8 +90,8 @@ const RepetitionEditQuestionsBlock = React.memo(({
 	};
 
 	const startCreationQuestion = () => {
-		const answer = question?.answer.trim();
-		const questionStr = question?.question.trim();
+		const answer = question?.answer?.trim();
+		const questionStr = question?.question?.trim();
 
 		if (!questionStr || !answer) {
 			return;
@@ -209,7 +209,10 @@ const RepetitionEditQuestionsBlock = React.memo(({
 			<h1 className="repetition-edit-questions__title">{ name }</h1>
 			<div className="repetition-edit-questions__block">
 				<div className="repetition-edit-questions__filters">
-					<button className="btn repetition-edit-questions__btn" onClick={ startSetCreationQuestion }>Создать вопрос</button>
+					<button
+						onClick={ startSetCreationQuestion }
+						className={`btn repetition-edit-questions__btn ${isCreationQuestion || question?.id ? 'btn-target-second repetition-edit-questions__btn--border' : ''}`}
+					>Составить вопрос</button>
 					<div>
 						<SearchInput
 							id="question"

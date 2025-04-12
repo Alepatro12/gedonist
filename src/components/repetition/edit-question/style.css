@@ -512,6 +512,9 @@ textarea.scroll::-webkit-scrollbar-track {
 .repetition-edit-questions__btn {
   height: 30px;
 }
+.repetition-edit-questions__btn--border {
+  border: 1px solid #27b13c !important;
+}
 @media only screen and (max-width: 991px) {
   .repetition-edit-questions__btn-target {
     width: 100%;
