@@ -2,7 +2,6 @@ import './style.css';
 import React, { useLayoutEffect } from 'react';
 import { isMobile } from '../../../utils/utils';
 import { NavLink, useParams } from 'react-router-dom';
-import DropDownMenu from './../../common/drop-down-menu';
 
 /**
  * Render the discipline repetition page
@@ -11,14 +10,12 @@ import DropDownMenu from './../../common/drop-down-menu';
  * @version 1.0.0
  *
  * @param {number} userId
- * @param {Array} subMenu List of submenu
  * @param {number} disciplineId Discipline ID
  * @param {Function} findDiscipline Search for discipline data
  * @returns {HTMLElement}
  */
 const RepetitionDiscipline = React.memo(({
 	userId = 0,
-	subMenu = [],
 	disciplineId = 0,
 	findDiscipline = () => {},
 	...props
@@ -35,10 +32,8 @@ const RepetitionDiscipline = React.memo(({
 	}, [ownerName, subjectId]);
 
 	return disciplineId
-		? <>
-			<DropDownMenu subMenu={subMenu}></DropDownMenu>
-			<RepetitionDisciplineBlock userId={userId} disciplineId={disciplineId} ownerName={ownerName} {...props}/>
-		</> : <></>;
+		? <RepetitionDisciplineBlock userId={userId} disciplineId={disciplineId} ownerName={ownerName} {...props}/>
+		: <></>;
 });
 
 /**

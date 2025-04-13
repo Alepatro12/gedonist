@@ -1,7 +1,9 @@
 import './style.css';
+
 import React from 'react';
-import PopUp from './../../common/pop-up';
-import { isMobile } from '../../../utils/utils';
+
+import PopUp from './../common/pop-up';
+import { isMobile } from '../../utils/utils';
 
 /**
  * Get a dropdown menu

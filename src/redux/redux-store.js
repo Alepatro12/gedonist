@@ -1,13 +1,15 @@
+import thunkMiddleware from 'redux-thunk';
+import { reducer as formReducer } from 'redux-form';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+
 import appReducer from './app-reducer';
 import gmaReducer from './gma-reducer';
 import menuReducer from './menu-reducer';
-import thunkMiddleware from 'redux-thunk';
 import musicReducer from './music-reducer';
-import { reducer as formReducer } from 'redux-form';
 import repetitionReducer from './repetition-reducer';
 import checkAuthenticationReducer from './account-data-reducer';
+import RepetitionEditSubjectReducer from './repetition-edit-subject-reducer';
 import RepetitionEditQuestionsReducer from './repetition-edit-questions-reducer';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 
 const reducers = combineReducers({
 	gma: gmaReducer,
@@ -17,6 +19,7 @@ const reducers = combineReducers({
 	music: musicReducer,
 	repetition: repetitionReducer,
 	authenticationData: checkAuthenticationReducer,
+	repetitionEditSubject : RepetitionEditSubjectReducer,
 	repetitionEditQuestions: RepetitionEditQuestionsReducer,
 });
 

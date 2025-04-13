@@ -14,6 +14,7 @@ const AuthenticateContainer = React.lazy(() => import('../auth/authenticate/cont
 const MusicNewCollection = React.lazy(() => import('../music/new-collection/container'));
 const RepetitionDiscipline = React.lazy(() => import('../repetition/discipline/container'));
 const ChangePasswordContainer = React.lazy(() => import('../auth/change-password/container'));
+const EditSubjectContainer = React.lazy(() => import('../repetition/edit-subject/container'));
 const MusicChangeCollection = React.lazy(() => import('../music/change-collection/container'));
 const RepetitionEditQuestions = React.lazy(() => import('../repetition/edit-question/container'));
 
@@ -36,8 +37,9 @@ export const authorizedUserRouters = [
 	{element: Fortune, path: '/fortune', exact: true},
 	{element: Repetition, path: '/repetition/menu/:ownerName', exact: true},
 	{element: MusicNewCollection, path: '/music/new-collection', exact: true},
-	{element: RepetitionDiscipline, path: '/repetition/subject/:ownerName/:subjectId', exact: true},
 	{element: MusicChangeCollection, path: '/music/change-collection', exact: true},
+	{element: RepetitionDiscipline, path: '/repetition/subject/:ownerName/:subjectId', exact: true},
+	{element: EditSubjectContainer, path: '/repetition/edit-subject/:ownerName/:subjectId', exact: true},
 	{element: RepetitionEditQuestions, path: '/repetition/edit-questions/:ownerName/:subjectId', exact: true},
 ];
 
