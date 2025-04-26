@@ -1,4 +1,5 @@
 import {
+	getQuestionsAPI,
 	getDisciplineAPI,
 	getChangeQuestionAPI,
 } from './../api/repetition-discipline';
@@ -30,6 +31,12 @@ const GET_DISCIPLINE = 'repetition/GET_DISCIPLINE';
 
 /**
  * @const
+ * @type {string} Action type - get discipline questions
+ */
+const GET_QUESTIONS = 'repetition/GET_QUESTIONS';
+
+/**
+ * @const
  * @type {string} Action type - skip question
  */
 const SKIP_QUESTION = 'repetition/SKIP_QUESTION';
@@ -58,6 +65,7 @@ const initialState = {
 	isDisabled: false,
 	isChecking: false,
 	currentQuestion: {},
+	isEditAvailable: false,
 	error: {
 		code: 0,
 		text: '',
@@ -86,11 +94,16 @@ const repetitionReducer = (state = initialState, action = {}) => {
 		case GET_DISCIPLINE: {
 			return {
 				...state,
-				counter: 0,
-				isChecking: false,
 				name: action.name,
 				error: { ...action.error },
 				disciplineId: action.disciplineId,
+				isEditAvailable: action.isEditAvailable,
+			};
+		}
+		case GET_QUESTIONS: {
+			return {
+				...state,
+				error: { ...action.error },
 				currentQuestion: { ...action.questions.pop() },
 				questions: [ ...action.questions ],
 				pageNumbers: { ...action.pageNumbers },
@@ -165,22 +178,45 @@ const setMenu = ({ menu = [], error = {} }, ownerName = '') => {
  * @param {Array} questions List of questions
  * @param {Object} pageNumbers Page numbers
  * @param {number} disciplineId Discipline ID
+ * @param {bool} isEditAvailable Ewditing availability flag
  * @returns {Object}
  */
 const setDiscipline = ({
 	name = '',
 	error = {},
-	questions = [],
-	pageNumbers = {},
 	disciplineId = 0,
+	isEditAvailable = false,
 }) => {
 	return {
 		name,
 		error,
+		disciplineId,
+		isEditAvailable,
+		type: GET_DISCIPLINE,
+	};
+};
+
+/**
+ * Set discipline questions
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} error
+ * @param {Array} questions List of questions
+ * @param {Object} pageNumbers Page numbers
+ * @returns {Object}
+ */
+const setQuestions = ({
+	error = {},
+	questions = [],
+	pageNumbers = {},
+}) => {
+	return {
+		error,
 		questions,
 		pageNumbers,
-		disciplineId,
-		type: GET_DISCIPLINE,
+		type: GET_QUESTIONS,
 	};
 };
 
@@ -339,3 +375,24 @@ export const moveNextQuestion = ({ isRepeat = false, ...props }) => {
 };
 
 export default repetitionReducer;
+
+/**
+ * Find discipline questions
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {number} userId
+ * @param {number} disciplineId discipline ID
+ * @returns {Function}
+ */
+export const findQuestions = (userId = 0, disciplineId = 0) => {
+	return async (dispatch) => {
+		dispatch(setToggle(true));
+
+		const response = await getQuestionsAPI(userId, disciplineId);
+
+		dispatch(setQuestions(response));
+		dispatch(setToggle(false));
+	}
+};

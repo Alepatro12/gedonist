@@ -495,33 +495,56 @@ textarea.scroll::-webkit-scrollbar-track {
   border-bottom-color: #27b13c;
 }
 
-.repetition-edit-subject {
+.rename-subject {
   display: flex;
   flex-direction: column;
   align-items: center;
   transform: translate(-10%, 0);
-  font-size: 18px;
 }
 @media only screen and (max-width: 991px) {
-  .repetition-edit-subject {
+  .rename-subject {
     transform: unset;
   }
 }
-.repetition-edit-subject__block {
-  margin-top: 35px;
+.rename-subject__block {
+  width: 330px;
+  min-width: 250px;
+  max-width: 330px;
 }
-@media only screen and (max-width: 767px) {
-  .repetition-edit-subject__block {
-    margin-top: 20px;
+@media only screen and (max-width: 991px) {
+  .rename-subject__block {
+    width: 100%;
   }
 }
-.repetition-edit-subject__title {
+.rename-subject__btn {
+  margin-bottom: 12px;
+}
+.rename-subject__btn-primary {
+  width: 100%;
+  margin-bottom: 6px;
+}
+.rename-subject__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.rename-subject__input {
+  margin-bottom: 6px;
+}
+.rename-subject__link {
+  color: #27b13c;
+}
+.rename-subject__link:hover {
+  color: #27b13c;
+}
+.rename-subject__title {
+  text-align: center;
   font-family: "Cormorant Garamond", serif;
   font-size: 30px;
   color: #d38484;
 }
 @media only screen and (max-width: 991px) {
-  .repetition-edit-subject__title {
+  .rename-subject__title {
     font-size: 24px;
   }
 }/*# sourceMappingURL=style.css.map */

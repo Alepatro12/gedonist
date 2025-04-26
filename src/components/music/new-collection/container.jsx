@@ -3,11 +3,7 @@ import NewCollection from './index';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Loader from './../../common/loader/index';
-import {
-	getUserId,
-	getUserName,
-	getIsAuthenticate
-} from './../../../redux/selectors';
+import { getUserId } from './../../../redux/selectors';
 import { createCollection } from './../../../redux/music-reducer';
 import {
 	getPerformer,
@@ -23,7 +19,6 @@ const NewCollectionContainer = React.memo(props => {
 		<NewCollection
 			userId={props.userId}
 			performer={props.performer}
-			isAuthenticate={props.isAuthenticate}
 			createCollection={props.createCollection}
 			errorText={props.errorText}
 			isDisabled={props.isDisabled}
@@ -35,12 +30,10 @@ const mapStateToProps = (state) => {
 	return {
 		page: 'music',
 		userId: getUserId(state),
-		userName: getUserName(state),
 		performer: getPerformer(state),
 		isFetching: getIsFetching(state),
 		isDisabled: getIsDisabled(state),
 		errorText: getCollectionError(state),
-		isAuthenticate: getIsAuthenticate(state),
 	}
 }
 

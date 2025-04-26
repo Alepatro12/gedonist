@@ -17,6 +17,7 @@ const ChangePasswordContainer = React.lazy(() => import('../auth/change-password
 const EditSubjectContainer = React.lazy(() => import('../repetition/edit-subject/container'));
 const MusicChangeCollection = React.lazy(() => import('../music/change-collection/container'));
 const RepetitionEditQuestions = React.lazy(() => import('../repetition/edit-question/container'));
+const RepetitionRenameSubject = React.lazy(() => import('../repetition/rename-subject/container'));
 
 export const commonRouters = [
 	{element: Home, path: '/*', exact: true},
@@ -41,6 +42,7 @@ export const authorizedUserRouters = [
 	{element: RepetitionDiscipline, path: '/repetition/subject/:ownerName/:subjectId', exact: true},
 	{element: EditSubjectContainer, path: '/repetition/edit-subject/:ownerName/:subjectId', exact: true},
 	{element: RepetitionEditQuestions, path: '/repetition/edit-questions/:ownerName/:subjectId', exact: true},
+	{element: RepetitionRenameSubject, path: '/repetition/rename-subject/:ownerName/:subjectId', exact: true},
 ];
 
 /**

@@ -5,7 +5,20 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	transform: translate(-10%, 0);
 	font-size: $font-size-xl;
+
+	@include mq('tablet') {
+		transform: unset;
+	}
+
+	&__block {
+		margin-top: 35px;
+
+		@include mq('phone') {
+			margin-top: 20px;
+		}
+	}
 
 	&__title {
 		font-family: $font-family-serif;

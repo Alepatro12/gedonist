@@ -23,6 +23,23 @@ export const getDisciplineAPI = (userId = 0, disciplineId = 0) => {
 };
 
 /**
+ * Get info about discipline
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {number} userId
+ * @param {number} disciplineId
+ * @returns {Object}
+ */
+export const getQuestionsAPI = (userId = 0, disciplineId = 0) => {
+	return instance
+		.post('discipline-controller.php', { userId, disciplineId, isSearchQuestions: true })
+		.then(response => response.data)
+};
+
+
+/**
  * Edit question history
  *
  * @author Alessandro Vilanni

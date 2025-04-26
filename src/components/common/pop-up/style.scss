@@ -23,6 +23,10 @@
 		border-radius: 0;
 	}
 
+	&--edit {
+		border-color: $green-200;
+	}
+
 	&__block {
 		position: relative;
 		margin-bottom: 10px;
@@ -38,6 +42,10 @@
 			&:last-child {
 				border: none;
 			}
+		}
+
+		&--edit {
+			border-bottom-color: $green-200;
 		}
 	}
 

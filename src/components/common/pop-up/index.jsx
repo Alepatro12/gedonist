@@ -13,6 +13,7 @@ import { NavLink } from 'react-router-dom';
  * @param {Array} results Results array
  * @param {Function} hideFocus The logic of losing focus
  * @param {Function} selectOption The logic of selecting option
+ * @param {Object} options
  * @returns {HTMLElement}
  */
 const PopUp = React.memo(({
@@ -21,6 +22,7 @@ const PopUp = React.memo(({
 	results = [],
 	hideFocus = () => {},
 	selectOption = () => {},
+	options = {},
 }) => {
 	const handleClickOutside = (event) => {
 		if (
@@ -50,7 +52,7 @@ const PopUp = React.memo(({
 	const blockPopUp =
 		results.map(result => {
 			const option = isLink
-				? <LinkOption result={result} choiceOption={choiceOption} />
+				? <LinkOption result={result} choiceOption={choiceOption} options={ options }/>
 				: <Option result={result} choiceOption={choiceOption} />;
 
 			return <React.Fragment key={result.id}>{option}</React.Fragment>
@@ -59,7 +61,7 @@ const PopUp = React.memo(({
 
 	return <>
 		<div
-			className={`popup js-search-result ${ isLink ? 'popup--menu' : '' }`}
+			className={`popup js-search-result ${ isLink ? 'popup--menu' : '' } ${ options.classModifier ? `popup--${options.classModifier}` : '' }`}
 			hidden={!isFocus || !results.length}
 		>
 			{blockPopUp}
@@ -75,17 +77,19 @@ const PopUp = React.memo(({
  *
  * @param {Object} result Result object
  * @param {Function} selectOption The logic of selecting option
+ * @param {Object} options
  * @returns {HTMLElement}
  */
 const LinkOption = React.memo(({
 	result = {},
 	choiceOption = () => {},
+	options = {},
 }) => {
 	if (!Object.keys(result).length) {
 		return <></>
 	}
 
-	return <div className="popup__block popup__block--menu">
+	return <div className={`popup__block popup__block--menu ${ options.classModifier ? `popup__block--${options.classModifier}` : '' }`}>
 		<NavLink
 			to={result.link}
 			className="popup__link"

@@ -96,3 +96,15 @@ export const getIsFetching = (state) => state.repetition.isFetching;
  * @returns {String}
  */
 export const getOwnerName = (state) => state.repetition.ownerName;
+
+/**
+ * Get editing availability flag
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} state
+ * @returns {bool}
+ */
+export const getIsEditAvailable = (state) => state.repetition.isEditAvailable;
+

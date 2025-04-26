@@ -2,14 +2,16 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-import EditSubject from './index';
+import RenameSubject from './index';
 import Loader from './../../common/loader/index';
 import { getUserId } from './../../../redux/selectors';
 import { findDiscipline } from './../../../redux/repetition-reducer';
+import { renameSubject, clearData } from './../../../redux/repetition-edit-subject-reducer';
 import { getName, getDisciplineId, getIsEditAvailable } from './../../../redux/repetition-selectors';
+import { getErrorText, getIsSubjectRenamed } from './../../../redux/repetition-edit-subject-selectors';
 
 /**
- * Get the subject edit page
+ * Get the subject rename page
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
@@ -18,18 +20,18 @@ import { getName, getDisciplineId, getIsEditAvailable } from './../../../redux/r
  * @param {Object} props
  * @returns {HTMLElement}
  */
-const EditSubjectClassContainer = React.memo(({
+const RepetitionRenameSubjectClassContainer = React.memo(({
 	isFetching = false,
 	...props
 }) => {
 	return <>
 		<Loader isFetching={isFetching}/>
-		<EditSubject {...props}/>
+		<RenameSubject {...props}/>
 	</>;
 });
 
 /**
- * Get parameters for the subject edit page
+ * Get parameters for the subject rename page
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
@@ -39,26 +41,30 @@ const EditSubjectClassContainer = React.memo(({
  */
 const mapStateToProps = (state = {}) => {
 	return {
-		page: 'repetition-edit-subject',
+		page: 'repetition-rename-subject',
 		name: getName(state),
 		userId: getUserId(state),
+		errorText: getErrorText(state),
 		disciplineId: getDisciplineId(state),
 		isEditAvailable: getIsEditAvailable(state),
+		isSubjectRenamed: getIsSubjectRenamed(state),
 	};
 }
 
 /**
- * Pass parameters to the subject edit page
+ * Pass parameters to the subject rename page
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
  * 
  * @returns {HTMLElement}
  */
-const EditSubjectContainer = compose(
+const RepetitionRenameSubject = compose(
 	connect(mapStateToProps, {
+		clearData,
+		renameSubject,
 		findDiscipline,
 	})
-) (EditSubjectClassContainer);
+) (RepetitionRenameSubjectClassContainer);
 
-export default EditSubjectContainer;
+export default RepetitionRenameSubject;

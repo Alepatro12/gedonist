@@ -12,14 +12,21 @@ const instance = axios.create({
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
+ * @param {number} userId
  * @param {number} disciplineId Discipline ID
  * @param {String} question
  * @param {String} answer
  * @returns {Object}
  */
-export const getCreationQuestionAPI = (disciplineId = 0, question = '', answer = '') => {
+export const getCreationQuestionAPI = (userId = 0, disciplineId = 0, question = '', answer = '') => {
 	return instance
-		.post('edit-question-controller.php', { disciplineId, question, answer, isCreationQuestion: true })
+		.post('edit-question-controller.php', {
+			userId,
+			answer,
+			question,
+			disciplineId,
+			isCreationQuestion: true,
+		})
 		.then(response => response.data);
 };
 
@@ -29,14 +36,20 @@ export const getCreationQuestionAPI = (disciplineId = 0, question = '', answer =
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
+ * @param {number} userId
  * @param {number} disciplineId Discipline ID
  * @param {String} request
  * @param {bool} isSearchAnswer Search by answer flag
  * @returns {Object}
  */
-export const getSearchQuestionAPI = (disciplineId = 0, request = '', isSearchAnswer = false) => {
+export const getSearchQuestionAPI = (userId = 0, disciplineId = 0, request = '', isSearchAnswer = false) => {
 	return instance
-		.post('edit-question-controller.php', { disciplineId, request, isSearchAnswer })
+		.post('edit-question-controller.php', {
+			userId,
+			request,
+			disciplineId,
+			isSearchAnswer
+		})
 		.then(response => response.data);
 };
 

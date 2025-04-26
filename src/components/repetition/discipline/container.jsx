@@ -15,6 +15,7 @@ import {
 import {
 	checkAnswer,
 	skipQuestion,
+	findQuestions,
 	findDiscipline,
 	moveNextQuestion,
 } from './../../../redux/repetition-reducer';
@@ -73,6 +74,7 @@ const RepetitionDisciplineContainer = compose(
 	connect(mapStateToProps, {
 		checkAnswer,
 		skipQuestion,
+		findQuestions,
 		findDiscipline,
 		moveNextQuestion,
 	})

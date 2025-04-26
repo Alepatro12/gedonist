@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { getIsAuthenticate, getIsChangePassword } from './../redux/selectors';
+
 import { getIsCreatedCollection } from './../redux/music-selectors';
+import { getIsAuthenticate, getIsChangePassword } from './../redux/selectors';
 
 const mapStateToPropsForRedirect = (state) => {
 	return {
 		isAuthenticate: getIsAuthenticate(state),
 		isChangePassword: getIsChangePassword(state),
-		isCreatedCollection: getIsCreatedCollection(state)
+		isCreatedCollection: getIsCreatedCollection(state),
 	}
 }
 

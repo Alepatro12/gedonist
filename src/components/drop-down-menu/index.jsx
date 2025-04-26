@@ -29,21 +29,26 @@ const DropDownMenu = React.memo(({ subMenu = [] }) => {
 			return <React.Fragment key={subPageLink.id}></React.Fragment>;
 		}
 
+		const options = {
+			classModifier: subPageLink.classModifier,
+		};
+
 		return <div className="drop-down-menu" key={subPageLink.id}>
 			<div className="drop-down-menu__block" onClick={ onMenu }>
-				<div className="drop-down-menu__side js-sub-menu"></div>
-				<div className="drop-down-menu__main js-sub-menu">
+				<div className={`drop-down-menu__side js-sub-menu ${ subPageLink.classModifier ? `drop-down-menu__side--${subPageLink.classModifier}` : '' }`}></div>
+				<div className={`drop-down-menu__main js-sub-menu ${ subPageLink.classModifier ? `drop-down-menu__main--${subPageLink.classModifier}` : '' }`}>
 					<div className="drop-down-menu__title js-sub-menu">{subPageLink.name}</div>
 				</div>
-				<div className="drop-down-menu__side drop-down-menu__side--right js-sub-menu"></div>
+				<div className={`drop-down-menu__side drop-down-menu__side--right js-sub-menu ${ subPageLink.classModifier ? `drop-down-menu__side--${subPageLink.classModifier}` : '' }`}></div>
 				<div></div>
 				<div className="drop-down-menu__popup">
 					<PopUp
-						hideFocus={ hideFocus }
-						isFocus={ isFocusMenu }
-						results={ subMenu.filter((subPageLink) => !subPageLink.isSelected) }
-						selectOption={ () => {} }
+						hideFocus = { hideFocus }
+						isFocus = { isFocusMenu }
+						results = { subMenu.filter((subPageLink) => !subPageLink.isSelected) }
+						selectOption = { () => {} }
 						isLink = { true }
+						options = { options }
 					/>
 				</div>
 				<div></div>

@@ -1,37 +1,4 @@
 /**
- * Get menu of repetition
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @param {Object} state
- * @returns {Array}
- */
-export const getMenu = (state) => state.repetitionEditQuestions.menu;
-
-/**
- * Get discipline ID
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @param {Object} state
- * @returns {number}
- */
-export const getDisciplineId = (state) => state.repetitionEditQuestions.disciplineId;
-
-/**
- * Get name of discipline
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @param {Object} state
- * @returns {String}
- */
-export const getName = (state) => state.repetitionEditQuestions.name;
-
-/**
  * Get fetching status
  *
  * @author Alessandro Vilanni

@@ -517,6 +517,9 @@ textarea.scroll::-webkit-scrollbar-track {
   border-top: none;
   border-radius: 0;
 }
+.popup--edit {
+  border-color: #27b13c;
+}
 .popup__block {
   position: relative;
   margin-bottom: 10px;
@@ -531,6 +534,9 @@ textarea.scroll::-webkit-scrollbar-track {
 }
 .popup__block--menu:last-child {
   border: none;
+}
+.popup__block--edit {
+  border-bottom-color: #27b13c;
 }
 .popup__link {
   display: flex;

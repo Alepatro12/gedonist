@@ -23,6 +23,10 @@
 		background-color: $black;
 		clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0%);
 
+		&--edit {
+			background-color: $green-200;
+		}
+
 		&:after {
 			content: "";
 			position: absolute;
@@ -46,6 +50,10 @@
 		width: 18px;
 		background-color: $black;
 		clip-path: polygon(100% 0, 0 50%, 100% 100%);
+
+		&--edit {
+			background-color: $green-200;
+		}
 
 		&:after {
 			content: "";

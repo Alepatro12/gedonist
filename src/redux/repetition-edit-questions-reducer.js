@@ -4,7 +4,6 @@ import {
 	getSearchQuestionAPI,
 	getCreationQuestionAPI,
 } from './../api/repetition-edit-question';
-import { getDisciplineAPI } from './../api/repetition-discipline';
 
 /**
  * @const
@@ -17,12 +16,6 @@ const TOGGLE_IS_FETCHING = 'repetition-edit-questions/TOGGLE_IS_FETCHING';
  * @type {string} Action type - toggle is disabled
  */
 const TOGGLE_IS_DISABLED = 'repetition-edit-questions/TOGGLE_IS_DISABLED';
-
-/**
- * @const
- * @type {string} Action type - get info of discipline
- */
-const GET_DISCIPLINE = 'repetition-edit-questions/GET_DISCIPLINE';
 
 /**
  * @const
@@ -60,13 +53,16 @@ const DELETE_QUESTION = 'repetition-edit-questions/DELETE_QUESTION';
  */
 const EDITE_QUESTION = 'repetition-edit-questions/EDIT_QUESTION';
 
+/**
+ * @const
+ * @type {string} Action type - clear data
+ */
+const CLEAR_DATA = 'repetition-edit-subject/CLEAR_DATA';
+
 const initialState = {
-	name: '',
-	menu: [],
 	answers: [],
 	questions: [],
 	resultText: '',
-	disciplineId: 0,
 	isFetching: false,
 	isDisabled: false,
 	isShowError: false,
@@ -146,12 +142,9 @@ const RepetitionEditQuestionsReducer = (state = initialState, action = {}) => {
 				isCreationQuestion: action.isCreationQuestion,
 			};
 		}
-		case GET_DISCIPLINE: {
+		case CLEAR_DATA: {
 			return {
 				...state,
-				name: action.name,
-				error: { ...action.error },
-				disciplineId: action.disciplineId,
 				answers: [],
 				questions: [],
 				resultText: '',
@@ -175,30 +168,6 @@ const RepetitionEditQuestionsReducer = (state = initialState, action = {}) => {
 		default:
 			return state;
 	}
-};
-
-/**
- * Set discipline data
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @param {String} name Name of discipline
- * @param {Object} error
- * @param {number} disciplineId Discipline ID
- * @returns {Object}
- */
-const setDiscipline = ({
-	name = '',
-	error = {},
-	disciplineId = 0,
-}) => {
-	return {
-		name,
-		error,
-		disciplineId,
-		type: GET_DISCIPLINE,
-	};
 };
 
 /**
@@ -295,27 +264,6 @@ const setToggle = (isToggle = false) => {
 };
 
 /**
- * Find discipline data
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @param {number} userId
- * @param {number} disciplineId discipline ID
- * @returns {Function}
- */
-export const findDiscipline = (userId = 0, disciplineId = 0) => {
-	return async (dispatch) => {
-		dispatch(setToggle(true));
-
-		const response = await getDisciplineAPI(userId, disciplineId);
-
-		dispatch(setDiscipline(response));
-		dispatch(setToggle(false));
-	}
-};
-
-/**
  * Set the flag for creating a question
  *
  * @author Alessandro Vilanni
@@ -385,16 +333,17 @@ export const clearError = () => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
+ * @param {number} userId
  * @param {number} disciplineId Discipline ID
  * @param {String} question
  * @param {String} answer
  * @returns {Function}
  */
-export const createQuestion = (disciplineId = 0, question = '', answer = '') => {
+export const createQuestion = (userId = 0, disciplineId = 0, question = '', answer = '') => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await getCreationQuestionAPI(disciplineId, question, answer);
+		const response = await getCreationQuestionAPI(userId, disciplineId, question, answer);
 
 		dispatch(setNewQuestion(response));
 		dispatch(setToggle(false));
@@ -407,16 +356,17 @@ export const createQuestion = (disciplineId = 0, question = '', answer = '') => 
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
+ * @param {number} userId
  * @param {number} disciplineId Discipline ID
  * @param {String} request
  * @param {bool} isSearchAnswer Search by answer flag
  * @returns {Function}
  */
-export const search = (disciplineId = 0, request = '', isSearchAnswer = false) => {
+export const search = (userId = 0, disciplineId = 0, request = '', isSearchAnswer = false) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await getSearchQuestionAPI(disciplineId, request, isSearchAnswer);
+		const response = await getSearchQuestionAPI(userId, disciplineId, request, isSearchAnswer);
 
 		dispatch(setQuestions(response));
 		dispatch(setToggle(false));
@@ -461,6 +411,20 @@ export const editQuestion = (data = {}, disciplineId = 0) => {
 
 		dispatch(setEditedQuestion(response));
 		dispatch(setToggle(false));
+	}
+};
+
+/**
+ * Clear data
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @returns {Function}
+ */
+export const clearData = () => {
+	return async (dispatch) => {
+		dispatch({ type: CLEAR_DATA });
 	}
 };
 

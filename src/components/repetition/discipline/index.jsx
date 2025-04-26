@@ -11,12 +11,16 @@ import { NavLink, useParams } from 'react-router-dom';
  *
  * @param {number} userId
  * @param {number} disciplineId Discipline ID
+ * @param {Object} currentQuestion Current question data
+ * @param {Function} findQuestions Search for discipline questions
  * @param {Function} findDiscipline Search for discipline data
  * @returns {HTMLElement}
  */
 const RepetitionDiscipline = React.memo(({
 	userId = 0,
 	disciplineId = 0,
+	currentQuestion = {},
+	findQuestions = () => {},
 	findDiscipline = () => {},
 	...props
 }) => {
@@ -24,16 +28,28 @@ const RepetitionDiscipline = React.memo(({
 
 	useLayoutEffect(() => {
 		if (!ownerName || !subjectId) {
-			return;
+			return <></>;
 		}
 
-		findDiscipline(userId, subjectId);
+		if (disciplineId && disciplineId === Number(subjectId)) {
+			findQuestions(userId, disciplineId);
+		} else {
+			findDiscipline(userId, subjectId);
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [ownerName, subjectId]);
+	}, [ownerName, subjectId, disciplineId]);
 
-	return disciplineId
-		? <RepetitionDisciplineBlock userId={userId} disciplineId={disciplineId} ownerName={ownerName} {...props}/>
-		: <></>;
+	if (!disciplineId || !Object.keys(currentQuestion).length) {
+		return <></>;
+	}
+
+	return <RepetitionDisciplineBlock
+		userId={userId}
+		ownerName={ownerName}
+		disciplineId={disciplineId}
+		currentQuestion={currentQuestion}
+		{...props}
+	/>;
 });
 
 /**

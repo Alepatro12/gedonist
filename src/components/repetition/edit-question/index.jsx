@@ -11,12 +11,16 @@ import React, { useLayoutEffect, useEffect } from 'react';
  *
  * @param {number} userId
  * @param {number} disciplineId Discipline ID
+ * @param {Function} clearData Clear data
+ * @param {bool} isEditAvailable Ewditing availability flag
  * @param {Function} findDiscipline Search for discipline data
  * @returns {HTMLElement}
  */
 const RepetitionEditQuestions = React.memo(({
 	userId = 0,
 	disciplineId = 0,
+	clearData = () => {},
+	isEditAvailable = false,
 	findDiscipline = () => {},
 	...props
 }) => {
@@ -24,16 +28,19 @@ const RepetitionEditQuestions = React.memo(({
 
 	useLayoutEffect(() => {
 		if (!ownerName || !subjectId) {
-			return;
+			return <></>;
 		}
 
+		clearData();
 		findDiscipline(userId, subjectId);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ownerName, subjectId]);
 
-	return disciplineId
-		? <RepetitionEditQuestionsBlock userId={userId} disciplineId={disciplineId} {...props}/>
-		: <></>;
+	if (!isEditAvailable || !disciplineId) {
+		return <></>;
+	}
+
+	return <RepetitionEditQuestionsBlock userId={userId} disciplineId={disciplineId} {...props}/>;
 });
 
 /**
@@ -43,6 +50,7 @@ const RepetitionEditQuestions = React.memo(({
  * @version 1.0.0
  *
  * @param {String} name Name of discipline
+ * @param {number} userId
  * @param {bool} isShowSuccess Success response flag
  * @param {String} resultText Query result text
  * @param {number} disciplineId Discipline ID
@@ -57,6 +65,7 @@ const RepetitionEditQuestions = React.memo(({
  */
 const RepetitionEditQuestionsBlock = React.memo(({
 	name = '',
+	userId = 0,
 	resultText = '',
 	disciplineId = 0,
 	search = () => {},
@@ -97,7 +106,7 @@ const RepetitionEditQuestionsBlock = React.memo(({
 			return;
 		}
 
-		createQuestion(disciplineId, questionStr, answer);
+		createQuestion(userId, disciplineId, questionStr, answer);
 	};
 
 	const searchQuestion = (event) => {
@@ -110,7 +119,7 @@ const RepetitionEditQuestionsBlock = React.memo(({
 			return;
 		}
 
-		search(disciplineId, question);
+		search(userId, disciplineId, question);
 	};
 
 	const searchAnswer = (event) => {
@@ -123,7 +132,7 @@ const RepetitionEditQuestionsBlock = React.memo(({
 			return;
 		}
 
-		search(disciplineId, answer, true);
+		search(userId, disciplineId, answer, true);
 	};
 
 	const onFocus = (event) => {
@@ -176,6 +185,7 @@ const RepetitionEditQuestionsBlock = React.memo(({
 		}
 
 		deleteQuestion({
+			userId,
 			disciplineId,
 			answerId: question.answerId,
 			questionId: question.questionId,
@@ -193,6 +203,7 @@ const RepetitionEditQuestionsBlock = React.memo(({
 
 		editQuestion({
 				answer,
+				userId,
 				question: questionStr,
 				answerId: question.answerId,
 				questionId: question.questionId,

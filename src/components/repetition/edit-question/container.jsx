@@ -6,23 +6,23 @@ import Loader from './../../common/loader/index';
 import { getUserId } from './../../../redux/selectors';
 import {
 	search,
+	clearData,
 	clearError,
 	editQuestion,
 	deleteQuestion,
 	createQuestion,
-	findDiscipline,
 	setCreationQuestion,
 } from './../../../redux/repetition-edit-questions-reducer';
 import {
-	getName,
 	getAnswers,
 	getQuestions,
 	getResultText,
 	getIsShowError,
-	getDisciplineId,
 	getIsShowSuccess,
 	getIsCreationQuestion,
 } from './../../../redux/repetition-edit-questions-selectors';
+import { findDiscipline } from './../../../redux/repetition-reducer';
+import { getName, getDisciplineId, getIsEditAvailable } from './../../../redux/repetition-selectors';
 
 /**
  * Get the edit questions discipline repetition page
@@ -64,6 +64,7 @@ const mapStateToProps = (state = {}) => {
 		isShowError: getIsShowError(state),
 		disciplineId: getDisciplineId(state),
 		isShowSuccess: getIsShowSuccess(state),
+		isEditAvailable: getIsEditAvailable(state),
 		isCreationQuestion: getIsCreationQuestion(state),
 	};
 }
@@ -79,6 +80,7 @@ const mapStateToProps = (state = {}) => {
 const RepetitionEditQuestionsContainer = compose(
 	connect(mapStateToProps, {
 		search,
+		clearData,
 		clearError,
 		editQuestion,
 		deleteQuestion,

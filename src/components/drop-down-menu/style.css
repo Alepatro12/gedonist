@@ -518,6 +518,9 @@ textarea.scroll::-webkit-scrollbar-track {
   -webkit-clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0%);
           clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0%);
 }
+.drop-down-menu__main--edit {
+  background-color: #27b13c;
+}
 .drop-down-menu__main:after {
   content: "";
   position: absolute;
@@ -540,6 +543,9 @@ textarea.scroll::-webkit-scrollbar-track {
   background-color: #000;
   -webkit-clip-path: polygon(100% 0, 0 50%, 100% 100%);
           clip-path: polygon(100% 0, 0 50%, 100% 100%);
+}
+.drop-down-menu__side--edit {
+  background-color: #27b13c;
 }
 .drop-down-menu__side:after {
   content: "";
