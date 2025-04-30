@@ -1,7 +1,9 @@
 import {
 	getQuestionsAPI,
 	getDisciplineAPI,
+	createSubjectAPI,
 	getChangeQuestionAPI,
+	getIsEditAvailableAPI,
 } from './../api/repetition-discipline';
 import { getMenuAPI } from './../api/repetition';
 
@@ -31,6 +33,18 @@ const GET_DISCIPLINE = 'repetition/GET_DISCIPLINE';
 
 /**
  * @const
+ * @type {string} Action type - get new subject
+ */
+const GET_NEW_SUBJECT = 'repetition/GET_NEW_SUBJECT';
+
+/**
+ * @const
+ * @type {string} Action type - get editing availability flag
+ */
+const GET_EDITING_FLAG = 'repetition/GET_EDITING_FLAG';
+
+/**
+ * @const
  * @type {string} Action type - get discipline questions
  */
 const GET_QUESTIONS = 'repetition/GET_QUESTIONS';
@@ -53,14 +67,22 @@ const CHECK_ANSWER = 'repetition/CHECK_ANSWER';
  */
 const MOVE_TO_NEXT_QUESTION = 'repetition/MOVE_TO_NEXT_QUESTION';
 
+/**
+ * @const
+ * @type {string} Action type - clear data
+ */
+const CLEAR_DATA = 'repetition/CLEAR_DATA';
+
 const initialState = {
 	name: '',
 	menu: [],
 	counter: 0,
 	ownerName: '',
 	questions: [],
+	isFinal: false,
 	pageNumbers: {},
 	disciplineId: 0,
+	newSubjectId: 0,
 	isFetching: false,
 	isDisabled: false,
 	isChecking: false,
@@ -89,6 +111,7 @@ const repetitionReducer = (state = initialState, action = {}) => {
 				...state,
 				menu: [ ...action.menu ],
 				ownerName: action.ownerName,
+				isMaxSubjects: action.isMaxSubjects,
 			};
 		}
 		case GET_DISCIPLINE: {
@@ -100,9 +123,24 @@ const repetitionReducer = (state = initialState, action = {}) => {
 				isEditAvailable: action.isEditAvailable,
 			};
 		}
+		case GET_NEW_SUBJECT: {
+			return {
+				...state,
+				error: { ...action.error },
+				newSubjectId: action.subjectId,
+			};
+		}
+		case GET_EDITING_FLAG: {
+			return {
+				...state,
+				error: { ...action.error },
+				isEditAvailable: action.isEditAvailable,
+			};
+		}
 		case GET_QUESTIONS: {
 			return {
 				...state,
+				isFinal: false,
 				error: { ...action.error },
 				currentQuestion: { ...action.questions.pop() },
 				questions: [ ...action.questions ],
@@ -112,6 +150,7 @@ const repetitionReducer = (state = initialState, action = {}) => {
 		case SKIP_QUESTION: {
 			return {
 				...state,
+				isFinal: !Boolean(state.questions.length),
 				currentQuestion: { ...state.questions.pop() },
 			};
 		}
@@ -125,9 +164,17 @@ const repetitionReducer = (state = initialState, action = {}) => {
 			return {
 				...state,
 				isChecking: false,
+				isFinal: !Boolean(state.questions.length),
 				counter: action.isRepeat ? state.counter : ++state.counter,
 				currentQuestion: { ...state.questions.pop() },
 				error: { ...action.error },
+			};
+		}
+		case CLEAR_DATA: {
+			return {
+				...state,
+				newSubjectId: 0,
+				error: initialState.error,
 			};
 		}
 		case TOGGLE_IS_FETCHING: {
@@ -155,15 +202,66 @@ const repetitionReducer = (state = initialState, action = {}) => {
  *
  * @param {Array} menu List of disciplines 
  * @param {Object} error
+ * @param {bool} isMaxSubjects Max subjects flag
  * @param {String} ownerName Page owner's name
  * @returns {Object}
  */
-const setMenu = ({ menu = [], error = {} }, ownerName = '') => {
+const setMenu = (
+	{
+		menu = [],
+		error = {},
+		isMaxSubjects = false,
+	},
+	ownerName = ''
+) => {
 	return {
 		menu,
 		error,
 		ownerName,
+		isMaxSubjects,
 		type: GET_MENU,
+	};
+};
+
+/**
+ * Set new subject
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} error
+ * @param {number} subjectId Subject ID
+ * @returns {Object}
+ */
+const setNewSubject = ({
+	error = {},
+	subjectId = 0,
+}) => {
+	return {
+		error,
+		subjectId,
+		type: GET_NEW_SUBJECT,
+	};
+};
+
+/**
+ * Set editing availability flag
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} error
+ * @param {bool} isEditAvailable Editing availability flag
+ * @returns {Object}
+ */
+const setIsEditAvailable = ({
+	error = {},
+	isEditAvailable = false,
+}) => {
+	return {
+		error,
+		isEditAvailable,
+		type: GET_EDITING_FLAG,
 	};
 };
 
@@ -175,10 +273,8 @@ const setMenu = ({ menu = [], error = {} }, ownerName = '') => {
  *
  * @param {String} name Name of discipline
  * @param {Object} error
- * @param {Array} questions List of questions
- * @param {Object} pageNumbers Page numbers
  * @param {number} disciplineId Discipline ID
- * @param {bool} isEditAvailable Ewditing availability flag
+ * @param {bool} isEditAvailable Editing availability flag
  * @returns {Object}
  */
 const setDiscipline = ({
@@ -394,5 +490,59 @@ export const findQuestions = (userId = 0, disciplineId = 0) => {
 
 		dispatch(setQuestions(response));
 		dispatch(setToggle(false));
+	}
+};
+
+/**
+ * Find editing availability flag
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} data
+ * @returns {Function}
+ */
+export const findIsEditAvailable = (data = {}) => {
+	return async (dispatch) => {
+		dispatch(setToggle(true));
+
+		const response = await getIsEditAvailableAPI(data);
+
+		dispatch(setIsEditAvailable(response));
+		dispatch(setToggle(false));
+	}
+};
+
+/**
+ * Create subject
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} data
+ * @returns {Function}
+ */
+export const createSubject = (data = {}) => {
+	return async (dispatch) => {
+		dispatch(setToggle(true));
+
+		const response = await createSubjectAPI(data);
+
+		dispatch(setNewSubject(response));
+		dispatch(setToggle(false));
+	}
+};
+
+/**
+ * Clear data
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @returns {Function}
+ */
+export const clearData = () => {
+	return async (dispatch) => {
+		dispatch({ type: CLEAR_DATA });
 	}
 };

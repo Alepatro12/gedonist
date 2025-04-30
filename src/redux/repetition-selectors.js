@@ -108,3 +108,46 @@ export const getOwnerName = (state) => state.repetition.ownerName;
  */
 export const getIsEditAvailable = (state) => state.repetition.isEditAvailable;
 
+/**
+ * Get new subject ID
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} state
+ * @returns {number}
+ */
+export const getNewSubjectId = (state) => state.repetition.newSubjectId;
+
+/**
+ * Get text error
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} state
+ * @returns {String}
+ */
+export const getErrorText = (state) => state.repetition.error.text;
+
+/**
+ * Get max subjects flag
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} state
+ * @returns {bool}
+ */
+export const getIsMaxSubjects = (state) => state.repetition.isMaxSubjects;
+
+/**
+ * Get end of repeat flag
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} state
+ * @returns {bool}
+ */
+export const getIsFinal = (state) => state.repetition.isFinal;

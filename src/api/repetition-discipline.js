@@ -53,3 +53,33 @@ export const getChangeQuestionAPI = (data = {}) => {
 		.post('discipline-repeat-controller.php', data)
 		.then(response => response.data)
 };
+
+/**
+ * Get info about discipline
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} data
+ * @returns {Object}
+ */
+export const getIsEditAvailableAPI = (data = {}) => {
+	return instance
+		.post('discipline-controller.php', data)
+		.then(response => response.data)
+};
+
+/**
+ * Create subject
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} data
+ * @returns {Object}
+ */
+export const createSubjectAPI = (data = {}) => {
+	return instance
+		.post('discipline-controller.php', { ...data })
+		.then(response => response.data);
+};

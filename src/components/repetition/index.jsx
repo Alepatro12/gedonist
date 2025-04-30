@@ -1,6 +1,7 @@
 import './style.css';
-import { NavLink, useParams } from 'react-router-dom';
+
 import React, { useLayoutEffect } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
 
 /**
  * Render the Repetition page
@@ -19,6 +20,7 @@ const Repetition = React.memo(({
 	userId = 0,
 	ownerName = '',
 	findMenu = () => {},
+	...props
 }) => {
 	const { ownerName: newOwnerName = '' } = useParams();
 	const isChangeOwner = ownerName === newOwnerName;
@@ -29,7 +31,7 @@ const Repetition = React.memo(({
 	}, [userId, isChangeOwner]);
 
 	return menu.length
-		? <RepetitionBlock menu={menu} ownerName={ownerName}/>
+		? <RepetitionBlock menu={menu} ownerName={ownerName} {...props}/>
 		: <></>;
 });
 
@@ -41,14 +43,21 @@ const Repetition = React.memo(({
  *
  * @param {Array} menu List of disciplines
  * @param {string} ownerName Page owner's name
+ * @param {bool} isMaxSubjects Max subjects flag
  * @returns {HTMLElement}
  */
-const RepetitionBlock = React.memo(({ menu = [], ownerName = '' }) => {
+const RepetitionBlock = React.memo(({
+	menu = [],
+	ownerName = '',
+	isMaxSubjects = false,
+}) => {
 	let menuBlock = '';
 
 	if (menu) {
+		let pageNumber = 0;
+
 		menuBlock = menu?.map(paragraph => {
-			const pageNumber = paragraph.id % 2 ? paragraph.id : Number(paragraph.id) + 1;
+			pageNumber += 2;
 
 			return <DisciplineBlock key={paragraph.id} ownerName={ownerName} pageNumber={pageNumber} {...paragraph}/>
 		})
@@ -58,12 +67,22 @@ const RepetitionBlock = React.memo(({ menu = [], ownerName = '' }) => {
 		<div className="repetition">
 			<div className="repetition__block">
 				<div className="repetition__page">
+					{ !isMaxSubjects &&
+						<div className="repetition__btn-create-menu repetition__btn-create-menu--mobile">
+							<NavLink to={`/repetition/create-subject/${ownerName}`} className="btn-link">Создать тему</NavLink>
+						</div>
+					}
 					<div className="repetition__front-page">
 						<div className="repetition__title">Повторение изученного материала</div>
 					</div>
 				</div>
 				<div className="repetition__page">
 					<div className="repetition__content">
+						{ !isMaxSubjects &&
+							<div className="repetition__btn-create-menu">
+								<NavLink to={`/repetition/create-subject/${ownerName}`} className="btn-link">Создать тему</NavLink>
+							</div>
+						}
 						<div className="repetition__menu">Меню</div>
 						<div className="repetition__menu-block">
 							{ menuBlock }

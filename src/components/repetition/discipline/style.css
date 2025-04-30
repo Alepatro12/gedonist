@@ -501,6 +501,11 @@ textarea.scroll::-webkit-scrollbar-track {
   font-family: "Cormorant Garamond", serif;
   font-size: 18px;
 }
+.repetition-discipline__add-question-btn {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+}
 .repetition-discipline__answer {
   margin-top: 20px;
   white-space: pre-wrap;
@@ -655,8 +660,7 @@ textarea.scroll::-webkit-scrollbar-track {
   width: 100%;
   white-space: pre-wrap;
 }
-@media only screen and (max-width: 991px) {
-  .repetition-discipline__question--final {
-    min-height: 80px;
-  }
+.repetition-discipline__question--final {
+  margin: 20px;
+  text-align: center;
 }/*# sourceMappingURL=style.css.map */

@@ -18,6 +18,7 @@ const EditSubjectContainer = React.lazy(() => import('../repetition/edit-subject
 const MusicChangeCollection = React.lazy(() => import('../music/change-collection/container'));
 const RepetitionEditQuestions = React.lazy(() => import('../repetition/edit-question/container'));
 const RepetitionRenameSubject = React.lazy(() => import('../repetition/rename-subject/container'));
+const RepetitionCreateSubject = React.lazy(() => import('../repetition/create-subject/container'));
 
 export const commonRouters = [
 	{element: Home, path: '/*', exact: true},
@@ -39,6 +40,7 @@ export const authorizedUserRouters = [
 	{element: Repetition, path: '/repetition/menu/:ownerName', exact: true},
 	{element: MusicNewCollection, path: '/music/new-collection', exact: true},
 	{element: MusicChangeCollection, path: '/music/change-collection', exact: true},
+	{element: RepetitionCreateSubject, path: '/repetition/create-subject/:ownerName', exact: true},
 	{element: RepetitionDiscipline, path: '/repetition/subject/:ownerName/:subjectId', exact: true},
 	{element: EditSubjectContainer, path: '/repetition/edit-subject/:ownerName/:subjectId', exact: true},
 	{element: RepetitionEditQuestions, path: '/repetition/edit-questions/:ownerName/:subjectId', exact: true},

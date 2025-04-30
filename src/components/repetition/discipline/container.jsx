@@ -6,6 +6,7 @@ import Loader from './../../common/loader/index';
 import { getUserId } from './../../../redux/selectors';
 import {
 	getName,
+	getIsFinal,
 	getCounter,
 	getIsChecking,
 	getPageNumbers,
@@ -55,6 +56,7 @@ const mapStateToProps = (state = {}) => {
 		name: getName(state),
 		userId: getUserId(state),
 		counter: getCounter(state),
+		isFinal: getIsFinal(state),
 		isChecking: getIsChecking(state),
 		pageNumbers: getPageNumbers(state),
 		disciplineId: getDisciplineId(state),

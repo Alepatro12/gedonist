@@ -39,7 +39,7 @@ const RepetitionDiscipline = React.memo(({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ownerName, subjectId, disciplineId]);
 
-	if (!disciplineId || !Object.keys(currentQuestion).length) {
+	if (!disciplineId) {
 		return <></>;
 	}
 
@@ -61,6 +61,7 @@ const RepetitionDiscipline = React.memo(({
  * @param {String} name Name of discipline
  * @param {number} counter Counter of correct answers
  * @param {String} ownerName Page owner's name
+ * @param {bool} isFinal End of repeat flag
  * @param {number} disciplineId Discipline ID
  * @param {Object} pageNumbers Page numbers
  * @param {bool} isChecking Response check flag
@@ -71,6 +72,7 @@ const RepetitionDisciplineBlock = React.memo(({
 	name = '',
 	counter = 0,
 	ownerName = '',
+	isFinal = false,
 	disciplineId = 0,
 	pageNumbers = {},
 	isChecking = false,
@@ -78,7 +80,8 @@ const RepetitionDisciplineBlock = React.memo(({
 	...props
 }) => {
 	const hasQuestion = currentQuestion?.question;
-	let firstPage = disciplineId % 2 ? disciplineId : ++disciplineId;
+	let firstPage = disciplineId;
+	firstPage = firstPage % 2 ? firstPage : ++firstPage;
 
 	return <>
 		<div className="repetition-discipline">
@@ -90,10 +93,9 @@ const RepetitionDisciplineBlock = React.memo(({
 					<div className="repetition-discipline__title">{ name }</div>
 					<div className="repetition-discipline__counter">{ counter }</div>
 					<div className={`repetition-discipline__question ${ hasQuestion ? '' : 'repetition-discipline__question--final' }`}>
-						{ hasQuestion
-							? currentQuestion.question
-							: 'Вы всё повторили, хорошего дня'
-						}
+						{ hasQuestion && currentQuestion.question }
+						{ isFinal && 'Вы всё повторили, хорошего дня' }
+						{ !hasQuestion && !isFinal && 'Вопросы ещё не были добавлены' }
 					</div>
 					{ hasQuestion
 						? <ButtonBlock
@@ -102,6 +104,12 @@ const RepetitionDisciplineBlock = React.memo(({
 							{...props}
 						/>
 						: <></>
+					}
+					{ !hasQuestion && !isFinal
+						? <AddQuestionBtn
+							ownerName={ownerName}
+							disciplineId={disciplineId}
+						/> : <></>
 					}
 					<div className="repetition-discipline__page-number-first">{ firstPage }</div>
 				</div>
@@ -158,6 +166,25 @@ const ButtonBlock = React.memo(({
 			>{ isChecking ? 'Далее' : 'Проверить' }</div>
 		</div>
 	</>;
+});
+
+/**
+ * Get add question button
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {String} ownerName Page owner's name
+ * @param {number} disciplineId Discipline ID
+ * @returns {HTMLElement}
+ */
+const AddQuestionBtn = React.memo(({
+	ownerName = '',
+	disciplineId = 0,
+}) => {
+	return <div className="repetition-discipline__add-question-btn">
+			<NavLink to={`/repetition/edit-questions/${ownerName}/${disciplineId}`} className="btn-link">Добавить</NavLink>
+	</div>;
 });
 
 export default RepetitionDiscipline; 

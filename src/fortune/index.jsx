@@ -97,7 +97,7 @@ const prizes = [
 		color: "hsl(220 56% 64%)",
 	},
 	{
-    	text: "Alice: Madness Returns",
+    	text: "Bastion",
     	color: "hsl(300 46% 74%)",
     },
   ];

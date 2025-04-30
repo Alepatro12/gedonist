@@ -5,7 +5,12 @@ import { connect } from 'react-redux';
 import Loader from './../common/loader/index';
 import { getUserId } from './../../redux/selectors';
 import { findMenu } from './../../redux/repetition-reducer';
-import { getMenu, getIsFetching, getOwnerName } from './../../redux/repetition-selectors';
+import {
+	getMenu,
+	getOwnerName,
+	getIsFetching,
+	getIsMaxSubjects,
+} from './../../redux/repetition-selectors';
 
 /**
  * Get the Repetition page
@@ -43,6 +48,7 @@ const mapStateToProps = (state = {}) => {
 		userId: getUserId(state),
 		ownerName: getOwnerName(state),
 		isFetching: getIsFetching(state),
+		isMaxSubjects: getIsMaxSubjects(state),
 	};
 }
 
