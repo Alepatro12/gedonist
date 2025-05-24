@@ -6,7 +6,10 @@ import EditSubject from './index';
 import Loader from './../../common/loader/index';
 import { getUserId } from './../../../redux/selectors';
 import { findDiscipline } from './../../../redux/repetition-reducer';
+import { showPopUp } from './../../../redux/pop-up-notification-reducer';
+import { deleteSubject, clearData } from './../../../redux/repetition-edit-subject-reducer';
 import { getName, getDisciplineId, getIsEditAvailable } from './../../../redux/repetition-selectors';
+import { getErrorText, getIsSubjectDeleted } from './../../../redux/repetition-edit-subject-selectors';
 
 /**
  * Get the subject edit page
@@ -42,8 +45,10 @@ const mapStateToProps = (state = {}) => {
 		page: 'repetition-edit-subject',
 		name: getName(state),
 		userId: getUserId(state),
+		errorText: getErrorText(state),
 		disciplineId: getDisciplineId(state),
 		isEditAvailable: getIsEditAvailable(state),
+		isSubjectDeleted: getIsSubjectDeleted(state),
 	};
 }
 
@@ -57,6 +62,9 @@ const mapStateToProps = (state = {}) => {
  */
 const EditSubjectContainer = compose(
 	connect(mapStateToProps, {
+		showPopUp,
+		clearData,
+		deleteSubject,
 		findDiscipline,
 	})
 ) (EditSubjectClassContainer);

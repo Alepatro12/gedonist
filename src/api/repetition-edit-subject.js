@@ -21,3 +21,18 @@ export const renameSubjectAPI = (data = {}) => {
 		.post('edit-subject-controller.php', { ...data })
 		.then(response => response.data);
 };
+
+/**
+ * Delete subject
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} data
+ * @returns {Object}
+ */
+export const deleteSubjectAPI = (data = {}) => {
+	return instance
+		.post('edit-subject-controller.php', { ...data, isDeleteSubject: true })
+		.then(response => response.data);
+};

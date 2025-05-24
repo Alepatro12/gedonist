@@ -12,6 +12,7 @@ import { NavLink, useParams } from 'react-router-dom';
  * @param {Array} menu List of disciplines
  * @param {number} userId
  * @param {string} ownerName Page owner's name
+ * @param {Boolean} isUpdate Update flag
  * @param {Function} findMenu Search for disciplines
  * @returns {HTMLElement}
  */
@@ -19,6 +20,7 @@ const Repetition = React.memo(({
 	menu = [],
 	userId = 0,
 	ownerName = '',
+	isUpdate = false,
 	findMenu = () => {},
 	...props
 }) => {
@@ -28,7 +30,7 @@ const Repetition = React.memo(({
 	useLayoutEffect(() => {
 		findMenu(userId, newOwnerName);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [userId, isChangeOwner]);
+	}, [userId, isChangeOwner, isUpdate]);
 
 	return menu.length
 		? <RepetitionBlock menu={menu} ownerName={ownerName} {...props}/>

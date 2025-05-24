@@ -8,6 +8,7 @@ import menuReducer from './menu-reducer';
 import musicReducer from './music-reducer';
 import repetitionReducer from './repetition-reducer';
 import checkAuthenticationReducer from './account-data-reducer';
+import PopUpNotificationReducer from './pop-up-notification-reducer';
 import RepetitionEditSubjectReducer from './repetition-edit-subject-reducer';
 import RepetitionEditQuestionsReducer from './repetition-edit-questions-reducer';
 
@@ -18,6 +19,7 @@ const reducers = combineReducers({
 	appData: appReducer,
 	music: musicReducer,
 	repetition: repetitionReducer,
+	popUpNotification: PopUpNotificationReducer,
 	authenticationData: checkAuthenticationReducer,
 	repetitionEditSubject : RepetitionEditSubjectReducer,
 	repetitionEditQuestions: RepetitionEditQuestionsReducer,

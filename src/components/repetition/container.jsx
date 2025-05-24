@@ -11,6 +11,7 @@ import {
 	getIsFetching,
 	getIsMaxSubjects,
 } from './../../redux/repetition-selectors';
+import { getIsUpdate } from './../../redux/pop-up-notification-selectors';
 
 /**
  * Get the Repetition page
@@ -46,6 +47,7 @@ const mapStateToProps = (state = {}) => {
 		page: 'repetition',
 		menu: getMenu(state),
 		userId: getUserId(state),
+		isUpdate: getIsUpdate(state),
 		ownerName: getOwnerName(state),
 		isFetching: getIsFetching(state),
 		isMaxSubjects: getIsMaxSubjects(state),

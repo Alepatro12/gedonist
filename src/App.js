@@ -1,6 +1,6 @@
 import './style.css';
 import { Provider, connect } from 'react-redux';
-import React, { Suspense, useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { BrowserRouter, useLocation } from 'react-router-dom';
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
@@ -14,6 +14,7 @@ import { initializedApp } from './redux/app-reducer';
 import Sidebar from './components/sidebar/container';
 import EmailWarning from './components/email-warning/container';
 import DropDownMenu from './components/drop-down-menu/container';
+import PopUpNotification from './components/pop-up-notification/container';
 
 const App = ({initialized, initializedApp}) => {
 	const location = useLocation();
@@ -42,6 +43,7 @@ const App = ({initialized, initializedApp}) => {
 						}>
 							<DropDownMenu/>
 							<AppRouter/>
+							<PopUpNotification/>
 						</Suspense>
 					</div>
 					<Footer/>

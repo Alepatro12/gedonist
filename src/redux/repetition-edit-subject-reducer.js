@@ -1,4 +1,4 @@
-import { renameSubjectAPI } from './../api/repetition-edit-subject';
+import { renameSubjectAPI, deleteSubjectAPI } from './../api/repetition-edit-subject';
 
 /**
  * @const
@@ -14,7 +14,7 @@ const TOGGLE_IS_DISABLED = 'repetition-edit-subject/TOGGLE_IS_DISABLED';
 
 /**
  * @const
- * @type {string} Action type - set creation new question
+ * @type {string} Action type - set new subject name
  */
 const SET_NEW_SUBJECT_NAME = 'repetition-edit-subject/SET_NEW_SUBJECT_NAME';
 
@@ -24,10 +24,17 @@ const SET_NEW_SUBJECT_NAME = 'repetition-edit-subject/SET_NEW_SUBJECT_NAME';
  */
 const CLEAR_DATA = 'repetition-edit-subject/CLEAR_DATA';
 
+/**
+ * @const
+ * @type {string} Action type - set deleted subject
+ */
+const SET_DELETED_SUBJECT = 'repetition-edit-subject/SET_DELETED_SUBJECT';
+
 const initialState = {
 	isFetching: false,
 	isDisabled: false,
 	isSubjectRenamed: false,
+	isSubjectDeleted: false,
 	error: {
 		code: 0,
 		text: '',
@@ -66,9 +73,18 @@ const RepetitionEditSubjectReducer = (state = initialState, action = {}) => {
 				isSubjectRenamed: !action.error.code,
 			};
 		}
+		case SET_DELETED_SUBJECT: {
+			return {
+				...state,
+				error: { ...action.error },
+				resultText: action.resultText,
+				isSubjectDeleted: !action.error.code,
+			};
+		}
 		case CLEAR_DATA: {
 			return {
 				...state,
+				isSubjectDeleted: false,
 				isSubjectRenamed: false,
 			};
 		}
@@ -147,6 +163,27 @@ const setNewSubjectName = ({
 };
 
 /**
+ * Set deleted subject
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {String} resultText Query result text
+ * @param {Object} error
+ * @returns {Object}
+ */
+const setDeletedSubject = ({
+	error = {},
+	resultText = '',
+}) => {
+	return {
+		error,
+		resultText,
+		type: SET_DELETED_SUBJECT,
+	};
+};
+
+/**
  * Rename subject
  *
  * @author Alessandro Vilanni
@@ -177,6 +214,26 @@ export const renameSubject = (data = {}) => {
 export const clearData = () => {
 	return async (dispatch) => {
 		dispatch({ type: CLEAR_DATA });
+	}
+};
+
+/**
+ * Delete subject
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} data
+ * @returns {Function}
+ */
+export const deleteSubject = (data = {}) => {
+	return async (dispatch) => {
+		dispatch(setToggle(true));
+
+		const response = await deleteSubjectAPI(data);
+
+		dispatch(setDeletedSubject(response));
+		dispatch(setToggle(false));
 	}
 };
 

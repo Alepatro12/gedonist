@@ -365,6 +365,16 @@ textarea.scroll::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
+.modal-collections__new-collection::before, .modal-collections__close::before, .btn-close::before, .modal-collections__new-collection::after, .modal-collections__close::after, .btn-close::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #000;
+}
+
 .btn {
   display: inline-block;
   min-height: 30px;
@@ -444,6 +454,26 @@ textarea.scroll::-webkit-scrollbar-track {
   background-color: #27b13c;
 }
 
+.btn-close {
+  position: relative;
+  top: 1px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  outline: 0;
+  opacity: 0.4;
+  cursor: pointer;
+}
+.btn-close:hover {
+  opacity: 0.8;
+}
+.btn-close::before {
+  transform: rotate(45deg);
+}
+.btn-close::after {
+  transform: rotate(-45deg);
+}
+
 .alert {
   display: block;
   position: relative;
@@ -495,7 +525,7 @@ textarea.scroll::-webkit-scrollbar-track {
   border-bottom-color: #27b13c;
 }
 
-.modal-collections__new-collection::before, .modal-collections__close::before, .modal-collections__new-collection::after, .modal-collections__close::after {
+.modal-collections__new-collection::before, .modal-collections__close::before, .btn-close::before, .modal-collections__new-collection::after, .modal-collections__close::after, .btn-close::after {
   content: "";
   position: absolute;
   top: 10px;

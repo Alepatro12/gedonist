@@ -365,6 +365,16 @@ textarea.scroll::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
+.btn-close::before, .btn-close::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #000;
+}
+
 .btn {
   display: inline-block;
   min-height: 30px;
@@ -444,6 +454,26 @@ textarea.scroll::-webkit-scrollbar-track {
   background-color: #27b13c;
 }
 
+.btn-close {
+  position: relative;
+  top: 1px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  outline: 0;
+  opacity: 0.4;
+  cursor: pointer;
+}
+.btn-close:hover {
+  opacity: 0.8;
+}
+.btn-close::before {
+  transform: rotate(45deg);
+}
+.btn-close::after {
+  transform: rotate(-45deg);
+}
+
 .alert {
   display: block;
   position: relative;
@@ -508,12 +538,18 @@ textarea.scroll::-webkit-scrollbar-track {
   }
 }
 .repetition-edit-subject__block {
+  display: flex;
+  flex-direction: column;
   margin-top: 35px;
+  row-gap: 15px;
 }
 @media only screen and (max-width: 767px) {
   .repetition-edit-subject__block {
     margin-top: 20px;
   }
+}
+.repetition-edit-subject__btn {
+  margin-bottom: 5px;
 }
 .repetition-edit-subject__title {
   font-family: "Cormorant Garamond", serif;

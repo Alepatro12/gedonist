@@ -13,11 +13,18 @@
 	}
 
 	&__block {
+		display: flex;
+		flex-direction: column;
 		margin-top: 35px;
+		row-gap: 15px;
 
 		@include mq('phone') {
 			margin-top: 20px;
 		}
+	}
+
+	&__btn {
+		margin-bottom: 5px;
 	}
 
 	&__title {
