@@ -37,7 +37,7 @@ const prizes = [
   //     color: "hsl(140 36% 74%)",
   //   },
 	// {
-  //     text: "Total War: Warhammer II",
+  //     text: "Disciples: Sacred Lands - Gold",
   //     color: "hsl(12 56% 64%)",
   // },
 	// {
@@ -73,7 +73,7 @@ const prizes = [
       color: "hsl(350 60% 52%)",
     },
     {
-      text: "Draugen",
+      text: "Silent Hill",
       color: "hsl(270 87% 67%)",
     },
     {
@@ -93,11 +93,11 @@ const prizes = [
 		color: "hsl(72 46% 54%)",
 	},
 	{
-		text: "Fable",
+		text: "Drakengard",
 		color: "hsl(220 56% 64%)",
 	},
 	{
-    	text: "Alice: Madness Returns",
+    	text: "Bastion",
     	color: "hsl(300 46% 74%)",
     },
   ];
