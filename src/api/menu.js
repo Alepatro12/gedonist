@@ -12,13 +12,11 @@ const instance = axios.create({
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {number} userId User ID
- * @param {number} userType User type
- * @param {bool} isAdminPanel Admin panel pages flag
+ * @param {Object} parameters
  * @returns {Object}
  */
-export const getMenuAPI = (userId = 0, userType = 0, isAdminPanel = false) => {
+export const getMenuAPI = (parameters) => {
 	return instance
-		.post('menu-controller.php', { userId, userType, isAdminPanel })
+		.post('menu-controller.php', parameters)
 		.then(response => response.data);
 };

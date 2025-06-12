@@ -9,9 +9,7 @@ const NewCollection = React.memo(({
 	errorText,
 	isDisabled,
 	userId,
-	userName,
 	performer,
-	isAuthenticate
 }) => {
 	const onSubmit = (formData) => {
 		createCollection(formData.name, userId, performer.id);

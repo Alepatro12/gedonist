@@ -190,3 +190,14 @@ export const getMenu = (state) => state.menu.menu;
  * @returns {number}
  */
 export const getUserType = (state) => state.authenticationData.userType;
+
+/**
+ * Get sub menu
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @param {Object} state
+ * @returns {Array}
+ */
+export const getSubMenu = (state) => state.menu.subMenu;

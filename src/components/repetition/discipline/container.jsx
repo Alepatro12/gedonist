@@ -6,6 +6,7 @@ import Loader from './../../common/loader/index';
 import { getUserId } from './../../../redux/selectors';
 import {
 	getName,
+	getIsFinal,
 	getCounter,
 	getIsChecking,
 	getPageNumbers,
@@ -15,6 +16,7 @@ import {
 import {
 	checkAnswer,
 	skipQuestion,
+	findQuestions,
 	findDiscipline,
 	moveNextQuestion,
 } from './../../../redux/repetition-reducer';
@@ -50,10 +52,11 @@ const RepetitionDisciplineClassContainer = React.memo(({
  */
 const mapStateToProps = (state = {}) => {
 	return {
-		page: 'repetition-discipline',
+		page: 'repetition-subject',
 		name: getName(state),
 		userId: getUserId(state),
 		counter: getCounter(state),
+		isFinal: getIsFinal(state),
 		isChecking: getIsChecking(state),
 		pageNumbers: getPageNumbers(state),
 		disciplineId: getDisciplineId(state),
@@ -73,6 +76,7 @@ const RepetitionDisciplineContainer = compose(
 	connect(mapStateToProps, {
 		checkAnswer,
 		skipQuestion,
+		findQuestions,
 		findDiscipline,
 		moveNextQuestion,
 	})

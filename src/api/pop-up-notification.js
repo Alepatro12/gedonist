@@ -1,22 +1,24 @@
 import * as axios from 'axios';
+
 import { SERVER_BASE_URL } from './constants';
 
 const instance = axios.create({
-	baseURL: `${SERVER_BASE_URL}admin-repetition/`,
+	baseURL: SERVER_BASE_URL,
 	headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 });
 
 /**
- * Get admin menu of repetition
+ * Send request
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {number} userId
+ * @param {String} url request URL
+ * @param {Object} data
  * @returns {Object}
  */
-export const getMenuAPI = (userId = 0) => {
+export const sendRequestAPI = (url = '', data = {}) => {
 	return instance
-		.post('repetition-controller.php', { userId })
-		.then(response => response.data)
+		.post(url, data)
+		.then(response => response.data);
 };

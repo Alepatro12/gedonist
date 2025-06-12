@@ -24,6 +24,7 @@ const GET_MENU = 'menu/GET_MENU';
  */
 const initialState = {
 	menu: [],
+	subMenu: [],
 	isFetching: false,
 	isDisabled: false,
 	error: {
@@ -49,6 +50,7 @@ const menuReducer = (state = initialState, action = {}) => {
 				...state,
 				menu: [ ...action.menu ],
 				error: { ...action.error },
+				subMenu: [ ...action.subMenu ],
 			};
 		}
 		case TOGGLE_IS_FETCHING: {
@@ -74,14 +76,16 @@ const menuReducer = (state = initialState, action = {}) => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {Array} menu List of menu 
+ * @param {Array} menu List of menu
+ * @param {Array} subMenu List of sub menu
  * @param {Object} error
  * @returns {Object}
  */
-const setMenu = ({ menu = [], error = {} }) => {
+const setMenu = ({ menu = [], subMenu = [], error = {} }) => {
 	return {
 		menu,
 		error,
+		subMenu,
 		type: GET_MENU,
 	};
 };
@@ -140,16 +144,14 @@ const setToggle = (isToggle = false) => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {number} userId User ID
- * @param {number} userType User type
- * @param {bool} isAdminPanel Admin panel pages flag
+ * @param {Object} parameters
  * @returns {Function}
  */
-export const findMenu = (userId = 0, userType = 0, isAdminPanel = false) => {
+export const findMenu = (parameters = {}) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await getMenuAPI(userId, userType, isAdminPanel);
+		const response = await getMenuAPI(parameters);
 
 		dispatch(setMenu(response));
 		dispatch(setToggle(false));

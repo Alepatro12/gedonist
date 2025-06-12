@@ -1,3 +1,15 @@
+%button-cross {
+	&::before, &::after {
+		content: '';
+		position: absolute;
+		top: 10px;
+		display: block;
+		width: 20px;
+		height: 2px;
+		background: $black;
+	}
+}
+
 .btn {
 	display: inline-block;
 	min-height: $btn-height;
@@ -81,5 +93,30 @@
 	&.active {
 		color: $btn-color;
 		background-color: $btn-bg;
+	}
+}
+
+.btn-close {
+	position: relative;
+	top: 1px;
+	width: 24px;
+	height: 24px;
+	border: 0;
+	outline: 0;
+	opacity: .4;
+	cursor: pointer;
+
+	&:hover {
+		opacity: .8;
+	}
+
+	@extend %button-cross;
+
+	&::before {
+		transform: rotate(45deg);
+	}
+
+	&::after {
+		transform: rotate(-45deg);
 	}
 }

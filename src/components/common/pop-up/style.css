@@ -365,6 +365,16 @@ textarea.scroll::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
+.btn-close::before, .btn-close::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #000;
+}
+
 .btn {
   display: inline-block;
   min-height: 30px;
@@ -444,6 +454,26 @@ textarea.scroll::-webkit-scrollbar-track {
   background-color: #27b13c;
 }
 
+.btn-close {
+  position: relative;
+  top: 1px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  outline: 0;
+  opacity: 0.4;
+  cursor: pointer;
+}
+.btn-close:hover {
+  opacity: 0.8;
+}
+.btn-close::before {
+  transform: rotate(45deg);
+}
+.btn-close::after {
+  transform: rotate(-45deg);
+}
+
 .alert {
   display: block;
   position: relative;
@@ -508,9 +538,45 @@ textarea.scroll::-webkit-scrollbar-track {
   overflow-y: scroll;
   z-index: 7;
 }
+.popup--menu {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+  border: 1px solid #000;
+  border-top: none;
+  border-radius: 0;
+}
+.popup--edit {
+  border-color: #27b13c;
+}
 .popup__block {
+  position: relative;
   margin-bottom: 10px;
   font-size: 14px;
   color: #333;
   border-bottom: 1px solid #dfdfdf;
+}
+.popup__block--menu {
+  height: 30px;
+  margin: 0;
+  border-bottom: 1px solid #000;
+}
+.popup__block--menu:last-child {
+  border: none;
+}
+.popup__block--edit {
+  border-bottom-color: #27b13c;
+}
+.popup__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+.popup__name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  color: #333;
 }/*# sourceMappingURL=style.css.map */

@@ -5,7 +5,13 @@
 	display: flex;
 	justify-content: center;
 	font-family: $font-family-serif;
-	font-size: 18px;
+	font-size: $font-size-xl;
+
+	&__add-question-btn {
+		display: flex;
+		width: 100%;
+		justify-content: end;
+	}
 
 	&__answer {
 		margin-top: 20px;
@@ -166,10 +172,9 @@
 		width: 100%;
 		white-space: pre-wrap;
 
-		@include mq('tablet') {
-			&--final {
-				min-height: 80px;
-			}
+		&--final {
+			margin: 20px;
+			text-align: center;
 		}
 	}
 }

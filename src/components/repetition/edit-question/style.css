@@ -365,6 +365,16 @@ textarea.scroll::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
+.btn-close::before, .btn-close::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #000;
+}
+
 .btn {
   display: inline-block;
   min-height: 30px;
@@ -444,6 +454,26 @@ textarea.scroll::-webkit-scrollbar-track {
   background-color: #27b13c;
 }
 
+.btn-close {
+  position: relative;
+  top: 1px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  outline: 0;
+  opacity: 0.4;
+  cursor: pointer;
+}
+.btn-close:hover {
+  opacity: 0.8;
+}
+.btn-close::before {
+  transform: rotate(45deg);
+}
+.btn-close::after {
+  transform: rotate(-45deg);
+}
+
 .alert {
   display: block;
   position: relative;
@@ -495,106 +525,109 @@ textarea.scroll::-webkit-scrollbar-track {
   border-bottom-color: #27b13c;
 }
 
-.admin-repetition-discipline {
+.repetition-edit-questions {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 18px;
 }
-.admin-repetition-discipline__block {
+.repetition-edit-questions__block {
   width: 960px;
 }
 @media only screen and (max-width: 991px) {
-  .admin-repetition-discipline__block {
+  .repetition-edit-questions__block {
     width: 100%;
   }
 }
-.admin-repetition-discipline__btn {
+.repetition-edit-questions__btn {
   height: 30px;
 }
+.repetition-edit-questions__btn--border {
+  border: 1px solid #27b13c !important;
+}
 @media only screen and (max-width: 991px) {
-  .admin-repetition-discipline__btn-target {
+  .repetition-edit-questions__btn-target {
     width: 100%;
     margin-bottom: 20px;
   }
 }
-.admin-repetition-discipline__buttons-block {
+.repetition-edit-questions__buttons-block {
   display: flex;
   width: 620px;
   justify-content: space-between;
   margin-top: 20px;
 }
 @media only screen and (max-width: 991px) {
-  .admin-repetition-discipline__buttons-block {
+  .repetition-edit-questions__buttons-block {
     width: 100%;
     flex-direction: column-reverse;
   }
 }
-.admin-repetition-discipline__edit-block {
+.repetition-edit-questions__edit-block {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 @media only screen and (max-width: 991px) {
-  .admin-repetition-discipline__edit-block {
+  .repetition-edit-questions__edit-block {
     display: block;
   }
 }
-.admin-repetition-discipline__error {
+.repetition-edit-questions__error {
   margin-top: 10px;
 }
 @media only screen and (max-width: 991px) {
-  .admin-repetition-discipline__error {
+  .repetition-edit-questions__error {
     margin-top: -10px;
     margin-bottom: 15px;
   }
 }
-.admin-repetition-discipline__input {
+.repetition-edit-questions__input {
   height: 30px;
   width: 400px;
 }
 @media only screen and (max-width: 991px) {
-  .admin-repetition-discipline__input {
+  .repetition-edit-questions__input {
     width: 100%;
     margin-top: 10px;
   }
 }
-.admin-repetition-discipline__filters {
+.repetition-edit-questions__filters {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 @media only screen and (max-width: 991px) {
-  .admin-repetition-discipline__filters {
+  .repetition-edit-questions__filters {
     display: block;
   }
 }
-.admin-repetition-discipline__success {
+.repetition-edit-questions__success {
   margin-top: 10px;
 }
 @media only screen and (max-width: 991px) {
-  .admin-repetition-discipline__success {
+  .repetition-edit-questions__success {
     margin-bottom: 15px;
   }
 }
-.admin-repetition-discipline__textarea {
+.repetition-edit-questions__textarea {
   height: 500px;
   width: 470px;
 }
 @media only screen and (max-width: 991px) {
-  .admin-repetition-discipline__textarea {
+  .repetition-edit-questions__textarea {
     height: 300px;
     width: 100%;
     margin-top: 20px;
   }
 }
-.admin-repetition-discipline__title {
+.repetition-edit-questions__title {
   font-family: "Cormorant Garamond", serif;
   font-size: 30px;
   color: #d38484;
 }
 @media only screen and (max-width: 991px) {
-  .admin-repetition-discipline__title {
+  .repetition-edit-questions__title {
     font-size: 24px;
   }
 }/*# sourceMappingURL=style.css.map */

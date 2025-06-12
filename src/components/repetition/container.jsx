@@ -5,7 +5,13 @@ import { connect } from 'react-redux';
 import Loader from './../common/loader/index';
 import { getUserId } from './../../redux/selectors';
 import { findMenu } from './../../redux/repetition-reducer';
-import { getMenu, getIsFetching } from './../../redux/repetition-selectors';
+import {
+	getMenu,
+	getOwnerName,
+	getIsFetching,
+	getIsMaxSubjects,
+} from './../../redux/repetition-selectors';
+import { getIsUpdate } from './../../redux/pop-up-notification-selectors';
 
 /**
  * Get the Repetition page
@@ -41,7 +47,10 @@ const mapStateToProps = (state = {}) => {
 		page: 'repetition',
 		menu: getMenu(state),
 		userId: getUserId(state),
+		isUpdate: getIsUpdate(state),
+		ownerName: getOwnerName(state),
 		isFetching: getIsFetching(state),
+		isMaxSubjects: getIsMaxSubjects(state),
 	};
 }
 

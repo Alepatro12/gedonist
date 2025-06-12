@@ -1,13 +1,16 @@
+import thunkMiddleware from 'redux-thunk';
+import { reducer as formReducer } from 'redux-form';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+
 import appReducer from './app-reducer';
 import gmaReducer from './gma-reducer';
 import menuReducer from './menu-reducer';
-import thunkMiddleware from 'redux-thunk';
 import musicReducer from './music-reducer';
-import { reducer as formReducer } from 'redux-form';
 import repetitionReducer from './repetition-reducer';
 import checkAuthenticationReducer from './account-data-reducer';
-import adminRepetitionReducer from './admin-repetition-reducer';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import PopUpNotificationReducer from './pop-up-notification-reducer';
+import RepetitionEditSubjectReducer from './repetition-edit-subject-reducer';
+import RepetitionEditQuestionsReducer from './repetition-edit-questions-reducer';
 
 const reducers = combineReducers({
 	gma: gmaReducer,
@@ -16,8 +19,10 @@ const reducers = combineReducers({
 	appData: appReducer,
 	music: musicReducer,
 	repetition: repetitionReducer,
-	adminRepetition: adminRepetitionReducer,
+	popUpNotification: PopUpNotificationReducer,
 	authenticationData: checkAuthenticationReducer,
+	repetitionEditSubject : RepetitionEditSubjectReducer,
+	repetitionEditQuestions: RepetitionEditQuestionsReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
