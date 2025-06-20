@@ -49,7 +49,7 @@ export const getText = (state) => state.popUpNotification.text;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {Array}
+ * @returns {Object}
  */
 export const getData = (state) => state.popUpNotification.data;
 
