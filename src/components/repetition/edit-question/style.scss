@@ -1,7 +1,7 @@
 @import './../../../design-system';
 @import './../../../style/mixins.scss';
 
-.admin-repetition-discipline {
+.repetition-edit-questions {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -17,6 +17,10 @@
 
 	&__btn {
 		height: 30px;
+
+		&--border {
+			border: 1px solid $green-200 !important;
+		}
 	}
 
 	&__btn-target {

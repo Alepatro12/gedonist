@@ -24,6 +24,25 @@
 		}
 	}
 
+	&__btn-create-menu {
+		position: absolute;
+		top: 10px;
+		right: 15px;
+		font-size: $font-size-xl;
+
+		@include mq('tablet') {
+			display: none;
+		}
+
+		&--mobile {
+			display: none;
+
+			@include mq('tablet') {
+				display: block;
+			}
+		}
+	}
+
 	&__content {
 		position: relative;
 		height: 100%;
@@ -68,6 +87,7 @@
 	}
 
 	&__page {
+		position: relative;
 		width: 50%;
 		background-color: $gray-100;
 		background-image: linear-gradient(90deg, $gray-200 0%, rgba($gray-100, 0) 18%);
@@ -96,7 +116,7 @@
 		letter-spacing: 1px;
 
 		@include mq('tablet') {
-			margin: 35px 0 25px;
+			margin-top: 40px;
 			font-size: $h2-font-size;
 		}
 	}

@@ -9,14 +9,16 @@ const Fortune = React.lazy(() => import('../../fortune/index'));
 const AdminPanel = React.lazy(() => import('../admin-panel/index'));
 const Repetition = React.lazy(() => import('../repetition/container'));
 const LoginContainer = React.lazy(() => import('../auth/login/container'));
-const AdminRepetition = React.lazy(() => import('../admin-repetition/container'));
+const EditSubject = React.lazy(() => import('../repetition/edit-subject/container'));
 const NewPasswordContainer = React.lazy(() => import('../auth/new-password/container'));
 const AuthenticateContainer = React.lazy(() => import('../auth/authenticate/container'));
 const MusicNewCollection = React.lazy(() => import('../music/new-collection/container'));
 const RepetitionDiscipline = React.lazy(() => import('../repetition/discipline/container'));
 const ChangePasswordContainer = React.lazy(() => import('../auth/change-password/container'));
 const MusicChangeCollection = React.lazy(() => import('../music/change-collection/container'));
-const AdminRepetitionDiscipline = React.lazy(() => import('../admin-repetition/discipline/container'));
+const RepetitionEditQuestions = React.lazy(() => import('../repetition/edit-question/container'));
+const RepetitionRenameSubject = React.lazy(() => import('../repetition/rename-subject/container'));
+const RepetitionCreateSubject = React.lazy(() => import('../repetition/create-subject/container'));
 
 export const commonRouters = [
 	{element: Home, path: '/*', exact: true},
@@ -35,11 +37,14 @@ export const unauthorizedUserRouters = [
 
 export const authorizedUserRouters = [
 	{element: Fortune, path: '/fortune', exact: true},
-	{element: Repetition, path: '/repetition', exact: true},
+	{element: Repetition, path: '/repetition/menu/:ownerName', exact: true},
 	{element: MusicNewCollection, path: '/music/new-collection', exact: true},
-	{element: RepetitionDiscipline, path: '/repetition/javascript', exact: true},
 	{element: MusicChangeCollection, path: '/music/change-collection', exact: true},
-	{element: RepetitionDiscipline, path: '/repetition/english-grammar', exact: true},
+	{element: EditSubject, path: '/repetition/edit-subject/:ownerName/:subjectId', exact: true},
+	{element: RepetitionCreateSubject, path: '/repetition/create-subject/:ownerName', exact: true},
+	{element: RepetitionDiscipline, path: '/repetition/subject/:ownerName/:subjectId', exact: true},
+	{element: RepetitionEditQuestions, path: '/repetition/edit-questions/:ownerName/:subjectId', exact: true},
+	{element: RepetitionRenameSubject, path: '/repetition/rename-subject/:ownerName/:subjectId', exact: true},
 ];
 
 /**
@@ -49,7 +54,4 @@ export const authorizedUserRouters = [
 export const moderatorRouters = [
 	{element: Menu, path: '/admin-panel/menu', exact: true},
 	{element: AdminPanel, path: '/admin-panel', exact: true},
-	{element: AdminRepetition, path: '/admin-panel/repetition', exact: true},
-	{element: AdminRepetitionDiscipline, path: '/admin-panel/repetition/javascript', exact: true},
-	{element: AdminRepetitionDiscipline, path: '/admin-panel/repetition/english-grammar', exact: true},
 ];

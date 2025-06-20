@@ -1,0 +1,83 @@
+@import './../../design-system';
+
+.drop-down-menu {
+	display: flex;
+	justify-content: center;
+	height: 30px;
+	margin-bottom: 20px;
+
+	&__block {
+		position: relative;
+		display: grid;
+		width: 100%;
+		grid-template-columns: 18px auto 18px;
+		grid-template-rows: 30px auto;
+	}
+
+	&__main {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-left: -1px;
+		background-color: $black;
+		clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+
+		&--edit {
+			background-color: $green-200;
+		}
+
+		&:after {
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			margin: 1px 0;
+			background: $gray-100;
+			clip-path: inherit;
+			border-radius: inherit;
+		}
+	}
+
+	&__popup {
+		position: relative;
+	}
+
+	&__side {
+		position: relative;
+		width: 18px;
+		background-color: $black;
+		clip-path: polygon(100% 0, 0 50%, 100% 100%);
+
+		&--edit {
+			background-color: $green-200;
+		}
+
+		&:after {
+			content: "";
+			position: absolute;
+			left: 1.5px;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			margin: 1px -1px;
+			background: $gray-100;
+			clip-path: inherit;
+			border-radius: inherit;
+		}
+
+		&--right {
+			margin-left: -0.5px;
+			transform: rotateY(180deg);
+		}
+	}
+
+	&__title {
+		position: absolute;
+		font-family: $font-family-serif;
+		font-size: 18px;
+		z-index: 1;
+	}
+}

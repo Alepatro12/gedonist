@@ -3,77 +3,66 @@ import {
 	deleteQuestionAPI,
 	getSearchQuestionAPI,
 	getCreationQuestionAPI,
-} from './../api/admin-repetition-discipline';
-import { getMenuAPI } from './../api/admin-repetition';
-import { getDisciplineAPI } from './../api/repetition-discipline';
+} from './../api/repetition-edit-question';
 
 /**
  * @const
  * @type {string} Action type - toggle is fetching
  */
-const TOGGLE_IS_FETCHING = 'admin-repetition/TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FETCHING = 'repetition-edit-questions/TOGGLE_IS_FETCHING';
 
 /**
  * @const
  * @type {string} Action type - toggle is disabled
  */
-const TOGGLE_IS_DISABLED = 'admin-repetition/TOGGLE_IS_DISABLED';
-
-/**
- * @const
- * @type {string} Action type - get menu of repetition
- */
-const GET_MENU = 'admin-repetition/GET_MENU';
-
-/**
- * @const
- * @type {string} Action type - get info of discipline
- */
-const GET_DISCIPLINE = 'admin-repetition/GET_DISCIPLINE';
+const TOGGLE_IS_DISABLED = 'repetition-edit-questions/TOGGLE_IS_DISABLED';
 
 /**
  * @const
  * @type {string} Action type - set creation question
  */
-const SET_CREATION_QUESTION = 'admin-repetition/SET_CREATION_QUESTION';
+const SET_CREATION_QUESTION = 'repetition-edit-questions/SET_CREATION_QUESTION';
 
 /**
  * @const
  * @type {string} Action type - set creation new question
  */
-const SET_CREATION_NEW_QUESTION = 'admin-repetition/SET_CREATION_NEW_QUESTION';
+const SET_CREATION_NEW_QUESTION = 'repetition-edit-questions/SET_CREATION_NEW_QUESTION';
 
 /**
  * @const
  * @type {string} Action type - clear error notification
  */
-const CLEAR_ERROR = 'admin-repetition/CLEAR_ERROR';
+const CLEAR_ERROR = 'repetition-edit-questions/CLEAR_ERROR';
 
 /**
  * @const
  * @type {string} Action type - set questions
  */
-const SET_QUESTIONS = 'admin-repetition/SET_QUESTIONS';
+const SET_QUESTIONS = 'repetition-edit-questions/SET_QUESTIONS';
 
 /**
  * @const
  * @type {string} Action type - delete question
  */
-const DELETE_QUESTION = 'admin-repetition/DELETE_QUESTION';
+const DELETE_QUESTION = 'repetition-edit-questions/DELETE_QUESTION';
 
 /**
  * @const
  * @type {string} Action type - edit question
  */
-const EDITE_QUESTION = 'admin-repetition/EDIT_QUESTION';
+const EDITE_QUESTION = 'repetition-edit-questions/EDIT_QUESTION';
+
+/**
+ * @const
+ * @type {string} Action type - clear data
+ */
+const CLEAR_DATA = 'repetition-edit-subject/CLEAR_DATA';
 
 const initialState = {
-	name: '',
-	menu: [],
 	answers: [],
 	questions: [],
 	resultText: '',
-	disciplineId: 0,
 	isFetching: false,
 	isDisabled: false,
 	isShowError: false,
@@ -86,7 +75,7 @@ const initialState = {
 };
 
 /**
- * Reducer the admin repetition pages
+ * Reducer the edit question repetition pages
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
@@ -95,7 +84,7 @@ const initialState = {
  * @param {Object} action New date
  * @returns {Object} New state
  */
-const adminRepetitionReducer = (state = initialState, action = {}) => {
+const RepetitionEditQuestionsReducer = (state = initialState, action = {}) => {
 	switch (action.type) {
 		case SET_QUESTIONS: {
 			const answers = action.answers?.length || action.error?.code ? action.answers : state.answers;
@@ -153,18 +142,9 @@ const adminRepetitionReducer = (state = initialState, action = {}) => {
 				isCreationQuestion: action.isCreationQuestion,
 			};
 		}
-		case GET_MENU: {
+		case CLEAR_DATA: {
 			return {
 				...state,
-				menu: [ ...action.menu ],
-			};
-		}
-		case GET_DISCIPLINE: {
-			return {
-				...state,
-				name: action.name,
-				error: { ...action.error },
-				disciplineId: action.disciplineId,
 				answers: [],
 				questions: [],
 				resultText: '',
@@ -188,48 +168,6 @@ const adminRepetitionReducer = (state = initialState, action = {}) => {
 		default:
 			return state;
 	}
-};
-
-/**
- * Set admin repetition menu
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @param {Array} menu List of disciplines 
- * @param {Object} error
- * @returns {Object}
- */
-const setMenu = ({ menu = [], error = {} }) => {
-	return {
-		menu,
-		error,
-		type: GET_MENU,
-	};
-};
-
-/**
- * Set discipline data
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @param {String} name Name of discipline
- * @param {Object} error
- * @param {number} disciplineId Discipline ID
- * @returns {Object}
- */
-const setDiscipline = ({
-	name = '',
-	error = {},
-	disciplineId = 0,
-}) => {
-	return {
-		name,
-		error,
-		disciplineId,
-		type: GET_DISCIPLINE,
-	};
 };
 
 /**
@@ -259,7 +197,8 @@ const setNewQuestion = ({
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {Array} questions Question array
+ * @param {Array} questions Questions
+ * @param {Array} answers Answers
  * @param {Object} error
  * @returns {Object}
  */
@@ -321,47 +260,6 @@ const setToggle = (isToggle = false) => {
 	return (dispatch) => {
 		dispatch(setIsFetching(isToggle));
 		dispatch(setIsDisabled(isToggle));
-	}
-};
-
-/**
- * Find admin menu of repetition
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @param {number} userId
- * @returns {Function}
- */
-export const findMenu = (userId = 0) => {
-	return async (dispatch) => {
-		dispatch(setToggle(true));
-
-		const response = await getMenuAPI(userId);
-
-		dispatch(setMenu(response));
-		dispatch(setToggle(false));
-	}
-};
-
-/**
- * Find discipline data
- *
- * @author Alessandro Vilanni
- * @version 1.0.0
- *
- * @param {number} userId
- * @param {number} disciplineId discipline ID
- * @returns {Function}
- */
-export const findDiscipline = (userId = 0, disciplineId = 0) => {
-	return async (dispatch) => {
-		dispatch(setToggle(true));
-
-		const response = await getDisciplineAPI(userId, disciplineId);
-
-		dispatch(setDiscipline(response));
-		dispatch(setToggle(false));
 	}
 };
 
@@ -435,16 +333,17 @@ export const clearError = () => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
+ * @param {number} userId
  * @param {number} disciplineId Discipline ID
  * @param {String} question
  * @param {String} answer
  * @returns {Function}
  */
-export const createQuestion = (disciplineId = 0, question = '', answer = '') => {
+export const createQuestion = (userId = 0, disciplineId = 0, question = '', answer = '') => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await getCreationQuestionAPI(disciplineId, question, answer);
+		const response = await getCreationQuestionAPI(userId, disciplineId, question, answer);
 
 		dispatch(setNewQuestion(response));
 		dispatch(setToggle(false));
@@ -452,21 +351,22 @@ export const createQuestion = (disciplineId = 0, question = '', answer = '') => 
 };
 
 /**
- * Search questions
+ * Search questions or answers
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
+ * @param {number} userId
  * @param {number} disciplineId Discipline ID
  * @param {String} request
  * @param {bool} isSearchAnswer Search by answer flag
  * @returns {Function}
  */
-export const search = (disciplineId = 0, request = '', isSearchAnswer = false) => {
+export const search = (userId = 0, disciplineId = 0, request = '', isSearchAnswer = false) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await getSearchQuestionAPI(disciplineId, request, isSearchAnswer);
+		const response = await getSearchQuestionAPI(userId, disciplineId, request, isSearchAnswer);
 
 		dispatch(setQuestions(response));
 		dispatch(setToggle(false));
@@ -479,15 +379,14 @@ export const search = (disciplineId = 0, request = '', isSearchAnswer = false) =
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {number} questionId Question ID
- * @param {number} disciplineId Discipline ID
+ * @param {Object} data
  * @returns {Function}
  */
-export const deleteQuestion = (questionId = 0, disciplineId = 0) => {
+export const deleteQuestion = (data) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await deleteQuestionAPI(questionId, disciplineId);
+		const response = await deleteQuestionAPI(data);
 
 		dispatch(setDeletedQuestion(response));
 		dispatch(setToggle(false));
@@ -500,19 +399,33 @@ export const deleteQuestion = (questionId = 0, disciplineId = 0) => {
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
- * @param {Object} question Question object
+ * @param {Object} data
  * @param {number} disciplineId Discipline ID
  * @returns {Function}
  */
-export const editQuestion = (question = {}, disciplineId = 0) => {
+export const editQuestion = (data = {}, disciplineId = 0) => {
 	return async (dispatch) => {
 		dispatch(setToggle(true));
 
-		const response = await editQuestionAPI(question, disciplineId);
+		const response = await editQuestionAPI(data, disciplineId);
 
 		dispatch(setEditedQuestion(response));
 		dispatch(setToggle(false));
 	}
 };
 
-export default adminRepetitionReducer;
+/**
+ * Clear data
+ *
+ * @author Alessandro Vilanni
+ * @version 1.0.0
+ *
+ * @returns {Function}
+ */
+export const clearData = () => {
+	return async (dispatch) => {
+		dispatch({ type: CLEAR_DATA });
+	}
+};
+
+export default RepetitionEditQuestionsReducer;

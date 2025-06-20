@@ -13,10 +13,53 @@
 	overflow-y: scroll;
 	z-index: 7;
 
+	&--menu {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		background-color: $gray-100;
+		border: 1px solid $black;
+		border-top: none;
+		border-radius: 0;
+	}
+
+	&--edit {
+		border-color: $green-200;
+	}
+
 	&__block {
+		position: relative;
 		margin-bottom: 10px;
 		font-size: $font-size-m;
 		color: $gray-600;
 		border-bottom: 1px solid $gray-200;
+
+		&--menu {
+			height: 30px;
+			margin: 0;
+			border-bottom: 1px solid $black;
+
+			&:last-child {
+				border: none;
+			}
+		}
+
+		&--edit {
+			border-bottom-color: $green-200;
+		}
+	}
+
+	&__link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		width: 100%;
+	}
+
+	&__name {
+		font-family: $font-family-serif;
+		font-size: $font-size-xl;
+		color: $gray-600;
 	}
 }

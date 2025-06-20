@@ -1,50 +1,46 @@
 import './style.css';
 import PopUp from './../../common/pop-up';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import React, { useLayoutEffect, useEffect } from 'react';
 
 /**
- * Render the admin discipline repetition page
+ * Render the edit questions discipline repetition page
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
  *
  * @param {number} userId
  * @param {number} disciplineId Discipline ID
+ * @param {Function} clearData Clear data
+ * @param {bool} isEditAvailable Ewditing availability flag
  * @param {Function} findDiscipline Search for discipline data
  * @returns {HTMLElement}
  */
-const AdminRepetitionDiscipline = React.memo(({
+const RepetitionEditQuestions = React.memo(({
 	userId = 0,
 	disciplineId = 0,
+	clearData = () => {},
+	isEditAvailable = false,
 	findDiscipline = () => {},
 	...props
 }) => {
-	const location = useLocation();
+	const { ownerName = '', subjectId = 0 } = useParams();
 
 	useLayoutEffect(() => {
-		const disciplineName = location.pathname.replace(/\/admin-panel\/repetition\//, '');
-		let disciplineId = 0;
-
-		switch(disciplineName) {
-			case 'javascript':
-				disciplineId = 1;
-				break;
-			case 'english-grammar':
-				disciplineId = 2;
-				break;
-			default:
-				disciplineId = 0;
-				break;
+		if (!ownerName || !subjectId) {
+			return <></>;
 		}
 
-		findDiscipline(userId, disciplineId);
+		clearData();
+		findDiscipline(userId, subjectId);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [location]);
+	}, [ownerName, subjectId]);
 
-	return disciplineId
-		? <RepetitionDisciplineBlock userId={userId} disciplineId={disciplineId} {...props}/>
-		: <></>;
+	if (!isEditAvailable || !disciplineId) {
+		return <></>;
+	}
+
+	return <RepetitionEditQuestionsBlock userId={userId} disciplineId={disciplineId} {...props}/>;
 });
 
 /**
@@ -54,6 +50,7 @@ const AdminRepetitionDiscipline = React.memo(({
  * @version 1.0.0
  *
  * @param {String} name Name of discipline
+ * @param {number} userId
  * @param {bool} isShowSuccess Success response flag
  * @param {String} resultText Query result text
  * @param {number} disciplineId Discipline ID
@@ -66,8 +63,9 @@ const AdminRepetitionDiscipline = React.memo(({
  * @param {Function} setCreationQuestion Request to start creating a question
  * @returns {HTMLElement}
  */
-const RepetitionDisciplineBlock = React.memo(({
+const RepetitionEditQuestionsBlock = React.memo(({
 	name = '',
+	userId = 0,
 	resultText = '',
 	disciplineId = 0,
 	search = () => {},
@@ -101,14 +99,14 @@ const RepetitionDisciplineBlock = React.memo(({
 	};
 
 	const startCreationQuestion = () => {
-		const answer = question?.answer.trim();
-		const questionStr = question?.question.trim();
+		const answer = question?.answer?.trim();
+		const questionStr = question?.question?.trim();
 
 		if (!questionStr || !answer) {
 			return;
 		}
 
-		createQuestion(disciplineId, questionStr, answer);
+		createQuestion(userId, disciplineId, questionStr, answer);
 	};
 
 	const searchQuestion = (event) => {
@@ -121,7 +119,7 @@ const RepetitionDisciplineBlock = React.memo(({
 			return;
 		}
 
-		search(disciplineId, question);
+		search(userId, disciplineId, question);
 	};
 
 	const searchAnswer = (event) => {
@@ -134,7 +132,7 @@ const RepetitionDisciplineBlock = React.memo(({
 			return;
 		}
 
-		search(disciplineId, answer, true);
+		search(userId, disciplineId, answer, true);
 	};
 
 	const onFocus = (event) => {
@@ -154,6 +152,8 @@ const RepetitionDisciplineBlock = React.memo(({
 		question = '',
 		answer = '',
 		record = '',
+		answer_id: answerId = 0,
+		question_id: questionId = 0,
 	} = {}) => {
 		if ((!question && !answer) || !id) {
 			return;
@@ -164,8 +164,12 @@ const RepetitionDisciplineBlock = React.memo(({
 
 		setQusetion(() => ({
 			id,
+			answerId,
+			questionId,
 			answer: valueAnswer,
 			question: valueQuestion,
+			oldAnswer: valueAnswer,
+			oldQuestion: valueQuestion,
 		}));
 		setCreationQuestion(false);
 	};
@@ -176,11 +180,17 @@ const RepetitionDisciplineBlock = React.memo(({
 
 	const startDeleteQuestion = () => {
 
-		if (!question.id) {
+		if (!question.id || !question.questionId || !question.answerId) {
 			return;
 		}
 
-		deleteQuestion(question.id, disciplineId);
+		deleteQuestion({
+			userId,
+			disciplineId,
+			answerId: question.answerId,
+			questionId: question.questionId,
+			questionAnswerId: question.id,
+		});
 	};
 
 	const startEditQuestion = () => {
@@ -193,19 +203,27 @@ const RepetitionDisciplineBlock = React.memo(({
 
 		editQuestion({
 				answer,
-				id: question.id,
+				userId,
 				question: questionStr,
+				answerId: question.answerId,
+				questionId: question.questionId,
+				questionAnswerId: question.id,
+				isEditAnswer: question.oldAnswer !== answer,
+				isEditQuestion: question.oldQuestion !== questionStr,
 			},
 			disciplineId
 		);
 	};
 
 	return <>
-		<div className="admin-repetition-discipline">
-			<h1 className="admin-repetition-discipline__title">{ name }</h1>
-			<div className="admin-repetition-discipline__block">
-				<div className="admin-repetition-discipline__filters">
-					<button className="btn admin-repetition-discipline__btn" onClick={ startSetCreationQuestion }>Создать вопрос</button>
+		<div className="repetition-edit-questions">
+			<h1 className="repetition-edit-questions__title">{ name }</h1>
+			<div className="repetition-edit-questions__block">
+				<div className="repetition-edit-questions__filters">
+					<button
+						onClick={ startSetCreationQuestion }
+						className={`btn repetition-edit-questions__btn ${isCreationQuestion || question?.id ? 'btn-target-second repetition-edit-questions__btn--border' : ''}`}
+					>Составить вопрос</button>
 					<div>
 						<SearchInput
 							id="question"
@@ -236,7 +254,7 @@ const RepetitionDisciplineBlock = React.memo(({
 					</div>
 				</div>
 				{(isCreationQuestion || question?.id) &&
-					<div className="admin-repetition-discipline__edit-block">
+					<div className="repetition-edit-questions__edit-block">
 						<QuestionEditingBlock
 							answer={question?.answer}
 							question={question?.question}
@@ -282,7 +300,7 @@ const ButtonBlock = React.memo(({
 	startPrimaryAction = () => {},
 }) => {
 	return <>
-		<div className="admin-repetition-discipline__buttons-block">
+		<div className="repetition-edit-questions__buttons-block">
 			<Button
 				name={ isCreationQuestion ? 'Очистить' : 'Удалить' }
 				startAction={ startSecondAction }
@@ -319,7 +337,7 @@ const Button = React.memo(({
 }) => {
 	return <>
 		<div
-			className={`btn btn-target admin-repetition-discipline__btn-target ${isPrimary ? '' : 'btn-target-second' }`}
+			className={`btn btn-target repetition-edit-questions__btn-target ${isPrimary ? '' : 'btn-target-second' }`}
 			onClick={ startAction }
 		>{ name }</div>
 	</>;
@@ -349,7 +367,7 @@ const SearchInput = React.memo(({
 			autoComplete="off"
 			id={`search-${id}`}
 			placeholder={`Поиск ${placeholder}`}
-			className="input admin-repetition-discipline__input"
+			className="input repetition-edit-questions__input"
 			onChange={ search }
 			onFocus={ onFocus }
 		></input>
@@ -371,7 +389,7 @@ const ResultBlock = React.memo(({
 	isSuccess = false,
 }) => {
 	return <>
-		<div className={`alert alert-${ isSuccess ? 'success' : 'error pointer' } admin-repetition-discipline__${ isSuccess ? 'success' : 'error' }`}>
+		<div className={`alert alert-${ isSuccess ? 'success' : 'error pointer' } repetition-edit-questions__${ isSuccess ? 'success' : 'error' }`}>
 			{ resultText }
 		</div>
 	</>;
@@ -430,7 +448,7 @@ const Textarea = React.memo(({
 	return <>
 		<textarea
 			id={`textarea-${id}`}
-			className="input scroll admin-repetition-discipline__textarea"
+			className="input scroll repetition-edit-questions__textarea"
 			placeholder={`Введите ${placeholder}`}
 			name={id}
 			value={ value }
@@ -439,4 +457,4 @@ const Textarea = React.memo(({
 	</>;
 });
 
-export default AdminRepetitionDiscipline; 
+export default RepetitionEditQuestions; 
