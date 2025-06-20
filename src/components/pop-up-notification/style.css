@@ -526,17 +526,17 @@ textarea.scroll::-webkit-scrollbar-track {
 }
 
 .pop-up-notification {
-  display: flex;
   position: fixed;
   left: 20px;
   bottom: 20px;
+  display: flex;
   width: -moz-max-content;
   width: max-content;
   padding: 5px 10px;
   font-family: "Cormorant Garamond", serif;
   font-size: 18px;
   background-color: #f8f8f8;
-  background-image: linear-gradient(90deg, #dfdfdf 0%, rgba(248, 248, 248, 0) 18%);
+  background-image: linear-gradient(90deg, #dfdfdf 0, rgba(248, 248, 248, 0) 18%);
   border-radius: 6px;
   box-shadow: 0 10px 29px rgba(51, 51, 51, 0.22);
   z-index: 10;

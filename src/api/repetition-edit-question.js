@@ -48,7 +48,7 @@ export const getSearchQuestionAPI = (userId = 0, disciplineId = 0, request = '',
 			userId,
 			request,
 			disciplineId,
-			isSearchAnswer
+			isSearchAnswer,
 		})
 		.then(response => response.data);
 };
@@ -62,7 +62,7 @@ export const getSearchQuestionAPI = (userId = 0, disciplineId = 0, request = '',
  * @param {Object} data
  * @returns {Object}
  */
-export const deleteQuestionAPI = (data) => {
+export const deleteQuestionAPI = (data = {}) => {
 	return instance
 		.post('edit-question-controller.php', { isDeleteQuestion: true, ...data })
 		.then(response => response.data);

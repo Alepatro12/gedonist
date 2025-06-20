@@ -7,21 +7,21 @@
 	margin-bottom: 20px;
 
 	&__block {
-		display: grid;
 		position: relative;
+		display: grid;
 		width: 100%;
 		grid-template-columns: 18px auto 18px;
 		grid-template-rows: 30px auto;
 	}
 
 	&__main {
-		display: flex;
 		position: relative;
+		display: flex;
 		align-items: center;
 		justify-content: center;
 		margin-left: -1px;
 		background-color: $black;
-		clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0%);
+		clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
 
 		&--edit {
 			background-color: $green-200;

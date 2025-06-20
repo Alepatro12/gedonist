@@ -532,21 +532,21 @@ textarea.scroll::-webkit-scrollbar-track {
   margin-bottom: 20px;
 }
 .drop-down-menu__block {
-  display: grid;
   position: relative;
+  display: grid;
   width: 100%;
   grid-template-columns: 18px auto 18px;
   grid-template-rows: 30px auto;
 }
 .drop-down-menu__main {
-  display: flex;
   position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
   margin-left: -1px;
   background-color: #000;
-  -webkit-clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0%);
-          clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0%);
+  -webkit-clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+          clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
 }
 .drop-down-menu__main--edit {
   background-color: #27b13c;

@@ -105,7 +105,7 @@ const RepetitionBlock = React.memo(({
  *
  * @param {number} id Discipline ID
  * @param {String} name Name of discipline
- * @param {String} link Title of the discipline page
+ * @param {String} ownerName Page owner's name
  * @param {number} pageNumber Page number
  * @returns {HTMLElement}
  */

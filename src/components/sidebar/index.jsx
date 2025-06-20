@@ -143,23 +143,13 @@ const SidebarBlock = ({
  * @version 1.0.0
  *
  * @param {Array} subMenu List of submenu
- * @param {Function} backToMain Logic when leaving a page
  * @returns {HTMLElement}
  */
-const SubMenuBlock = ({
-	subMenu = [],
-	backToMain = () => {},
-}) => {
-	const isBack = (event) => {
-		if (event.currentTarget.classList.contains('js-sidebar-music')) {
-			backToMain(true);
-		}
-	};
-
+const SubMenuBlock = ({ subMenu = [] }) => {
 	const blockSubMenu = subMenu?.map(subPageLink => {
 		return (
 			<div className={`sub-menu__glitch-btn ${ subPageLink.isSelected ? 'sub-menu__glitch-btn--selected' : '' }`} key={subPageLink.link}>
-				<NavLink className={`sub-menu__link js-sidebar-${subPageLink.link}`} to={subPageLink.link} onClick={ isBack }>
+				<NavLink className={`sub-menu__link js-sidebar-${subPageLink.link}`} to={subPageLink.link}>
 					<span className="sub-menu__title">{subPageLink.name}</span>
 				</NavLink>
 			</div>

@@ -27,7 +27,7 @@ export const getIsFetching = (state) => state.popUpNotification.isFetching;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {Array}
+ * @returns {Number}
  */
 export const getLifeTime = (state) => state.popUpNotification.lifetime;
 
@@ -38,7 +38,7 @@ export const getLifeTime = (state) => state.popUpNotification.lifetime;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {Array}
+ * @returns {String}
  */
 export const getText = (state) => state.popUpNotification.text;
 
@@ -60,7 +60,7 @@ export const getData = (state) => state.popUpNotification.data;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {Array}
+ * @returns {String}
  */
 export const getURL = (state) => state.popUpNotification.url;
 
@@ -71,6 +71,6 @@ export const getURL = (state) => state.popUpNotification.url;
  * @version 1.0.0
  *
  * @param {Object} state
- * @returns {Array}
+ * @returns {Bool}
  */
 export const getIsUpdate = (state) => state.popUpNotification.isUpdate;

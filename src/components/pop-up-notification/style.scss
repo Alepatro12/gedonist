@@ -2,16 +2,16 @@
 @import './../../style/mixins.scss';
 
 .pop-up-notification {
-	display: flex;
 	position: fixed;
 	left: 20px;
 	bottom: 20px;
+	display: flex;
 	width: max-content;
 	padding: 5px 10px;
 	font-family: $font-family-serif;
 	font-size: $font-size-xl;
 	background-color: $gray-100;
-	background-image: linear-gradient(90deg, $gray-200 0%, rgba($gray-100, 0) 18%);
+	background-image: linear-gradient(90deg, $gray-200 0, rgba($gray-100, 0) 18%);
 	border-radius: $border-radius-s;
 	box-shadow: 0 10px 29px rgba($gray-600, .22);
 	z-index: 10;

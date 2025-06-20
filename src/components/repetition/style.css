@@ -634,7 +634,7 @@ textarea.scroll::-webkit-scrollbar-track {
 }
 @media only screen and (max-width: 991px) {
   .repetition__title {
-    margin: 40px 0 0;
+    margin-top: 40px;
     font-size: 24px;
   }
 }/*# sourceMappingURL=style.css.map */

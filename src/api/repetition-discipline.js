@@ -23,7 +23,7 @@ export const getDisciplineAPI = (userId = 0, disciplineId = 0) => {
 };
 
 /**
- * Get info about discipline
+ * Get questions
  *
  * @author Alessandro Vilanni
  * @version 1.0.0
@@ -55,7 +55,7 @@ export const getChangeQuestionAPI = (data = {}) => {
 };
 
 /**
- * Get info about discipline
+ * Get editable flag
  *
  * @author Alessandro Vilanni
  * @version 1.0.0

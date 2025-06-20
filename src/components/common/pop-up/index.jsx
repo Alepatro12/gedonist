@@ -76,7 +76,7 @@ const PopUp = React.memo(({
  * @version 1.0.0
  *
  * @param {Object} result Result object
- * @param {Function} selectOption The logic of selecting option
+ * @param {Function} choiceOption The logic of selecting option
  * @param {Object} options
  * @returns {HTMLElement}
  */
@@ -107,7 +107,7 @@ const LinkOption = React.memo(({
  * @version 1.0.0
  *
  * @param {Object} result Result object
- * @param {Function} selectOption The logic of selecting option
+ * @param {Function} choiceOption The logic of selecting option
  * @returns {HTMLElement}
  */
 const Option = React.memo(({
